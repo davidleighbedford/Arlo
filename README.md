@@ -14,8 +14,8 @@ database rule in step 2, not from hiding the key.)
 
 ## Files (upload them all together, in one folder)
 - `index.html` – the app (your Firebase config is inside it)
-- `manifest.webmanifest` – makes it installable
-- `sw.js` – offline support (cache version `arlo-v2`)
+- `manifest.json` – makes it installable (web-app name + icons)
+- `sw.js` – offline support (cache version `arlo-v3`)
 - `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` – home-screen icons
 
 ---
@@ -70,7 +70,7 @@ Share panel as a backup (works offline / without Firebase).
 
 ## Updating later
 The service worker caches the app, so after you push changes, bump the version
-inside `sw.js` (e.g. `arlo-v2` → `arlo-v3`) so phones that already installed it
+inside `sw.js` (e.g. `arlo-v3` → `arlo-v4`) so phones that already installed it
 pull the new code and icon on next open.
 
 ## Privacy note
