@@ -178,6 +178,32 @@
   .sticks span:first-child{text-align:left;}
   .sticks span:last-child{text-align:right;}
   .slabel{margin-top:9px;font-weight:800;font-size:.96rem;text-align:center;}
+  /* notes */
+  .notesarea{width:100%;min-height:92px;border:1px solid var(--line);border-radius:14px;padding:12px;font-family:inherit;font-size:.92rem;color:var(--ink);background:#fffdf9;resize:vertical;margin-top:2px;}
+  .notesarea:focus{outline:none;border-color:var(--accent);}
+  /* what-to-do-today button + accordion */
+  .todaybtn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;border:none;background:var(--comm);color:#fff;font-family:inherit;font-weight:800;font-size:.92rem;padding:11px 18px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow);}
+  .todaybtn:hover{transform:translateY(-1px);}
+  .today .sheet{--accent:#ff7a59;--accent-bg:#fff3ec;--accent-deep:#d6492a;}
+  .titem{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);}
+  .thead{width:100%;display:flex;align-items:stretch;gap:0;background:#fff;border:none;cursor:pointer;padding:0;font-family:inherit;text-align:left;color:inherit;}
+  .tbar{flex:0 0 9px;}
+  .stretchbar{background:repeating-linear-gradient(45deg,#a988e6,#a988e6 6px,#c6b2ef 6px,#c6b2ef 12px);}
+  .tnamewrap{flex:1;padding:13px 4px 13px 14px;}
+  .tname{display:block;font-weight:800;font-size:.98rem;line-height:1.25;}
+  .tdom{display:block;font-size:.76rem;color:var(--ink-soft);margin-top:3px;}
+  .tchev{flex:0 0 auto;display:flex;align-items:center;padding:0 16px;color:#b6ad9f;font-size:1rem;transition:transform .2s ease;}
+  .titem.open .tchev{transform:rotate(180deg);}
+  .tbody{display:none;padding:2px 16px 16px;}
+  .titem.open .tbody{display:block;}
+  .stretchbadge{display:inline-block;background:var(--soc-bg);color:var(--soc-deep);font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:999px;margin-left:4px;vertical-align:middle;}
+  .alldone{background:#e8f8f1;border:1px solid #cdeede;border-radius:16px;padding:16px;font-weight:700;color:var(--fine-deep);margin-bottom:14px;}
+  .stretchtoggle{width:100%;display:flex;align-items:center;gap:8px;background:var(--soc-bg);color:var(--soc-deep);border:1px solid #e4dcef;border-radius:14px;padding:13px 16px;font-family:inherit;font-weight:800;font-size:.9rem;cursor:pointer;margin:20px 0 10px;}
+  .stretchtoggle .sopt{font-weight:600;color:var(--ink-soft);}
+  .stretchtoggle .tchev{margin-left:auto;transition:transform .2s ease;}
+  .stretchtoggle.open .tchev{transform:rotate(180deg);}
+  .stretchwrap{display:none;}
+  .stretchwrap.open{display:block;}
 
   /* Refs / footer */
   .refs{margin-top:30px;animation:rise .6s .1s ease both;}
@@ -225,9 +251,9 @@
   </header>
 
   <div class="panel">
-    <h3>Your focus <span class="hint">tap ⭐ on a card to change</span></h3>
+    <h3>Your focus</h3>
     <div class="chips" id="focusChips"></div>
-    <p class="note"><b>Arlo's already pulling up &amp; cruising</b> — so his Gross Motor activities point at the next steps: standing free &amp; first steps.</p>
+    <button class="todaybtn" id="todayBtn">📋 What to do today →</button>
   </div>
 
   <div class="panel">
@@ -284,17 +310,29 @@
 </div>
 
 <!-- Share modal -->
+<div class="overlay today" id="todayOverlay" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true">
+    <div class="sheethead" id="todayHead" style="background:#fff3ec">
+      <div class="grip"></div>
+      <button class="close" id="closeToday" aria-label="Close">✕</button>
+      <h2 style="color:var(--comm-deep)">What to do today</h2>
+      <p>Top priorities first — what Arlo hasn't mastered yet.</p>
+    </div>
+    <div class="sheetbody" id="todayBody"></div>
+  </div>
+</div>
+
 <div class="modal" id="shareModal">
   <div class="modalcard">
     <button class="closex" id="closeShare">✕</button>
     <h2>Share with your partner</h2>
     <p id="modeBadge" style="font-weight:700;margin-top:0"></p>
-    <p>Open your published web address on both phones. On iPhone: open it in Safari → <b>Share</b> → <b>Add to Home Screen</b> for a one-tap app icon. With Firebase configured, every tick syncs live between you both.</p>
+    <p>Open your published web address on both phones. On iPhone: open it in Safari → <b>Share</b> → <b>Add to Home Screen</b> for a one-tap app icon. Both phones share one live tracker via Firebase.</p>
     <div class="mstep">
-      <p style="margin-top:0"><b>1 · Send her the link</b><br>Use the <b>Share</b> button at the top of this Claude conversation to get a link. On her iPhone, open it in Safari → tap <b>Share</b> → <b>Add to Home Screen</b> for one-tap access.</p>
+      <p style="margin-top:0"><b>1 · Send them the link</b><br>Use the <b>Share</b> button at the top of this Claude conversation to get a link. On their iPhone, open it in Safari → tap <b>Share</b> → <b>Add to Home Screen</b> for one-tap access.</p>
     </div>
     <div class="mstep">
-      <p style="margin-top:0"><b>2 · Or move the data by code</b> (works on any device, even offline copies). Copy this and she pastes it in:</p>
+      <p style="margin-top:0"><b>2 · Or move the data by code</b> (works on any device, even offline copies). Copy this and they paste it in:</p>
       <textarea class="syncfield" id="syncOut" readonly></textarea>
       <button class="mbtn primary" id="copyCode">Copy progress code</button>
       <button class="mbtn ghost" id="refreshCode">Refresh</button>
@@ -331,7 +369,9 @@ const TAGS={
   master:{t:'Master',c:'#15805d',bg:'#e8f8f1'}
 };
 function actVal(id){ const v=state.acts[id]; if(typeof v==='number') return Math.max(0,Math.min(3,v)); if(v===true) return 1; return 0; }
-function domLevel(k){ const a=DATA[k].acts; if(!a.length) return 'beginner'; let s=0; a.forEach(x=>s+=actVal(x.id)); const avg=s/a.length; if(avg>=2.5) return 'master'; if(avg>=1) return 'apprentice'; return 'beginner'; }
+function scorableActs(k){ return DATA[k].acts.filter(a=>!a.notes); }
+function domLevel(k){ const a=scorableActs(k); if(!a.length) return 'beginner'; let s=0; a.forEach(x=>s+=actVal(x.id)); const avg=s/a.length; if(avg>=2.5) return 'master'; if(avg>=1) return 'apprentice'; return 'beginner'; }
+function domMasteryPct(k){ const a=scorableActs(k); if(!a.length) return 0; let s=0; a.forEach(x=>s+=actVal(x.id)); return Math.round(s/(3*a.length)*100); }
 
 /* ---------- Source links ---------- */
 const SRC = {
@@ -460,7 +500,7 @@ const DATA = {
     acts:[
       {id:"o1",t:"Notice symmetry",do:"During play, watch that Arlo reaches, kicks and bears weight fairly evenly on both sides over time.",why:"A strong early one-sided preference is worth mentioning at his review \u2014 not a worry, just a flag.",src:["ASQ-3","CDC"]},
       {id:"o2",t:"Sound & sight check-ins",do:"Call his name from out of view to see if he turns; notice if he tracks toys and makes eye contact.",why:"Hearing and vision underpin talking and play \u2014 mention any family history of childhood hearing loss.",src:["ASQ-3","CDC"]},
-      {id:"o3",t:"Bring this to his review",do:"Jot down what you've noticed \u2014 favourites, anything puzzling \u2014 and take it to the 9\u201312 month health visitor review.",why:"You know Arlo best; sharing observations is exactly how the review is designed to work.",src:["CDC: Act Early","ASQ-3"]}
+      {id:"o3",notes:true,t:"Bring this to his review",do:"Jot down anything you've noticed \u2014 favourites, wins, or things that puzzle you \u2014 to take to the 9\u201312 month health visitor review.",why:"You know Arlo best; sharing observations is exactly how the review is designed to work.",src:["CDC: Act Early","ASQ-3"]}
     ],
     tip:{h:"If something feels off",b:"Trust your instinct. If Arlo loses a skill he had, isn't making sounds, or anything worries you, contact your <b>health visitor or GP</b> \u2014 early support is always easier than waiting."},
     look:{sub:"All steady \u2014 look toward the 12-month review:",items:[
@@ -472,32 +512,32 @@ const DATA = {
 const BASE_ORDER = ["comm","fine","gross","prob","soc","over"];
 
 /* ===================================================================
-   CONFIG — fill in once to share LIVE data between phones (see README).
-   1) Make a free Firebase project, enable Cloud Firestore.
-   2) Paste your web app's config object below (uncomment the lines).
-   3) Keep SHARE_ID identical on both phones (any word you like).
-   Leave FIREBASE_CONFIG blank => saves on each device only; use the
-   "Share & sync" copy/paste code instead.
+   Firebase is pre-configured below for project "arlo-5d8a6".
+   This app uses CLOUD FIRESTORE (not the Realtime Database).
+   See README: enable Firestore + publish the security rule, then both
+   phones that open this page share one live tracker.
+   SHARE_ID is the document name — keep it the same on both phones.
    =================================================================== */
 const FIREBASE_CONFIG = {
-  // apiKey: "AIza................................",
-  // authDomain: "your-app.firebaseapp.com",
-  // projectId: "your-app",
-  // storageBucket: "your-app.appspot.com",
-  // messagingSenderId: "000000000000",
-  // appId: "1:000000000000:web:abcdef123456"
+  apiKey: "AIzaSyBVYcjxo5aKAKlwsDjui7FdQtNmhry0Mro",
+  authDomain: "arlo-5d8a6.firebaseapp.com",
+  databaseURL: "https://arlo-5d8a6-default-rtdb.firebaseio.com",
+  projectId: "arlo-5d8a6",
+  storageBucket: "arlo-5d8a6.firebasestorage.app",
+  messagingSenderId: "588304685385",
+  appId: "1:588304685385:web:cd18b18ba8c737a48ba298"
 };
 const SHARE_ID = "arlo";
 
 /* ---------- State ---------- */
-let state = { skills:{}, acts:{}, focus:["comm","fine"] };
+let state = { skills:{}, acts:{}, focus:["comm","fine"], notes:{} };
 const KEY = "arlo-data-v2";
 let saveTimer = null;
 let storeMode = "local";
 let fbWrite = null;
 let curKey = null;
 
-function clean(s){ return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"] }; }
+function clean(s){ return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"], notes:(s&&s.notes)||{} }; }
 
 async function initStore(){
   if(FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey){
@@ -510,7 +550,8 @@ async function initStore(){
       fbWrite = (data)=> fs.setDoc(ref, { payload: JSON.stringify(data), updated: Date.now() });
       storeMode = "firebase";
       fs.onSnapshot(ref, snap=>{
-        if(typeof dragging!=='undefined' && dragging) return;   // don't yank an in-progress drag
+        if(typeof dragging!=='undefined' && dragging) return;
+        const ae=document.activeElement; if(ae && ae.tagName==='TEXTAREA') return;
         if(snap.exists() && snap.data().payload){
           try{ state = clean(JSON.parse(snap.data().payload)); renderAll();
                if(curKey && overlay.classList.contains('open')) renderSheet(curKey,0); }catch(e){}
@@ -546,7 +587,7 @@ async function save(){
 function updateModeBadge(){
   const el=document.getElementById('modeBadge'); if(!el) return;
   if(storeMode==="firebase"){ el.innerHTML='🟢 <b>Live sync is ON</b> — you and your partner share this tracker.'; el.style.color='var(--fine-deep)'; }
-  else{ el.innerHTML='⚪ Saving on <b>this device only.</b> Add your Firebase config (see README) for live sharing, or use the code below.'; el.style.color='var(--ink-soft)'; }
+  else{ el.innerHTML='⚪ Saving on <b>this device only.</b> Firestore not reachable yet — see README (enable Firestore + rules). Or use the code below.'; el.style.color='var(--ink-soft)'; }
 }
 
 /* ---------- Helpers ---------- */
@@ -568,9 +609,8 @@ function isStretch(k){ return domStat(k).pct>=75; }
 /* ---------- Renderers ---------- */
 function renderFocus(){
   const el=document.getElementById('focusChips');
-  const keys = state.focus.length? orderedKeys().filter(k=>state.focus.includes(k)) : [];
-  if(!keys.length){ el.innerHTML='<span class="chip">No focus set — tap ⭐ on a card</span>'; return; }
-  el.innerHTML = keys.map(k=>`<span class="chip" style="background:${DATA_bg(k)};color:${CD[k]}">⭐ ${DATA[k].name}</span>`).join('');
+  const keys = orderedKeys().filter(k=>state.focus.includes(k));
+  el.innerHTML = keys.map(k=>`<span class="chip" style="background:${DATA_bg(k)};color:${CD[k]}">${DATA[k].name}</span>`).join('');
 }
 function DATA_bg(k){ return getComputedStyle(document.documentElement).getPropertyValue('--'+k+'-bg'); }
 
@@ -612,29 +652,20 @@ function renderSummary(){
 function renderCards(){
   const grid=document.getElementById('grid'); grid.innerHTML='';
   orderedKeys().forEach((k,i)=>{
-    const d=DATA[k]; const s=domStat(k); const st=statusOf(s.pct); const isF=state.focus.includes(k);
+    const d=DATA[k];
     const btn=document.createElement('button');
     btn.className='card'; btn.style.animationDelay=(0.04+i*0.05)+'s';
     btn.style.setProperty('--accent',`var(--${k})`);
     btn.style.setProperty('--accent-bg',`var(--${k}-bg)`);
     btn.style.setProperty('--accent-deep',`var(--${k}-deep)`);
     btn.innerHTML=`
-      <div class="cardhead">
-        <div class="glyph">${d.glyph}</div>
-        <button class="star ${isF?'on':''}" data-k="${k}" aria-label="Set focus">${isF?'★':'☆'}</button>
-      </div>
+      <div class="glyph">${d.glyph}</div>
       <h2>${d.name}</h2>
       <p>${d.sub}</p>
       <span class="lvl" style="color:${TAGS[domLevel(k)].c};background:${TAGS[domLevel(k)].bg};border-color:${TAGS[domLevel(k)].c}40">${TAGS[domLevel(k)].t}</span>`;
-    btn.addEventListener('click',e=>{ if(e.target.closest('.star'))return; openSheet(k); });
+    btn.addEventListener('click',()=>openSheet(k));
     grid.appendChild(btn);
   });
-  grid.querySelectorAll('.star').forEach(b=>b.addEventListener('click',e=>{
-    e.stopPropagation(); const k=b.dataset.k;
-    if(state.focus.includes(k)) state.focus=state.focus.filter(x=>x!==k);
-    else state.focus=[...state.focus,k];
-    queueSave(); renderAll();
-  }));
 }
 
 function renderAll(){ renderFocus(); renderSummary(); renderCards(); }
@@ -687,8 +718,18 @@ function renderSheet(k,dir){
     </div>`;
   }
 
+  const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
   const acts=`<p class="section-label">Things to try together <small>· slide to show how Arlo's getting on</small></p>
-    ${d.acts.map(a=>{const v=actVal(a.id);const si=stageIdx(v);return `
+    ${d.acts.map(a=>{
+      if(a.notes){ const nv=(state.notes&&state.notes[a.id])||''; return `
+      <div class="act">
+        <h4>${a.t}</h4>
+        <p class="doit">${a.do}</p>
+        <textarea class="notesarea" data-note="${a.id}" placeholder="Type your notes for the review…">${esc(nv)}</textarea>
+        <div class="why"><b>Why it works:</b> ${a.why}</div>
+        <div class="src">${srcHTML(a.src)}</div>
+      </div>`; }
+      const v=actVal(a.id);const si=stageIdx(v);return `
       <div class="act">
         <h4>${a.t}</h4>
         <p class="doit">${a.do}</p>
@@ -722,6 +763,9 @@ function renderSheet(k,dir){
     });
     inp.addEventListener('change',()=>{ dragging=false; state.acts[inp.dataset.act]=+inp.value; queueSave(); });
   });
+  body.querySelectorAll('.notesarea').forEach(ta=>{
+    ta.addEventListener('input',()=>{ if(!state.notes)state.notes={}; state.notes[ta.dataset.note]=ta.value; queueSave(); });
+  });
 
   // slide animation
   if(dir){ body.style.opacity='0'; body.style.transform=`translateX(${dir>0?'34px':'-34px'})`;
@@ -745,6 +789,85 @@ overlay.addEventListener('click',e=>{ if(e.target===overlay) closeSheet(); });
 document.addEventListener('keydown',e=>{ if(!overlay.classList.contains('open'))return; const ae=document.activeElement; const inField=ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'); if(e.key==='Escape')closeSheet(); if(inField)return; if(e.key==='ArrowRight')navigate(1); if(e.key==='ArrowLeft')navigate(-1); });
 let dragging=false;
 ['pointerup','touchend','touchcancel'].forEach(ev=>document.addEventListener(ev,()=>{ if(dragging){ dragging=false; queueSave(); } }));
+
+/* ---------- What to do today ---------- */
+const todayOverlay=document.getElementById('todayOverlay');
+function openToday(){ buildToday(); todayOverlay.classList.add('open'); todayOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; todayOverlay.querySelector('.sheet').scrollTop=0; }
+function closeToday(){ todayOverlay.classList.remove('open'); todayOverlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+document.getElementById('closeToday').addEventListener('click',closeToday);
+todayOverlay.addEventListener('click',e=>{ if(e.target===todayOverlay) closeToday(); });
+document.getElementById('todayBtn').addEventListener('click',openToday);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && todayOverlay.classList.contains('open')) closeToday(); });
+
+function buildToday(){
+  const el=document.getElementById('todayBody');
+  let items=[];
+  BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ const v=actVal(a.id); if(v<2.5) items.push({k,a,v}); }));
+  items.sort((x,y)=>x.v-y.v);
+  let stretch=[];
+  BASE_ORDER.forEach(k=>{ if(domMasteryPct(k)>=75 && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>stretch.push({k,it,id:'st-'+k+'-'+idx})); } });
+
+  let html='';
+  if(!items.length){ html+=`<div class="alldone">🎉 Arlo's having a good go at everything here. Slide anything back as he grows — or try the stretch targets below.</div>`; }
+  items.forEach(o=>{
+    const col=blend(o.v/3); const si=stageIdx(o.v);
+    html+=`<div class="titem">
+      <button class="thead" type="button">
+        <span class="tbar" style="background:${col}"></span>
+        <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${DATA[o.k].name} · ${STAGES[si].t}</span></span>
+        <span class="tchev">▾</span>
+      </button>
+      <div class="tbody">
+        <p class="doit">${o.a.do}</p>
+        <div class="slider">
+          <input type="range" class="rng" min="0" max="3" step="0.01" value="${o.v}" data-act="${o.a.id}" style="--thumb:${col}" aria-label="Progress for ${o.a.t}">
+          <div class="sticks"><span>not quite</span><span>had a go</span><span>nearly</span><span>master</span></div>
+          <div class="slabel" data-lab="${o.a.id}" style="color:${STAGES[si].text}">${STAGES[si].t}</div>
+        </div>
+        <div class="why"><b>Why it works:</b> ${o.a.why}</div>
+        <div class="src">${srcHTML(o.a.src)}</div>
+      </div>
+    </div>`;
+  });
+  if(stretch.length){
+    html+=`<button class="stretchtoggle" id="stretchToggle" type="button">Stretch targets <span class="sopt">optional next steps</span><span class="tchev">▾</span></button><div class="stretchwrap" id="stretchWrap">`;
+    stretch.forEach(o=>{
+      html+=`<div class="titem stretch">
+        <button class="thead" type="button">
+          <span class="tbar stretchbar"></span>
+          <span class="tnamewrap"><span class="tname">${o.it.t}<span class="stretchbadge">Stretch</span></span><span class="tdom">${DATA[o.k].name} · look ahead</span></span>
+          <span class="tchev">▾</span>
+        </button>
+        <div class="tbody">
+          <p class="doit">${o.it.do}</p>
+          <div class="why"><b>Why:</b> ${o.it.why}</div>
+          <div class="src">${srcHTML(o.it.src)}</div>
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+  el.innerHTML=html;
+
+  const stog=document.getElementById('stretchToggle');
+  if(stog) stog.addEventListener('click',()=>{ stog.classList.toggle('open'); document.getElementById('stretchWrap').classList.toggle('open'); });
+  el.querySelectorAll('.thead').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
+  el.querySelectorAll('.rng').forEach(inp=>{
+    const grab=e=>{ e.stopPropagation(); dragging=true; };
+    inp.addEventListener('touchstart',grab,{passive:true});
+    inp.addEventListener('pointerdown',grab);
+    inp.addEventListener('click',e=>e.stopPropagation());
+    inp.addEventListener('input',()=>{
+      const id=inp.dataset.act; const v=+inp.value; state.acts[id]=v;
+      const col=blend(v/3); inp.style.setProperty('--thumb',col);
+      const si=stageIdx(v); const lab=el.querySelector('[data-lab="'+id+'"]');
+      if(lab){ lab.textContent=STAGES[si].t; lab.style.color=STAGES[si].text; }
+      const item=inp.closest('.titem'); const bar=item&&item.querySelector('.tbar'); if(bar) bar.style.background=col;
+      queueSave(); renderCards(); renderSummary();
+    });
+    inp.addEventListener('change',()=>{ dragging=false; queueSave(); });
+  });
+}
 
 // swipe
 let sx=0,sy=0,swiping=false;
