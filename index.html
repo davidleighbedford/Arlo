@@ -162,6 +162,22 @@
   .laitem .why{margin-top:9px;}
   .tipbox{margin-top:6px;border:1px dashed var(--accent);border-radius:14px;padding:13px 15px;background:#fff;font-size:.86rem;}
   .tipbox b{color:var(--accent-deep);}
+  /* level pill on cards */
+  .lvl{display:inline-flex;align-items:center;margin-top:13px;font-size:.74rem;font-weight:800;padding:5px 12px;border-radius:999px;border:1.6px solid transparent;}
+  .lvlswatch{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:6px;}
+  /* practice slider */
+  .slider{margin:14px 0 2px;}
+  .rng{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;cursor:pointer;}
+  .rng:focus{outline:none;}
+  .rng::-webkit-slider-runnable-track{height:14px;border-radius:99px;background:linear-gradient(to right,#e5564e,#f0992e 33%,#f2cb2a 66%,#2bb98a);}
+  .rng::-moz-range-track{height:14px;border-radius:99px;background:linear-gradient(to right,#e5564e,#f0992e 33%,#f2cb2a 66%,#2bb98a);}
+  .rng::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;margin-top:-8px;border-radius:10px;background:#fff;border:3px solid var(--thumb,#888);box-shadow:0 3px 9px rgba(0,0,0,.28);transition:border-color .15s ease;}
+  .rng::-moz-range-thumb{width:30px;height:30px;border-radius:10px;background:#fff;border:3px solid var(--thumb,#888);box-shadow:0 3px 9px rgba(0,0,0,.28);}
+  .sticks{display:flex;margin-top:7px;}
+  .sticks span{flex:1;font-size:.62rem;font-weight:800;color:#b6ad9f;text-align:center;}
+  .sticks span:first-child{text-align:left;}
+  .sticks span:last-child{text-align:right;}
+  .slabel{margin-top:9px;font-weight:800;font-size:.96rem;text-align:center;}
 
   /* Refs / footer */
   .refs{margin-top:30px;animation:rise .6s .1s ease both;}
@@ -298,6 +314,24 @@
 const C  = {comm:'#ff7a59',fine:'#2bb98a',gross:'#4aa3e8',prob:'#f3b13d',soc:'#a988e6',over:'#ef6f8e'};
 const CM = {comm:'#ead9d1',fine:'#d6e4dc',gross:'#d8e3ed',prob:'#ece2cf',soc:'#e2d9ee',over:'#ecd8dc'};
 const CD = {comm:'#d6492a',fine:'#15805d',gross:'#1f6db5',prob:'#b9791a',soc:'#6f49bf',over:'#c63e5f'};
+
+/* ---------- Practice slider + level tags ---------- */
+const STAGES=[
+  {t:'not quite there',text:'#d6492a'},
+  {t:'had a go',text:'#b9791a'},
+  {t:'nearly there!',text:'#9a7d12'},
+  {t:"he's a master!",text:'#15805d'}
+];
+const STOPS=[[229,86,78],[240,153,46],[242,203,42],[43,185,138]];
+function blend(f){ f=Math.max(0,Math.min(1,f)); const seg=f*3; let i=Math.min(2,Math.floor(seg)); const t=seg-i; const a=STOPS[i],b=STOPS[i+1]; const c=a.map((v,k)=>Math.round(v+(b[k]-v)*t)); return 'rgb('+c[0]+','+c[1]+','+c[2]+')'; }
+function stageIdx(v){ return Math.max(0,Math.min(3,Math.round(v))); }
+const TAGS={
+  beginner:{t:'Beginner',c:'#d6492a',bg:'#fdeceb'},
+  apprentice:{t:'Apprentice',c:'#b9791a',bg:'#fff5e1'},
+  master:{t:'Master',c:'#15805d',bg:'#e8f8f1'}
+};
+function actVal(id){ const v=state.acts[id]; if(typeof v==='number') return Math.max(0,Math.min(3,v)); if(v===true) return 1; return 0; }
+function domLevel(k){ const a=DATA[k].acts; if(!a.length) return 'beginner'; let s=0; a.forEach(x=>s+=actVal(x.id)); const avg=s/a.length; if(avg>=2.5) return 'master'; if(avg>=1) return 'apprentice'; return 'beginner'; }
 
 /* ---------- Source links ---------- */
 const SRC = {
@@ -453,20 +487,19 @@ const FIREBASE_CONFIG = {
   // messagingSenderId: "000000000000",
   // appId: "1:000000000000:web:abcdef123456"
 };
-const SHARE_ID = "arlo";   // same value on both phones = same shared tracker
+const SHARE_ID = "arlo";
 
 /* ---------- State ---------- */
 let state = { skills:{}, acts:{}, focus:["comm","fine"] };
 const KEY = "arlo-data-v2";
 let saveTimer = null;
-let storeMode = "local";   // 'firebase' | 'claude' | 'local'
+let storeMode = "local";
 let fbWrite = null;
-let curKey = null;         // open sheet key (for live refresh)
+let curKey = null;
 
 function clean(s){ return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"] }; }
 
 async function initStore(){
-  // 1) Firebase — live shared sync
   if(FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey){
     try{
       const appMod = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
@@ -477,6 +510,7 @@ async function initStore(){
       fbWrite = (data)=> fs.setDoc(ref, { payload: JSON.stringify(data), updated: Date.now() });
       storeMode = "firebase";
       fs.onSnapshot(ref, snap=>{
+        if(typeof dragging!=='undefined' && dragging) return;   // don't yank an in-progress drag
         if(snap.exists() && snap.data().payload){
           try{ state = clean(JSON.parse(snap.data().payload)); renderAll();
                if(curKey && overlay.classList.contains('open')) renderSheet(curKey,0); }catch(e){}
@@ -487,13 +521,11 @@ async function initStore(){
       return null;
     }catch(e){ console.warn("Firebase unavailable — falling back to local.", e); }
   }
-  // 2) Claude artifact storage (when previewed inside Claude)
   if(window.storage){
     storeMode = "claude";
     try{ const r = await window.storage.get(KEY, true); if(r && r.value) return clean(JSON.parse(r.value)); }catch(e){}
     return null;
   }
-  // 3) Plain localStorage (per-device)
   storeMode = "local";
   try{ const v = localStorage.getItem(KEY); if(v) return clean(JSON.parse(v)); }catch(e){}
   return null;
@@ -507,7 +539,7 @@ async function load(){
 }
 async function save(){
   const payload = JSON.stringify(state);
-  if(storeMode==="firebase" && fbWrite){ try{ await fbWrite(state); }catch(e){ console.warn(e); } return; }
+  if(storeMode==="firebase" && fbWrite){ try{ await fbWrite(state); }catch(e){ console.warn("save failed",e); } return; }
   if(storeMode==="claude" && window.storage){ try{ await window.storage.set(KEY, payload, true); }catch(e){} return; }
   try{ localStorage.setItem(KEY, payload); }catch(e){}
 }
@@ -566,13 +598,14 @@ function renderSummary(){
   // legend
   document.getElementById('legend').innerHTML = keys.map(k=>`<span><b style="background:${C[k]}"></b>${DATA[k].name}</span>`).join('');
 
-  // grouped lists
-  const done=[], todo=[];
-  keys.forEach(k=>{ const s=domStat(k); (s.pct>=75?done:todo).push({k,s}); });
-  function chip(k,s){ const st=statusOf(s.pct); const star=state.focus.includes(k)?'⭐ ':''; return `<span class="statchip" style="background:${DATA_bg(k)};color:${CD[k]};border-color:${C[k]}33">${star}${DATA[k].name} <span class="frac">${s.done}/${s.total}</span> <span class="st">${s.pct>=100?'✓':''}</span></span>`; }
-  let g='';
-  if(done.length) g+=`<div class="grouprow"><p class="gl">✓ Coming along / mastered</p><div class="statchips">${done.map(x=>chip(x.k,x.s)).join('')}</div></div>`;
-  if(todo.length) g+=`<div class="grouprow"><p class="gl">Still emerging</p><div class="statchips">${todo.map(x=>chip(x.k,x.s)).join('')}</div></div>`;
+  // practice levels (from the activity sliders)
+  const lv={master:[],apprentice:[],beginner:[]};
+  keys.forEach(k=>lv[domLevel(k)].push(k));
+  function lvchip(k){ const L=TAGS[domLevel(k)]; const star=state.focus.includes(k)?'⭐ ':''; return `<span class="statchip" style="background:${L.bg};color:${L.c};border-color:${L.c}40">${star}${DATA[k].name}</span>`; }
+  let g='<p class="gl" style="margin:2px 0 10px">Practice levels <span style="font-weight:600;text-transform:none;letter-spacing:0;color:#b6ad9f">· from your sliders</span></p>';
+  [['master','Master'],['apprentice','Apprentice'],['beginner','Beginner']].forEach(p=>{
+    const arr=lv[p[0]]; if(arr.length){ g+=`<div class="grouprow"><p class="gl"><span class="lvlswatch" style="background:${TAGS[p[0]].c}"></span>${p[1]}</p><div class="statchips">${arr.map(lvchip).join('')}</div></div>`; }
+  });
   document.getElementById('groups').innerHTML=g;
 }
 
@@ -592,7 +625,7 @@ function renderCards(){
       </div>
       <h2>${d.name}</h2>
       <p>${d.sub}</p>
-      <span class="statusdot"><i style="background:${st.c}"></i>${s.pct>=100?'Complete ✓':st.w} · ${s.done}/${s.total}</span>`;
+      <span class="lvl" style="color:${TAGS[domLevel(k)].c};background:${TAGS[domLevel(k)].bg};border-color:${TAGS[domLevel(k)].c}40">${TAGS[domLevel(k)].t}</span>`;
     btn.addEventListener('click',e=>{ if(e.target.closest('.star'))return; openSheet(k); });
     grid.appendChild(btn);
   });
@@ -654,12 +687,15 @@ function renderSheet(k,dir){
     </div>`;
   }
 
-  const acts=`<p class="section-label">Things to try together</p>
-    ${d.acts.map(a=>{const on=state.acts[a.id]?'done':'';return `
+  const acts=`<p class="section-label">Things to try together <small>· slide to show how Arlo's getting on</small></p>
+    ${d.acts.map(a=>{const v=actVal(a.id);const si=stageIdx(v);return `
       <div class="act">
-        <div class="act-top">
-          <button class="actcheck ${on}" data-act="${a.id}" aria-label="Mark tried"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg></button>
-          <div style="flex:1"><h4>${a.t}</h4><p class="doit">${a.do}</p></div>
+        <h4>${a.t}</h4>
+        <p class="doit">${a.do}</p>
+        <div class="slider">
+          <input type="range" class="rng" min="0" max="3" step="0.01" value="${v}" data-act="${a.id}" style="--thumb:${blend(v/3)}" aria-label="Progress for ${a.t}">
+          <div class="sticks"><span>not quite</span><span>had a go</span><span>nearly</span><span>master</span></div>
+          <div class="slabel" data-lab="${a.id}" style="color:${STAGES[si].text}">${STAGES[si].t}</div>
         </div>
         <div class="why"><b>Why it works:</b> ${a.why}</div>
         <div class="src">${srcHTML(a.src)}</div>
@@ -673,10 +709,19 @@ function renderSheet(k,dir){
     const id=b.dataset.sk; state.skills[id]=!state.skills[id];
     queueSave(); renderSheet(k,0); renderAll();
   }));
-  body.querySelectorAll('.actcheck').forEach(b=>b.addEventListener('click',()=>{
-    const id=b.dataset.act; state.acts[id]=!state.acts[id];
-    b.classList.toggle('done',!!state.acts[id]); queueSave();
-  }));
+  body.querySelectorAll('.rng').forEach(inp=>{
+    const grab=e=>{ e.stopPropagation(); dragging=true; };
+    inp.addEventListener('touchstart',grab,{passive:true});
+    inp.addEventListener('pointerdown',grab);
+    inp.addEventListener('input',()=>{
+      const id=inp.dataset.act; const v=+inp.value; state.acts[id]=v;
+      inp.style.setProperty('--thumb',blend(v/3));
+      const si=stageIdx(v); const lab=body.querySelector('[data-lab="'+id+'"]');
+      if(lab){ lab.textContent=STAGES[si].t; lab.style.color=STAGES[si].text; }
+      queueSave(); renderCards(); renderSummary();
+    });
+    inp.addEventListener('change',()=>{ dragging=false; state.acts[inp.dataset.act]=+inp.value; queueSave(); });
+  });
 
   // slide animation
   if(dir){ body.style.opacity='0'; body.style.transform=`translateX(${dir>0?'34px':'-34px'})`;
@@ -697,11 +742,13 @@ document.getElementById('closeBtn').addEventListener('click',closeSheet);
 document.getElementById('prevBtn').addEventListener('click',()=>navigate(-1));
 document.getElementById('nextBtn').addEventListener('click',()=>navigate(1));
 overlay.addEventListener('click',e=>{ if(e.target===overlay) closeSheet(); });
-document.addEventListener('keydown',e=>{ if(!overlay.classList.contains('open'))return; if(e.key==='Escape')closeSheet(); if(e.key==='ArrowRight')navigate(1); if(e.key==='ArrowLeft')navigate(-1); });
+document.addEventListener('keydown',e=>{ if(!overlay.classList.contains('open'))return; const ae=document.activeElement; const inField=ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'); if(e.key==='Escape')closeSheet(); if(inField)return; if(e.key==='ArrowRight')navigate(1); if(e.key==='ArrowLeft')navigate(-1); });
+let dragging=false;
+['pointerup','touchend','touchcancel'].forEach(ev=>document.addEventListener(ev,()=>{ if(dragging){ dragging=false; queueSave(); } }));
 
 // swipe
 let sx=0,sy=0,swiping=false;
-sheet.addEventListener('touchstart',e=>{ const t=e.touches[0]; sx=t.clientX; sy=t.clientY; swiping=true; },{passive:true});
+sheet.addEventListener('touchstart',e=>{ if(e.target.closest('.rng')){ swiping=false; return; } const t=e.touches[0]; sx=t.clientX; sy=t.clientY; swiping=true; },{passive:true});
 sheet.addEventListener('touchend',e=>{
   if(!swiping)return; swiping=false;
   const t=e.changedTouches[0]; const dx=t.clientX-sx, dy=t.clientY-sy;
