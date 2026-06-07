@@ -16,7 +16,7 @@ remembered, so you don't re-enter it every time.
 ## Files (upload them all together, in one folder)
 - `index.html` – the app (config inside)
 - `manifest.json` – installable web-app name + icons
-- `sw.js` – offline support (cache `arlo-v3`)
+- `sw.js` – offline support (cache `arlo-v4`)
 - `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` – home-screen icons
 
 ---
@@ -79,7 +79,7 @@ switches/sliders — all write to the one shared document. A guard stops a live
 update from interrupting a slider you're dragging or text you're typing.
 
 ## Updating later
-After pushing changes, bump the version in `sw.js` (`arlo-v3` → `arlo-v4`) so
+After pushing changes, bump the version in `sw.js` (`arlo-v4` → `arlo-v5`) so
 already-installed phones pull the new code/icon. On Android, if an old icon
 sticks, remove and re-add the home-screen shortcut.
 

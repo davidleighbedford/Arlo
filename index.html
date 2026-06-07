@@ -124,7 +124,6 @@
   .sheetbody{padding:20px;transition:transform .22s ease,opacity .22s ease;}
   .section-label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--accent-deep);margin:6px 0 12px;display:flex;align-items:center;gap:8px;}
   .section-label small{font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink-soft);}
-  .acthint{font-size:.82rem;color:var(--ink-soft);margin:-6px 0 16px;}
 
   .skills{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:8px;}
   .skill{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;gap:11px;align-items:flex-start;}
@@ -205,17 +204,39 @@
   .stretchtoggle.open .tchev{transform:rotate(180deg);}
   .stretchwrap{display:none;}
   .stretchwrap.open{display:block;}
-  .theadrow{display:flex;align-items:stretch;}
-  .theadrow .thead{flex:1;min-width:0;}
-  .calbtn{flex:0 0 50px;display:flex;align-items:center;justify-content:center;border:none;border-left:1px solid var(--line);background:#fff;cursor:pointer;font-size:1.2rem;color:#cfc6da;transition:color .15s ease,background-color .15s ease;}
-  .calbtn:hover{color:var(--fine);}
-  .calbtn.on{color:var(--fine);background:var(--fine-bg);}
-  .triedtoggle{width:100%;display:flex;align-items:center;gap:8px;background:var(--fine-bg);color:var(--fine-deep);border:1px solid #cdeede;border-radius:14px;padding:13px 16px;font-family:inherit;font-weight:800;font-size:.9rem;cursor:pointer;margin:14px 0 10px;}
-  .triedtoggle .sopt{font-weight:600;color:var(--ink-soft);}
-  .triedtoggle .tchev{margin-left:auto;transition:transform .2s ease;}
-  .triedtoggle.open .tchev{transform:rotate(180deg);}
-  .triedwrap{display:none;}
-  .triedwrap.open{display:block;}
+  /* password / lock screen */
+  .loginoverlay{position:fixed;inset:0;z-index:90;background:linear-gradient(160deg,#ffe4da,#fff3ec);display:none;align-items:center;justify-content:center;padding:24px;}
+  .loginoverlay.open{display:flex;}
+  .logincard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px 24px;max-width:340px;width:100%;text-align:center;box-shadow:var(--shadow-lg);}
+  .loginicon{font-size:2rem;}
+  .logincard h2{font-family:"Fraunces",serif;font-weight:600;font-size:1.9rem;margin:6px 0 2px;color:var(--comm-deep);}
+  .logincard p{color:var(--ink-soft);font-size:.9rem;margin:6px 0 14px;}
+  .logincard input{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px;font-family:inherit;font-size:1rem;text-align:center;margin-bottom:12px;background:#fffdf9;color:var(--ink);}
+  .logincard input:focus{outline:none;border-color:var(--comm);}
+  .loginmsg{min-height:1.1em;font-weight:700;font-size:.85rem;color:var(--over-deep);margin:10px 0 0;}
+  .loginlink{background:none;border:none;color:var(--gross-deep);font-family:inherit;font-weight:700;font-size:.82rem;cursor:pointer;margin-top:12px;text-decoration:underline;}
+  /* doughnuts + key + switches */
+  .summary{align-items:flex-start;flex-wrap:wrap;}
+  .donuts{display:flex;flex-direction:column;gap:14px;align-items:center;flex:0 0 auto;}
+  .donut{position:relative;display:grid;place-items:center;width:auto;height:auto;}
+  .donut .label{position:absolute;inset:0;display:grid;place-items:center;text-align:center;}
+  .donut .pct{color:var(--ink);}
+  .legend{display:flex;flex-direction:column;gap:7px;margin-top:4px;}
+  .swtch{position:relative;width:46px;height:26px;border-radius:99px;border:none;background:#d9cdba;cursor:pointer;padding:0;flex:0 0 auto;transition:background .2s ease;}
+  .swtch.on{background:var(--fine);}
+  .swtch .knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s ease;display:grid;place-items:center;}
+  .swtch.on .knob{left:23px;}
+  .swtch .knob::after{content:'✕';font-size:.66rem;font-weight:800;color:#b6ad9f;}
+  .swtch.on .knob::after{content:'✓';color:var(--fine-deep);}
+  .dtogrow{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:.8rem;font-weight:700;color:var(--ink-soft);}
+  .strow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 2px;}
+  .strow .strack-lbl{font-size:.82rem;font-weight:700;color:var(--ink-soft);}
+  .thead-row{display:flex;align-items:stretch;}
+  .thead-row .thead{flex:1;}
+  .caltog{flex:0 0 auto;border:none;border-left:1px solid var(--line);background:#fff;padding:0 15px;cursor:pointer;font-size:1.05rem;color:#cbbfa8;display:flex;align-items:center;}
+  .caltog.on{background:var(--gross-bg);color:var(--gross-deep);}
+  .triedtoggle{background:var(--gross-bg);color:var(--gross-deep);border-color:#cfe4f6;}
+  .triedtoggle .ttico{margin-right:2px;}
 
   /* Refs / footer */
   .refs{margin-top:30px;animation:rise .6s .1s ease both;}
@@ -258,8 +279,8 @@
       </div>
       <button class="sharebtn" id="openShare">⇪ Share &amp; sync</button>
     </div>
-    <p class="lede">Tap a card to see the skills emerging now, plus simple research-based things to try. Tick what Arlo does regularly to watch his progress fill in.</p>
-    <span class="agechip"><span class="dot"></span> 9-month window · begins <b>24 June 2026</b></span>
+    <p class="lede">Working towards Arlo's <b>10-month Ages &amp; Stages Questionnaire (ASQ-3)</b>. Tap a card to see the skills emerging now, plus simple research-based things to try, and tick what Arlo does regularly.</p>
+    <span class="agechip"><span class="dot"></span> 10-month ASQ-3 window · from <b>24 June 2026</b></span>
   </header>
 
   <div class="panel">
@@ -271,11 +292,11 @@
   <div class="panel">
     <h3>Progress summary</h3>
     <div class="summary">
-      <div class="donut" id="donut"></div>
+      <div class="donuts" id="donuts"></div>
       <div class="sumright">
         <p class="statusword" id="statusWord"></p>
-        <div class="bar" id="bar"></div>
         <div class="legend" id="legend"></div>
+        <div class="dtogrow"><button class="swtch" id="stretchDonutTog" role="switch" aria-checked="false"><span class="knob"></span></button><span>show stretch progress</span></div>
       </div>
     </div>
     <div class="groups" id="groups"></div>
@@ -322,13 +343,25 @@
 </div>
 
 <!-- Share modal -->
+<div class="loginoverlay" id="loginOverlay">
+  <div class="logincard">
+    <div class="loginicon">🔒</div>
+    <h2>Arlo</h2>
+    <p>Enter the family password to unlock the tracker.</p>
+    <input type="password" id="loginPw" placeholder="Password" autocomplete="current-password" />
+    <button class="mbtn primary" id="loginBtn" style="width:100%">Unlock</button>
+    <p class="loginmsg" id="loginMsg"></p>
+    <button class="loginlink" id="loginCreate">First time here? Set the password</button>
+  </div>
+</div>
+
 <div class="overlay today" id="todayOverlay" aria-hidden="true">
   <div class="sheet" role="dialog" aria-modal="true">
     <div class="sheethead" id="todayHead" style="background:#fff3ec">
       <div class="grip"></div>
       <button class="close" id="closeToday" aria-label="Close">✕</button>
       <h2 style="color:var(--comm-deep)">What to do today</h2>
-      <p>Top priorities first — what Arlo hasn't mastered yet.</p>
+      <p>Top priorities first — what Arlo hasn't mastered yet. Tap 📅 once you've tried an activity with Arlo today.</p>
     </div>
     <div class="sheetbody" id="todayBody"></div>
   </div>
@@ -339,7 +372,7 @@
     <button class="closex" id="closeShare">✕</button>
     <h2>Share with your partner</h2>
     <p id="modeBadge" style="font-weight:700;margin-top:0"></p>
-    <p>Open your published web address on both phones. On iPhone: open it in Safari → <b>Share</b> → <b>Add to Home Screen</b> for a one-tap app icon. Both phones share one live tracker via Firebase.</p>
+    <p>Open your published web address on both phones and sign in with the family password. On iPhone: open it in Safari → <b>Share</b> → <b>Add to Home Screen</b>. Both phones then share one live tracker.</p>
     <div class="mstep">
       <p style="margin-top:0"><b>1 · Send them the link</b><br>Use the <b>Share</b> button at the top of this Claude conversation to get a link. On their iPhone, open it in Safari → tap <b>Share</b> → <b>Add to Home Screen</b> for one-tap access.</p>
     </div>
@@ -354,6 +387,7 @@
       <textarea class="syncfield" id="syncIn" placeholder="Paste a progress code here…"></textarea>
       <button class="mbtn primary" id="loadCode">Load this code</button>
     </div>
+    <button class="mbtn ghost" id="lockBtn" style="display:none;width:100%;margin-top:4px">🔒 Lock app (sign out)</button>
   </div>
 </div>
 
@@ -378,12 +412,40 @@ function stageIdx(v){ return Math.max(0,Math.min(3,Math.round(v))); }
 const TAGS={
   beginner:{t:'Beginner',c:'#d6492a',bg:'#fdeceb'},
   apprentice:{t:'Apprentice',c:'#b9791a',bg:'#fff5e1'},
-  master:{t:'Master',c:'#15805d',bg:'#e8f8f1'}
+  master:{t:'Master',c:'#15805d',bg:'#e8f8f1'},
+  elite:{t:'Elite',c:'#5b3fb0',bg:'#ece6fb'}
 };
 function actVal(id){ const v=state.acts[id]; if(typeof v==='number') return Math.max(0,Math.min(3,v)); if(v===true) return 1; return 0; }
 function scorableActs(k){ return DATA[k].acts.filter(a=>!a.notes); }
 function domLevel(k){ const a=scorableActs(k); if(!a.length) return 'beginner'; let s=0; a.forEach(x=>s+=actVal(x.id)); const avg=s/a.length; if(avg>=2.5) return 'master'; if(avg>=1) return 'apprentice'; return 'beginner'; }
 function domMasteryPct(k){ const a=scorableActs(k); if(!a.length) return 0; let s=0; a.forEach(x=>s+=actVal(x.id)); return Math.round(s/(3*a.length)*100); }
+let showStretchDonut=false;
+function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function triedMap(){ if(!state.tried || state.tried.date!==todayStr()){ state.tried={date:todayStr(),ids:{}}; queueSave(); } return state.tried.ids; }
+function stretchAchieved(id){ return !!(state.stretchOn&&state.stretchOn[id]) && actVal(id)>=2.5; }
+function domStretchTotal(k){ return (DATA[k].look&&DATA[k].look.items.length)||0; }
+function domStretchAch(k){ if(!DATA[k].look) return 0; let n=0; DATA[k].look.items.forEach((it,i)=>{ if(stretchAchieved('st-'+k+'-'+i)) n++; }); return n; }
+function domElite(k){ const t=domStretchTotal(k); return t>0 && domStretchAch(k)/t>=0.75; }
+function stretchControls(id){
+  const on=!!(state.stretchOn&&state.stretchOn[id]); const v=actVal(id); const si=stageIdx(v);
+  return `<div class="strow"><span class="strack-lbl">Track Arlo's progress</span><button class="swtch ${on?'on':''}" data-stretch="${id}" role="switch" aria-checked="${on}"><span class="knob"></span></button></div>
+    <div class="slider stretchslider" data-for="${id}" style="${on?'':'display:none'}">
+      <input type="range" class="rng" min="0" max="3" step="0.01" value="${v}" data-act="${id}" style="--thumb:${blend(v/3)}" aria-label="Stretch progress">
+      <div class="sticks"><span>not quite</span><span>had a go</span><span>nearly</span><span>master</span></div>
+      <div class="slabel" data-lab="${id}" style="color:${STAGES[si].text}">${STAGES[si].t}</div>
+    </div>`;
+}
+function wireStretch(scope){
+  scope.querySelectorAll('.swtch[data-stretch]').forEach(sw=>{
+    sw.addEventListener('click',e=>{ e.stopPropagation();
+      const id=sw.dataset.stretch; if(!state.stretchOn) state.stretchOn={};
+      const on=!state.stretchOn[id]; state.stretchOn[id]=on;
+      sw.classList.toggle('on',on); sw.setAttribute('aria-checked',on);
+      const sl=scope.querySelector('.stretchslider[data-for="'+id+'"]'); if(sl) sl.style.display=on?'block':'none';
+      queueSave(); renderCards(); renderSummary();
+    });
+  });
+}
 
 /* ---------- Source links ---------- */
 const SRC = {
@@ -524,10 +586,9 @@ const DATA = {
 const BASE_ORDER = ["comm","fine","gross","prob","soc","over"];
 
 /* ===================================================================
-   Firebase is pre-configured below for project "arlo-5d8a6".
-   This app uses CLOUD FIRESTORE (not the Realtime Database).
-   See README: enable Firestore + publish the security rule, then both
-   phones that open this page share one live tracker.
+   Firebase + password login for project "arlo-5d8a6".
+   Cloud Firestore for data, Firebase Auth (email/password) for the family
+   password. Session is remembered per device. See README for setup.
    =================================================================== */
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBVYcjxo5aKAKlwsDjui7FdQtNmhry0Mro",
@@ -539,48 +600,64 @@ const FIREBASE_CONFIG = {
   appId: "1:588304685385:web:cd18b18ba8c737a48ba298"
 };
 const SHARE_ID = "arlo";
+const AUTH_EMAIL = "family@arlo-5d8a6.web.app";   // fixed; you just enter the password
 
 /* ---------- State ---------- */
-let state = { skills:{}, acts:{}, focus:["comm","fine"], notes:{}, tried:{date:'',ids:{}} };
+let state = { skills:{}, acts:{}, focus:["comm","fine"], notes:{}, stretchOn:{}, tried:{date:"",ids:{}} };
 const KEY = "arlo-data-v2";
 let saveTimer = null;
 let storeMode = "local";
 let fbWrite = null;
 let curKey = null;
-let lastWrite = null;   // payload we last wrote — used to ignore our own echo
+let lastWrite = null;
+let fsMod=null, authMod=null, authObj=null, dbRef=null;
 
-function clean(s){
-  const tr=(s&&s.tried&&typeof s.tried==='object')?s.tried:null;
-  return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"], notes:(s&&s.notes)||{},
-    tried:{ date:(tr&&tr.date)||'', ids:(tr&&tr.ids&&typeof tr.ids==='object')?tr.ids:{} } };
+function clean(s){ return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"], notes:(s&&s.notes)||{}, stretchOn:(s&&s.stretchOn)||{}, tried:(s&&s.tried)||{date:"",ids:{}} }; }
+
+function wireLogin(){
+  const pwEl=document.getElementById('loginPw'), msg=document.getElementById('loginMsg');
+  if(!pwEl) return;
+  const signIn=async()=>{ const pw=(pwEl.value||'').trim(); if(pw.length<4){ msg.textContent='Enter your password.'; return; } msg.textContent='Checking…';
+    try{ await authMod.signInWithEmailAndPassword(authObj, AUTH_EMAIL, pw); }
+    catch(e){ msg.textContent = (e&&e.code==='auth/too-many-requests')?'Too many tries — wait a moment.':'Incorrect password.'; } };
+  document.getElementById('loginBtn').addEventListener('click',signIn);
+  pwEl.addEventListener('keydown',e=>{ if(e.key==='Enter') signIn(); });
+  document.getElementById('loginCreate').addEventListener('click',async()=>{ const pw=(pwEl.value||'').trim(); if(pw.length<6){ msg.textContent='Pick a password of 6+ characters.'; return; } msg.textContent='Setting up…';
+    try{ await authMod.createUserWithEmailAndPassword(authObj, AUTH_EMAIL, pw); }
+    catch(e){ msg.textContent=(e&&e.code==='auth/email-already-in-use')?'Already set — just tap Unlock.':'Could not set up — enable Email/Password in Firebase first.'; } });
+  const lk=document.getElementById('lockBtn'); if(lk) lk.addEventListener('click',()=>{ try{ authMod.signOut(authObj); }catch(e){} });
 }
 
-// "Activities Arlo's tried today" is a daily marker — wipe it whenever the calendar date has moved on.
-function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function ensureTriedFresh(){ if(state.tried.date!==todayStr()){ state.tried={date:todayStr(),ids:{}}; queueSave(); } }
+function startSync(){
+  storeMode='firebase'; updateModeBadge();
+  fsMod.getDoc(dbRef).then(snap=>{ if(snap.exists()&&snap.data().payload){ try{ state=clean(JSON.parse(snap.data().payload)); }catch(e){} } renderAll(); if(curKey&&overlay.classList.contains('open')) renderSheet(curKey,0); }).catch(()=>{});
+  fsMod.onSnapshot(dbRef, snap=>{
+    if(typeof dragging!=='undefined' && dragging) return;
+    const ae=document.activeElement; if(ae && ae.tagName==='TEXTAREA') return;
+    if(!(snap.exists() && snap.data().payload)) return;
+    const p=snap.data().payload; if(p===lastWrite) return; if(p===JSON.stringify(state)) return;
+    try{ state=clean(JSON.parse(p)); renderAll(); if(curKey&&overlay.classList.contains('open')) renderSheet(curKey,0); }catch(e){}
+  });
+}
 
 async function initStore(){
   if(FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey){
     try{
       const appMod = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
-      const fs     = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
-      const app = appMod.initializeApp(FIREBASE_CONFIG);
-      const db  = fs.getFirestore(app);
-      const ref = fs.doc(db, "trackers", SHARE_ID);
-      fbWrite = (data)=>{ lastWrite = JSON.stringify(data); return fs.setDoc(ref, { payload: lastWrite, updated: Date.now() }); };
-      storeMode = "firebase";
-      fs.onSnapshot(ref, snap=>{
-        if(typeof dragging!=='undefined' && dragging) return;            // mid-drag
-        const ae=document.activeElement; if(ae && ae.tagName==='TEXTAREA') return; // mid-typing
-        if(!(snap.exists() && snap.data().payload)) return;
-        const p = snap.data().payload;
-        if(p===lastWrite) return;            // our own write echoing back — ignore
-        if(p===JSON.stringify(state)) return; // nothing actually changed
-        try{ state = clean(JSON.parse(p)); renderAll();
-             if(curKey && overlay.classList.contains('open')) renderSheet(curKey,0); }catch(e){}
+      fsMod        = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
+      authMod      = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js");
+      const fbapp = appMod.initializeApp(FIREBASE_CONFIG);
+      const db  = fsMod.getFirestore(fbapp);
+      authObj   = authMod.getAuth(fbapp);
+      try{ await authMod.setPersistence(authObj, authMod.browserLocalPersistence); }catch(e){}
+      dbRef = fsMod.doc(db, "trackers", SHARE_ID);
+      fbWrite = (data)=>{ lastWrite = JSON.stringify(data); return fsMod.setDoc(dbRef, { payload:lastWrite, updated:Date.now() }); };
+      wireLogin();
+      authMod.onAuthStateChanged(authObj, user=>{
+        const lk=document.getElementById('lockBtn');
+        if(user){ hideLogin(); if(lk) lk.style.display='block'; startSync(); }
+        else { storeMode='local'; updateModeBadge(); if(lk) lk.style.display='none'; showLogin(); }
       });
-      const snap = await fs.getDoc(ref);
-      if(snap.exists() && snap.data().payload){ try{ return clean(JSON.parse(snap.data().payload)); }catch(e){} }
       return null;
     }catch(e){ console.warn("Firebase unavailable — falling back to local.", e); }
   }
@@ -597,7 +674,6 @@ async function initStore(){
 async function load(){
   const loaded = await initStore();
   if(loaded) state = loaded;
-  ensureTriedFresh();
   updateModeBadge();
   renderAll();
 }
@@ -610,7 +686,7 @@ async function save(){
 function updateModeBadge(){
   const el=document.getElementById('modeBadge'); if(!el) return;
   if(storeMode==="firebase"){ el.innerHTML='🟢 <b>Live sync is ON</b> — you and your partner share this tracker.'; el.style.color='var(--fine-deep)'; }
-  else{ el.innerHTML='⚪ Saving on <b>this device only.</b> Firestore not reachable yet — see README (enable Firestore + rules). Or use the code below.'; el.style.color='var(--ink-soft)'; }
+  else{ el.innerHTML='⚪ Not synced yet. Sign in, and make sure Firestore + Email/Password are enabled (see README).'; el.style.color='var(--ink-soft)'; }
 }
 
 /* ---------- Helpers ---------- */
@@ -638,35 +714,37 @@ function renderFocus(){
 function DATA_bg(k){ return getComputedStyle(document.documentElement).getPropertyValue('--'+k+'-bg'); }
 
 function renderSummary(){
-  const o=overall(); const st=statusOf(o.pct);
-  // doughnut
-  const r=52, circ=2*Math.PI*r, off=circ*(1-o.pct/100);
-  const center = o.pct>=100
-    ? `<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#2bb98a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg>`
-    : `<div><div class="pct" style="color:${st.c}">${o.pct}%</div><div class="sub">${o.done}/${o.total} skills</div></div>`;
-  document.getElementById('donut').innerHTML = `
-    <svg width="118" height="118" viewBox="0 0 118 118">
-      <circle cx="59" cy="59" r="${r}" fill="none" stroke="#f0ebe2" stroke-width="12"/>
-      <circle cx="59" cy="59" r="${r}" fill="none" stroke="${st.c}" stroke-width="12" stroke-linecap="round"
-        stroke-dasharray="${circ}" stroke-dashoffset="${off}" style="transition:stroke-dashoffset .6s ease"/>
-    </svg><div class="label">${center}</div>`;
-  document.getElementById('statusWord').innerHTML = `${st.w} <span style="color:var(--ink-soft);font-weight:400;font-size:.85rem">· tick skills as Arlo masters them</span>`;
-
-  // stacked bar: completed group (colour) then incomplete group (grey), focus-first
-  const keys=orderedKeys(); const total=o.total; let segs='';
-  keys.forEach(k=>{ const s=domStat(k); if(s.done>0) segs+=`<i style="width:${s.done/total*100}%;background:${C[k]}" title="${DATA[k].name}: ${s.done} done"></i>`; });
-  keys.forEach(k=>{ const s=domStat(k); const inc=s.total-s.done; if(inc>0) segs+=`<i style="width:${inc/total*100}%;background:${CM[k]}" title="${DATA[k].name}: ${inc} to go"></i>`; });
-  document.getElementById('bar').innerHTML = segs;
-
-  // legend
+  const o=overall(); const keys=orderedKeys();
+  const DS=132;
+  function donutSVG(segs,centerHTML){
+    const r=DS*0.39, cx=DS/2, cy=DS/2, Circ=2*Math.PI*r, sw=DS*0.13; let acc=0, arcs='';
+    segs.forEach(s=>{ if(s.frac<=0) return; const len=s.frac*Circ; arcs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${len} ${Circ-len}" stroke-dashoffset="${-acc*Circ}"/>`; acc+=s.frac; });
+    return `<svg width="${DS}" height="${DS}" viewBox="0 0 ${DS} ${DS}"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#f0ebe2" stroke-width="${sw}"/>${arcs}</svg><div class="label">${centerHTML}</div>`;
+  }
+  const tick=`<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#2bb98a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg>`;
+  const ctr=(pct,sub)=> pct>=100?tick:`<div><div class="pct">${pct}%</div><div class="sub">${sub}</div></div>`;
+  const total=o.total; let mseg=[];
+  keys.forEach(k=>{ const s=domStat(k); if(s.done>0) mseg.push({frac:s.done/total,color:C[k]}); });
+  keys.forEach(k=>{ const s=domStat(k); const inc=s.total-s.done; if(inc>0) mseg.push({frac:inc/total,color:CM[k]}); });
+  let html=`<div class="donut">${donutSVG(mseg,ctr(o.pct,'milestones'))}</div>`;
+  let stotal=0; keys.forEach(k=>stotal+=domStretchTotal(k));
+  if(showStretchDonut){
+    let sseg=[], sach=0;
+    keys.forEach(k=>{ const aa=domStretchAch(k); if(aa>0){ sseg.push({frac:aa/stotal,color:C[k]}); sach+=aa; } });
+    keys.forEach(k=>{ const rem=domStretchTotal(k)-domStretchAch(k); if(rem>0) sseg.push({frac:rem/stotal,color:CM[k]}); });
+    const spct=stotal?Math.round(sach/stotal*100):0;
+    html+=`<div class="donut">${donutSVG(sseg,ctr(spct,'stretch'))}</div>`;
+  }
+  document.getElementById('donuts').innerHTML=html;
+  document.getElementById('statusWord').innerHTML = `<b>${o.pct}%</b> of milestones <span style="color:var(--ink-soft);font-weight:400;font-size:.85rem">· ${o.done}/${o.total} skills</span>`;
   document.getElementById('legend').innerHTML = keys.map(k=>`<span><b style="background:${C[k]}"></b>${DATA[k].name}</span>`).join('');
+  const dtog=document.getElementById('stretchDonutTog'); if(dtog) dtog.classList.toggle('on',showStretchDonut);
 
-  // practice levels (from the activity sliders)
-  const lv={master:[],apprentice:[],beginner:[]};
-  keys.forEach(k=>lv[domLevel(k)].push(k));
-  function lvchip(k){ const L=TAGS[domLevel(k)]; const star=state.focus.includes(k)?'⭐ ':''; return `<span class="statchip" style="background:${L.bg};color:${L.c};border-color:${L.c}40">${star}${DATA[k].name}</span>`; }
+  const lv={elite:[],master:[],apprentice:[],beginner:[]};
+  keys.forEach(k=>{ if(domElite(k)) lv.elite.push(k); else lv[domLevel(k)].push(k); });
+  function lvchip(k){ const L=TAGS[domElite(k)?'elite':domLevel(k)]; return `<span class="statchip" style="background:${L.bg};color:${L.c};border-color:${L.c}40">${DATA[k].name}</span>`; }
   let g='<p class="gl" style="margin:2px 0 10px">Practice levels <span style="font-weight:600;text-transform:none;letter-spacing:0;color:#b6ad9f">· from your sliders</span></p>';
-  [['master','Master'],['apprentice','Apprentice'],['beginner','Beginner']].forEach(p=>{
+  [['elite','Elite'],['master','Master'],['apprentice','Apprentice'],['beginner','Beginner']].forEach(p=>{
     const arr=lv[p[0]]; if(arr.length){ g+=`<div class="grouprow"><p class="gl"><span class="lvlswatch" style="background:${TAGS[p[0]].c}"></span>${p[1]}</p><div class="statchips">${arr.map(lvchip).join('')}</div></div>`; }
   });
   document.getElementById('groups').innerHTML=g;
@@ -675,7 +753,7 @@ function renderSummary(){
 function renderCards(){
   const grid=document.getElementById('grid'); grid.innerHTML='';
   orderedKeys().forEach((k,i)=>{
-    const d=DATA[k];
+    const d=DATA[k]; const eff=domElite(k)?'elite':domLevel(k);
     const btn=document.createElement('button');
     btn.className='card'; btn.style.animationDelay=(0.04+i*0.05)+'s';
     btn.style.setProperty('--accent',`var(--${k})`);
@@ -685,7 +763,7 @@ function renderCards(){
       <div class="glyph">${d.glyph}</div>
       <h2>${d.name}</h2>
       <p>${d.sub}</p>
-      <span class="lvl" style="color:${TAGS[domLevel(k)].c};background:${TAGS[domLevel(k)].bg};border-color:${TAGS[domLevel(k)].c}40">${TAGS[domLevel(k)].t}</span>`;
+      <span class="lvl" style="color:${TAGS[eff].c};background:${TAGS[eff].bg};border-color:${TAGS[eff].c}40">${TAGS[eff].t}</span>`;
     btn.addEventListener('click',()=>openSheet(k));
     grid.appendChild(btn);
   });
@@ -737,13 +815,12 @@ function renderSheet(k,dir){
     look=`<div class="lookahead">
       <div class="la-h"><span class="badge">Look ahead</span><h3>Stretch targets</h3></div>
       <p class="la-sub">${d.look.sub}</p>
-      ${d.look.items.map(it=>`<div class="laitem"><h4>${it.t}</h4><p>${it.do}</p><div class="why"><b>Why:</b> ${it.why}</div><div class="src">${srcHTML(it.src)}</div></div>`).join('')}
+      ${d.look.items.map((it,i)=>{const sid='st-'+k+'-'+i;return `<div class="laitem"><h4>${it.t}</h4><p>${it.do}</p><div class="why"><b>Why:</b> ${it.why}</div><div class="src">${srcHTML(it.src)}</div>${stretchControls(sid)}</div>`;}).join('')}
     </div>`;
   }
 
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
   const acts=`<p class="section-label">Things to try together <small>· slide to show how Arlo's getting on</small></p>
-    <p class="acthint">Had a go at one of these today? Open <b>What to do today</b> and tap the 📅 calendar icon to mark it as tried — it collects in "Activities Arlo's tried today" and clears fresh each night.</p>
     ${d.acts.map(a=>{
       if(a.notes){ const nv=(state.notes&&state.notes[a.id])||''; return `
       <div class="act">
@@ -789,6 +866,7 @@ function renderSheet(k,dir){
   body.querySelectorAll('.notesarea').forEach(ta=>{
     ta.addEventListener('input',()=>{ if(!state.notes)state.notes={}; state.notes[ta.dataset.note]=ta.value; queueSave(); });
   });
+  wireStretch(body);
 
   // slide animation
   if(dir){ body.style.opacity='0'; body.style.transform=`translateX(${dir>0?'34px':'-34px'})`;
@@ -820,24 +898,26 @@ function closeToday(){ todayOverlay.classList.remove('open'); todayOverlay.setAt
 document.getElementById('closeToday').addEventListener('click',closeToday);
 todayOverlay.addEventListener('click',e=>{ if(e.target===todayOverlay) closeToday(); });
 document.getElementById('todayBtn').addEventListener('click',openToday);
+document.getElementById('stretchDonutTog').addEventListener('click',()=>{ showStretchDonut=!showStretchDonut; renderSummary(); });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape' && todayOverlay.classList.contains('open')) closeToday(); });
+function showLogin(){ const o=document.getElementById('loginOverlay'); if(o) o.classList.add('open'); }
+function hideLogin(){ const o=document.getElementById('loginOverlay'); if(o) o.classList.remove('open'); }
 
-function todayItemHTML(o,tried){
-  const col=blend(o.v/3); const si=stageIdx(o.v);
-  const calLabel=tried?"Tried today — tap to undo":"Mark as tried today";
-  return `<div class="titem">
-      <div class="theadrow">
+function actItemHTML(o, tried){
+  const v=actVal(o.a.id); const col=blend(v/3); const si=stageIdx(v);
+  return `<div class="titem" data-key="${o.a.id}">
+      <div class="thead-row">
         <button class="thead" type="button">
           <span class="tbar" style="background:${col}"></span>
           <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${DATA[o.k].name} · ${STAGES[si].t}</span></span>
           <span class="tchev">▾</span>
         </button>
-        <button class="calbtn ${tried?'on':''}" type="button" data-tried="${o.a.id}" aria-label="${calLabel}" aria-pressed="${tried}" title="${calLabel}">📅</button>
+        <button class="caltog ${tried?'on':''}" data-tid="${o.a.id}" aria-pressed="${tried}" title="${tried?'Tried with Arlo today':'Mark as tried today'}">📅</button>
       </div>
       <div class="tbody">
         <p class="doit">${o.a.do}</p>
         <div class="slider">
-          <input type="range" class="rng" min="0" max="3" step="0.01" value="${o.v}" data-act="${o.a.id}" style="--thumb:${col}" aria-label="Progress for ${o.a.t}">
+          <input type="range" class="rng" min="0" max="3" step="0.01" value="${v}" data-act="${o.a.id}" style="--thumb:${col}" aria-label="Progress for ${o.a.t}">
           <div class="sticks"><span>not quite</span><span>had a go</span><span>nearly</span><span>master</span></div>
           <div class="slabel" data-lab="${o.a.id}" style="color:${STAGES[si].text}">${STAGES[si].t}</div>
         </div>
@@ -846,26 +926,29 @@ function todayItemHTML(o,tried){
       </div>
     </div>`;
 }
-
 function buildToday(){
-  ensureTriedFresh();
   const el=document.getElementById('todayBody');
-  let items=[];
-  BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ const v=actVal(a.id); if(v<2.5) items.push({k,a,v}); }));
-  items.sort((x,y)=>x.v-y.v);
-  const notTried=items.filter(o=>!state.tried.ids[o.a.id]);
-  const tried=items.filter(o=>state.tried.ids[o.a.id]);
-  let stretch=[];
-  BASE_ORDER.forEach(k=>{ if(domMasteryPct(k)>=75 && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>stretch.push({k,it,id:'st-'+k+'-'+idx})); } });
+  const sheetEl=todayOverlay.querySelector('.sheet'); const scroll=sheetEl?sheetEl.scrollTop:0;
+  const openKeys=new Set(); el.querySelectorAll('.titem.open').forEach(t=>{ if(t.dataset.key) openKeys.add(t.dataset.key); });
+  const wasStretch=!!(document.getElementById('stretchWrap')&&document.getElementById('stretchWrap').classList.contains('open'));
+  const wasTried=!!(document.getElementById('triedWrap')&&document.getElementById('triedWrap').classList.contains('open'));
+
+  const tm=triedMap();
+  const allActs={}; BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ allActs[a.id]={k,a}; }));
+  let mainItems=[]; BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ const v=actVal(a.id); if(v<2.5 && !tm[a.id]) mainItems.push({k,a,v}); }));
+  mainItems.sort((x,y)=>x.v-y.v);
+  const triedItems=Object.keys(tm).filter(id=>tm[id]&&allActs[id]).map(id=>({k:allActs[id].k,a:allActs[id].a}));
+
+  let stretch=[]; BASE_ORDER.forEach(k=>{ if(domMasteryPct(k)>=75 && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>stretch.push({k,it,id:'st-'+k+'-'+idx})); } });
 
   let html='';
-  if(!items.length){ html+=`<div class="alldone">🎉 Arlo's having a good go at everything here. Slide anything back as he grows — or try the stretch targets below.</div>`; }
-  else if(!notTried.length){ html+=`<div class="alldone">✅ Logged everything on today's list as tried — nice going. New ones will land here as Arlo's skills grow.</div>`; }
-  notTried.forEach(o=>{ html+=todayItemHTML(o,false); });
+  if(!mainItems.length){ html+=`<div class="alldone">🎉 Nothing left on today's list right now. Slide things back as Arlo grows, or open the boxes below.</div>`; }
+  mainItems.forEach(o=> html+=actItemHTML(o,false));
+
   if(stretch.length){
     html+=`<button class="stretchtoggle" id="stretchToggle" type="button">Stretch targets <span class="sopt">optional next steps</span><span class="tchev">▾</span></button><div class="stretchwrap" id="stretchWrap">`;
     stretch.forEach(o=>{
-      html+=`<div class="titem stretch">
+      html+=`<div class="titem stretch" data-key="${o.id}">
         <button class="thead" type="button">
           <span class="tbar stretchbar"></span>
           <span class="tnamewrap"><span class="tname">${o.it.t}<span class="stretchbadge">Stretch</span></span><span class="tdom">${DATA[o.k].name} · look ahead</span></span>
@@ -875,31 +958,33 @@ function buildToday(){
           <p class="doit">${o.it.do}</p>
           <div class="why"><b>Why:</b> ${o.it.why}</div>
           <div class="src">${srcHTML(o.it.src)}</div>
+          ${stretchControls(o.id)}
         </div>
       </div>`;
     });
     html+=`</div>`;
   }
-  if(tried.length){
-    html+=`<button class="triedtoggle" id="triedToggle" type="button">Activities Arlo's tried today <span class="sopt">${tried.length} logged · clears tonight</span><span class="tchev">▾</span></button><div class="triedwrap" id="triedWrap">`;
-    tried.forEach(o=>{ html+=todayItemHTML(o,true); });
+
+  if(triedItems.length){
+    html+=`<button class="stretchtoggle triedtoggle" id="triedToggle" type="button"><span class="ttico">📅</span> Activities Arlo's tried today <span class="sopt">${triedItems.length}</span><span class="tchev">▾</span></button><div class="stretchwrap" id="triedWrap">`;
+    triedItems.forEach(o=> html+=actItemHTML(o,true));
     html+=`</div>`;
   }
+
   el.innerHTML=html;
 
   const stog=document.getElementById('stretchToggle');
   if(stog) stog.addEventListener('click',()=>{ stog.classList.toggle('open'); document.getElementById('stretchWrap').classList.toggle('open'); });
   const ttog=document.getElementById('triedToggle');
   if(ttog) ttog.addEventListener('click',()=>{ ttog.classList.toggle('open'); document.getElementById('triedWrap').classList.toggle('open'); });
-  el.querySelectorAll('.calbtn').forEach(b=>b.addEventListener('click',e=>{
+  wireStretch(el);
+  el.querySelectorAll('.thead').forEach(h=>h.addEventListener('click',()=>{ const it=h.closest('.titem'); if(it) it.classList.toggle('open'); }));
+  el.querySelectorAll('.caltog').forEach(b=>b.addEventListener('click',e=>{
     e.stopPropagation();
-    ensureTriedFresh();
-    const id=b.dataset.tried;
-    if(state.tried.ids[id]) delete state.tried.ids[id]; else state.tried.ids[id]=true;
-    queueSave();
-    buildToday();
+    const id=b.dataset.tid; const m=triedMap();
+    if(m[id]) delete m[id]; else m[id]=true;
+    queueSave(); buildToday();
   }));
-  el.querySelectorAll('.thead').forEach(h=>h.addEventListener('click',()=>h.closest('.titem').classList.toggle('open')));
   el.querySelectorAll('.rng').forEach(inp=>{
     const grab=e=>{ e.stopPropagation(); dragging=true; };
     inp.addEventListener('touchstart',grab,{passive:true});
@@ -914,6 +999,11 @@ function buildToday(){
     });
     inp.addEventListener('change',()=>{ dragging=false; queueSave(); renderCards(); renderSummary(); });
   });
+
+  openKeys.forEach(k=>{ const t=el.querySelector('.titem[data-key="'+k+'"]'); if(t) t.classList.add('open'); });
+  if(wasStretch){ const sw=document.getElementById('stretchWrap'); const st=document.getElementById('stretchToggle'); if(sw){ sw.classList.add('open'); if(st) st.classList.add('open'); } }
+  if(wasTried){ const tw=document.getElementById('triedWrap'); const tt=document.getElementById('triedToggle'); if(tw){ tw.classList.add('open'); if(tt) tt.classList.add('open'); } }
+  if(sheetEl) sheetEl.scrollTop=scroll;
 }
 
 // swipe

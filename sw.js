@@ -1,6 +1,6 @@
 /* Offline cache for the Arlo app shell. Network-first so updates show,
    falls back to cache when offline. Firebase / CDN requests bypass the cache. */
-const CACHE = 'arlo-v3';
+const CACHE = 'arlo-v4';
 const ASSETS = ['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
