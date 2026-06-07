@@ -124,6 +124,7 @@
   .sheetbody{padding:20px;transition:transform .22s ease,opacity .22s ease;}
   .section-label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--accent-deep);margin:6px 0 12px;display:flex;align-items:center;gap:8px;}
   .section-label small{font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink-soft);}
+  .acthint{font-size:.82rem;color:var(--ink-soft);margin:-6px 0 16px;}
 
   .skills{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:8px;}
   .skill{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;gap:11px;align-items:flex-start;}
@@ -204,6 +205,17 @@
   .stretchtoggle.open .tchev{transform:rotate(180deg);}
   .stretchwrap{display:none;}
   .stretchwrap.open{display:block;}
+  .theadrow{display:flex;align-items:stretch;}
+  .theadrow .thead{flex:1;min-width:0;}
+  .calbtn{flex:0 0 50px;display:flex;align-items:center;justify-content:center;border:none;border-left:1px solid var(--line);background:#fff;cursor:pointer;font-size:1.2rem;color:#cfc6da;transition:color .15s ease,background-color .15s ease;}
+  .calbtn:hover{color:var(--fine);}
+  .calbtn.on{color:var(--fine);background:var(--fine-bg);}
+  .triedtoggle{width:100%;display:flex;align-items:center;gap:8px;background:var(--fine-bg);color:var(--fine-deep);border:1px solid #cdeede;border-radius:14px;padding:13px 16px;font-family:inherit;font-weight:800;font-size:.9rem;cursor:pointer;margin:14px 0 10px;}
+  .triedtoggle .sopt{font-weight:600;color:var(--ink-soft);}
+  .triedtoggle .tchev{margin-left:auto;transition:transform .2s ease;}
+  .triedtoggle.open .tchev{transform:rotate(180deg);}
+  .triedwrap{display:none;}
+  .triedwrap.open{display:block;}
 
   /* Refs / footer */
   .refs{margin-top:30px;animation:rise .6s .1s ease both;}
@@ -529,7 +541,7 @@ const FIREBASE_CONFIG = {
 const SHARE_ID = "arlo";
 
 /* ---------- State ---------- */
-let state = { skills:{}, acts:{}, focus:["comm","fine"], notes:{} };
+let state = { skills:{}, acts:{}, focus:["comm","fine"], notes:{}, tried:{date:'',ids:{}} };
 const KEY = "arlo-data-v2";
 let saveTimer = null;
 let storeMode = "local";
@@ -537,7 +549,15 @@ let fbWrite = null;
 let curKey = null;
 let lastWrite = null;   // payload we last wrote — used to ignore our own echo
 
-function clean(s){ return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"], notes:(s&&s.notes)||{} }; }
+function clean(s){
+  const tr=(s&&s.tried&&typeof s.tried==='object')?s.tried:null;
+  return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"], notes:(s&&s.notes)||{},
+    tried:{ date:(tr&&tr.date)||'', ids:(tr&&tr.ids&&typeof tr.ids==='object')?tr.ids:{} } };
+}
+
+// "Activities Arlo's tried today" is a daily marker — wipe it whenever the calendar date has moved on.
+function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function ensureTriedFresh(){ if(state.tried.date!==todayStr()){ state.tried={date:todayStr(),ids:{}}; queueSave(); } }
 
 async function initStore(){
   if(FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey){
@@ -577,6 +597,7 @@ async function initStore(){
 async function load(){
   const loaded = await initStore();
   if(loaded) state = loaded;
+  ensureTriedFresh();
   updateModeBadge();
   renderAll();
 }
@@ -722,6 +743,7 @@ function renderSheet(k,dir){
 
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
   const acts=`<p class="section-label">Things to try together <small>· slide to show how Arlo's getting on</small></p>
+    <p class="acthint">Had a go at one of these today? Open <b>What to do today</b> and tap the 📅 calendar icon to mark it as tried — it collects in "Activities Arlo's tried today" and clears fresh each night.</p>
     ${d.acts.map(a=>{
       if(a.notes){ const nv=(state.notes&&state.notes[a.id])||''; return `
       <div class="act">
@@ -800,24 +822,18 @@ todayOverlay.addEventListener('click',e=>{ if(e.target===todayOverlay) closeToda
 document.getElementById('todayBtn').addEventListener('click',openToday);
 document.addEventListener('keydown',e=>{ if(e.key==='Escape' && todayOverlay.classList.contains('open')) closeToday(); });
 
-function buildToday(){
-  const el=document.getElementById('todayBody');
-  let items=[];
-  BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ const v=actVal(a.id); if(v<2.5) items.push({k,a,v}); }));
-  items.sort((x,y)=>x.v-y.v);
-  let stretch=[];
-  BASE_ORDER.forEach(k=>{ if(domMasteryPct(k)>=75 && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>stretch.push({k,it,id:'st-'+k+'-'+idx})); } });
-
-  let html='';
-  if(!items.length){ html+=`<div class="alldone">🎉 Arlo's having a good go at everything here. Slide anything back as he grows — or try the stretch targets below.</div>`; }
-  items.forEach(o=>{
-    const col=blend(o.v/3); const si=stageIdx(o.v);
-    html+=`<div class="titem">
-      <button class="thead" type="button">
-        <span class="tbar" style="background:${col}"></span>
-        <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${DATA[o.k].name} · ${STAGES[si].t}</span></span>
-        <span class="tchev">▾</span>
-      </button>
+function todayItemHTML(o,tried){
+  const col=blend(o.v/3); const si=stageIdx(o.v);
+  const calLabel=tried?"Tried today — tap to undo":"Mark as tried today";
+  return `<div class="titem">
+      <div class="theadrow">
+        <button class="thead" type="button">
+          <span class="tbar" style="background:${col}"></span>
+          <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${DATA[o.k].name} · ${STAGES[si].t}</span></span>
+          <span class="tchev">▾</span>
+        </button>
+        <button class="calbtn ${tried?'on':''}" type="button" data-tried="${o.a.id}" aria-label="${calLabel}" aria-pressed="${tried}" title="${calLabel}">📅</button>
+      </div>
       <div class="tbody">
         <p class="doit">${o.a.do}</p>
         <div class="slider">
@@ -829,7 +845,23 @@ function buildToday(){
         <div class="src">${srcHTML(o.a.src)}</div>
       </div>
     </div>`;
-  });
+}
+
+function buildToday(){
+  ensureTriedFresh();
+  const el=document.getElementById('todayBody');
+  let items=[];
+  BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ const v=actVal(a.id); if(v<2.5) items.push({k,a,v}); }));
+  items.sort((x,y)=>x.v-y.v);
+  const notTried=items.filter(o=>!state.tried.ids[o.a.id]);
+  const tried=items.filter(o=>state.tried.ids[o.a.id]);
+  let stretch=[];
+  BASE_ORDER.forEach(k=>{ if(domMasteryPct(k)>=75 && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>stretch.push({k,it,id:'st-'+k+'-'+idx})); } });
+
+  let html='';
+  if(!items.length){ html+=`<div class="alldone">🎉 Arlo's having a good go at everything here. Slide anything back as he grows — or try the stretch targets below.</div>`; }
+  else if(!notTried.length){ html+=`<div class="alldone">✅ Logged everything on today's list as tried — nice going. New ones will land here as Arlo's skills grow.</div>`; }
+  notTried.forEach(o=>{ html+=todayItemHTML(o,false); });
   if(stretch.length){
     html+=`<button class="stretchtoggle" id="stretchToggle" type="button">Stretch targets <span class="sopt">optional next steps</span><span class="tchev">▾</span></button><div class="stretchwrap" id="stretchWrap">`;
     stretch.forEach(o=>{
@@ -848,11 +880,26 @@ function buildToday(){
     });
     html+=`</div>`;
   }
+  if(tried.length){
+    html+=`<button class="triedtoggle" id="triedToggle" type="button">Activities Arlo's tried today <span class="sopt">${tried.length} logged · clears tonight</span><span class="tchev">▾</span></button><div class="triedwrap" id="triedWrap">`;
+    tried.forEach(o=>{ html+=todayItemHTML(o,true); });
+    html+=`</div>`;
+  }
   el.innerHTML=html;
 
   const stog=document.getElementById('stretchToggle');
   if(stog) stog.addEventListener('click',()=>{ stog.classList.toggle('open'); document.getElementById('stretchWrap').classList.toggle('open'); });
-  el.querySelectorAll('.thead').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
+  const ttog=document.getElementById('triedToggle');
+  if(ttog) ttog.addEventListener('click',()=>{ ttog.classList.toggle('open'); document.getElementById('triedWrap').classList.toggle('open'); });
+  el.querySelectorAll('.calbtn').forEach(b=>b.addEventListener('click',e=>{
+    e.stopPropagation();
+    ensureTriedFresh();
+    const id=b.dataset.tried;
+    if(state.tried.ids[id]) delete state.tried.ids[id]; else state.tried.ids[id]=true;
+    queueSave();
+    buildToday();
+  }));
+  el.querySelectorAll('.thead').forEach(h=>h.addEventListener('click',()=>h.closest('.titem').classList.toggle('open')));
   el.querySelectorAll('.rng').forEach(inp=>{
     const grab=e=>{ e.stopPropagation(); dragging=true; };
     inp.addEventListener('touchstart',grab,{passive:true});
