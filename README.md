@@ -1,88 +1,88 @@
 # Arlo · Play & Progress
 
-A bright, installable web app tracking Arlo's development against the ASQ-3
-9–10 month milestones, with research-based activities, a "What to do today"
-priority list, and **live sync between two phones** via Firebase.
+A bright, installable web app tracking Arlo's development against the **10-month
+Ages & Stages Questionnaire (ASQ-3)**, with research-based activities, a
+priority "What to do today" list, stretch targets, and **live sync between two
+phones** — now protected by a **family password**.
 
-Your Firebase project (`arlo-5d8a6`) is **already configured inside
-`index.html`** — you just need to switch on the database and publish. (A
-Firebase web config/API key is meant to be public; security comes from the
-database rule in step 2, not from hiding the key.)
+Your Firebase project (`arlo-5d8a6`) is already configured inside `index.html`.
+It uses **Cloud Firestore** for the data and **Firebase Authentication
+(email/password)** for the password. You sign in once per phone — the session is
+remembered, so you don't re-enter it every time.
 
-> **Important:** this app uses **Cloud Firestore**, *not* the Realtime Database.
-> The `databaseURL` line in the config is harmless but unused.
+> The `databaseURL` line in the config is harmless but unused (this app uses
+> Firestore, not the Realtime Database).
 
 ## Files (upload them all together, in one folder)
-- `index.html` – the app (your Firebase config is inside it)
-- `manifest.json` – makes it installable (web-app name + icons)
-- `sw.js` – offline support (cache version `arlo-v3`)
+- `index.html` – the app (config inside)
+- `manifest.json` – installable web-app name + icons
+- `sw.js` – offline support (cache `arlo-v4`)
 - `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` – home-screen icons
 
 ---
 
-## Step 1 — Turn on Cloud Firestore
-1. Go to <https://console.firebase.google.com> and open project **arlo-5d8a6**.
-2. Left menu → **Build → Firestore Database → Create database**.
-3. Pick a location (e.g. `europe-west2` for the UK), and start in
-   **Production mode** (we set the rule next). Click **Enable**.
+## One-time setup in the Firebase console (`arlo-5d8a6`)
+<https://console.firebase.google.com>
 
-## Step 2 — Publish the security rule
-In **Firestore Database → Rules**, replace what's there with this and click
-**Publish**:
+**1. Turn on Cloud Firestore**
+Build → **Firestore Database** → **Create database** → choose a location
+(e.g. `europe-west2`) → start in **Production mode** → Enable.
 
+**2. Turn on the password (Authentication)**
+Build → **Authentication** → **Get started** → **Sign-in method** tab →
+enable **Email/Password** → Save.
+
+**3. Set the family password**
+Easiest: once the site is published (step 5), open it, type a password, and tap
+**"First time here? Set the password."** That creates the shared account.
+*(Console alternative: Authentication → Users → Add user, email
+`family@arlo-5d8a6.web.app` and your chosen password.)*
+
+**4. Publish the security rule**
+Firestore Database → **Rules** → paste this → **Publish**:
 ```
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /trackers/{id} {
-      allow read, write: if true;
+      allow read, write: if request.auth != null;
     }
   }
 }
 ```
-
-This lets the app read/write one shared document (`trackers/arlo`). See the
-privacy note at the bottom.
-
-## Step 3 — Publish to GitHub Pages
-1. Put all the files above into your GitHub Pages repo (root, or a folder like
-   `/arlo/`). Commit & push.
-2. Your app is live at e.g. `https://YOURNAME.github.io/` (or `…/arlo/`).
-
-## Step 4 — Install on both phones
-1. Open the address in **Safari** (iPhone) on both your phones.
-2. Tap **Share → Add to Home Screen** for a one-tap app icon.
-3. Open it and tap **⇪ Share & sync** at the top. You should see
-   **🟢 Live sync is ON**. Tick something on one phone — it appears on the
-   other within a second or two.
-
-That's it. Both phones load the same file, so both use the same config and the
-same `trackers/arlo` document — one shared tracker.
+This blocks anyone who isn't signed in — the data is now behind the password.
 
 ---
 
+## 5. Publish to GitHub Pages
+Put all the files in your GitHub Pages repo (root or a folder), commit & push.
+Your app is live at e.g. `https://YOURNAME.github.io/` (or `…/arlo/`).
+
+## 6. Install + sign in on both phones
+1. Open the address in **Safari** (iPhone) / **Chrome** (Android).
+2. Sign in with the family password (set it the first time via the link).
+3. **Add to Home Screen** (iPhone: Share → Add to Home Screen).
+4. Open the app → **⇪ Share & sync** should show **🟢 Live sync is ON**.
+
+You only enter the password once per phone; it's remembered after that. If you
+ever need to sign out, there's a **🔒 Lock app** button in the Share & sync panel.
+
+---
+
+## Your existing data is kept
+Everything you've already entered lives in the `trackers/arlo` document and is
+untouched by these changes. After you sign in, it loads exactly as before.
+
 ## What syncs
-Everything writes to the shared document: activity sliders, skill tick-boxes,
-and the free-text **review notes** in the Overall section. There's a built-in
-guard so a live update from your partner won't yank a slider you're dragging or
-interrupt you mid-typing. There's also a manual **copy/paste sync code** in the
-Share panel as a backup (works offline / without Firebase).
+Activity sliders, skill tick-boxes, the review notes, **and** the stretch-target
+switches/sliders — all write to the one shared document. A guard stops a live
+update from interrupting a slider you're dragging or text you're typing.
 
 ## Updating later
-The service worker caches the app, so after you push changes, bump the version
-inside `sw.js` (e.g. `arlo-v3` → `arlo-v4`) so phones that already installed it
-pull the new code and icon on next open.
+After pushing changes, bump the version in `sw.js` (`arlo-v4` → `arlo-v5`) so
+already-installed phones pull the new code/icon. On Android, if an old icon
+sticks, remove and re-add the home-screen shortcut.
 
-## Privacy note
-The rule above lets anyone who knows your page URL read or edit the tracker. For
-a baby activity list that's usually fine. To lock it down you can:
-- change `SHARE_ID` in `index.html` from `"arlo"` to a hard-to-guess word (use
-  the same value on both phones), and/or
-- ask me to switch the app to require a simple Firebase sign-in.
-
-## Troubleshooting
-- **Badge says "this device only":** Firestore isn't enabled yet, the rule
-  isn't published, or the browser blocked the connection. Recheck steps 1–2 and
-  make sure you're opening the page over `https://` (GitHub Pages always is).
-- **Nothing syncs between phones:** confirm both are on the published URL (not a
-  local file) and both show the 🟢 badge.
+## Privacy
+With the rule above, only someone signed in with the password can read or edit
+the tracker. Use a password you're happy sharing just between the two of you.
