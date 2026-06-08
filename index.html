@@ -153,6 +153,8 @@
 
   .lookahead{border:2px solid var(--accent);border-radius:18px;padding:4px 16px 16px;margin:6px 0 20px;background:linear-gradient(180deg,var(--accent-bg),#fff 60%);}
   .lookahead .la-h{display:flex;align-items:center;gap:8px;margin:14px 0 4px;}
+  .lookahead-info{background:#f7f4ff;border-color:#d6cdf5;}
+  .lookahead-info .la-h .badge{background:#8b72cc;}
   .la-h .badge{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:999px;}
   .la-h h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.2rem;margin:0;color:var(--accent-deep);}
   .la-sub{font-size:.85rem;color:var(--ink-soft);margin:0 0 8px;}
@@ -428,8 +430,8 @@ let showStretchDonut=false;
 function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function triedMap(){ if(!state.tried || state.tried.date!==todayStr()){ state.tried={date:todayStr(),ids:{}}; queueSave(); } return state.tried.ids; }
 function stretchAchieved(id){ return !!(state.stretchOn&&state.stretchOn[id]) && actVal(id)>=2.5; }
-function domStretchTotal(k){ return (DATA[k].look&&DATA[k].look.items.length)||0; }
-function domStretchAch(k){ if(!DATA[k].look) return 0; let n=0; DATA[k].look.items.forEach((it,i)=>{ if(stretchAchieved('st-'+k+'-'+i)) n++; }); return n; }
+function domStretchTotal(k){ if(k==='over') return 0; return (DATA[k].look&&DATA[k].look.items.length)||0; }
+function domStretchAch(k){ if(k==='over'||!DATA[k].look) return 0; let n=0; DATA[k].look.items.forEach((it,i)=>{ if(stretchAchieved('st-'+k+'-'+i)) n++; }); return n; }
 function domElite(k){ const t=domStretchTotal(k); return t>0 && domStretchAch(k)/t>=0.75; }
 function stretchBubble(k){
   const total=domStretchTotal(k); if(!total) return '';
@@ -736,7 +738,13 @@ function renderSheet(k,dir){
       </li>`;}).join('')}</ul>`;
 
   let look='';
-  if(isStretch(k) && d.look){
+  if(k==='over' && d.look){
+    look=`<div class="lookahead lookahead-info">
+      <div class="la-h"><span class="badge">Coming up</span><h3>Towards the 1-year review</h3></div>
+      <p class="la-sub">${d.look.sub}</p>
+      ${d.look.items.map(it=>`<div class="laitem"><h4>${it.t}</h4><p>${it.do}</p><div class="why"><b>Why:</b> ${it.why}</div><div class="src">${srcHTML(it.src)}</div></div>`).join('')}
+    </div>`;
+  } else if(isStretch(k) && d.look){
     look=`<div class="lookahead">
       <div class="la-h"><span class="badge">Look ahead</span><h3>Stretch targets</h3></div>
       <p class="la-sub">${d.look.sub}</p>
@@ -821,6 +829,12 @@ const todayOverlay=document.getElementById('todayOverlay');
 function openToday(){ buildToday(); todayOverlay.classList.add('open'); todayOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; todayOverlay.querySelector('.sheet').scrollTop=0; }
 function closeToday(){ todayOverlay.classList.remove('open'); todayOverlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
 document.getElementById('closeToday').addEventListener('click',closeToday);
+{ // swipe-down to close today panel
+  const _sh=todayOverlay.querySelector('.sheet');
+  let _ty=0,_tx=0,_sc=0;
+  _sh.addEventListener('touchstart',e=>{ _ty=e.touches[0].clientY; _tx=e.touches[0].clientX; _sc=_sh.scrollTop; },{passive:true});
+  _sh.addEventListener('touchend',e=>{ const dy=e.changedTouches[0].clientY-_ty, dx=Math.abs(e.changedTouches[0].clientX-_tx); if(dy>80&&dx<70&&_sc===0) closeToday(); });
+}
 todayOverlay.addEventListener('click',e=>{ if(e.target===todayOverlay) closeToday(); });
 document.getElementById('todayBtn').addEventListener('click',openToday);
 document.getElementById('stretchDonutTog').addEventListener('click',()=>{ showStretchDonut=!showStretchDonut; renderSummary(); });
@@ -865,7 +879,7 @@ function buildToday(){
   mainItems.sort((x,y)=>x.v-y.v);
   const triedItems=Object.keys(tm).filter(id=>tm[id]&&allActs[id]).map(id=>({k:allActs[id].k,a:allActs[id].a}));
 
-  let stretch=[]; BASE_ORDER.forEach(k=>{ if(DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>{ const id='st-'+k+'-'+idx; if(state.stretchOn && state.stretchOn[id]) stretch.push({k,it,id}); }); } });
+  let stretch=[]; BASE_ORDER.forEach(k=>{ if(k!=='over' && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>{ const id='st-'+k+'-'+idx; if(state.stretchOn && state.stretchOn[id]) stretch.push({k,it,id}); }); } });
 
   let html='';
   if(!mainItems.length){ html+=`<div class="alldone">🎉 Nothing left on today's list right now. Slide things back as Arlo grows, or open the boxes below.</div>`; }
