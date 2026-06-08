@@ -404,6 +404,7 @@
 /* ---------- Colours ---------- */
 const C  = {comm:'#ff7a59',fine:'#2bb98a',gross:'#4aa3e8',prob:'#f3b13d',soc:'#a988e6',over:'#ef6f8e'};
 const CM = {comm:'#ead9d1',fine:'#d6e4dc',gross:'#d8e3ed',prob:'#ece2cf',soc:'#e2d9ee',over:'#ecd8dc'};
+const CMP= {comm:'#f7b29d',fine:'#8dd2b6',gross:'#9dc7e5',prob:'#f1ce8f',soc:'#ccb9e4',over:'#efadb8'}; // 50%-blend, visible stretch-pending tints
 const CD = {comm:'#d6492a',fine:'#15805d',gross:'#1f6db5',prob:'#b9791a',soc:'#6f49bf',over:'#c63e5f'};
 
 /* ---------- Practice slider + level tags ---------- */
@@ -642,8 +643,10 @@ function renderSummary(){
   const o=overall(); const keys=orderedKeys();
   const DS=132;
   function donutSVG(segs,centerHTML){
-    const r=DS*0.39, cx=DS/2, cy=DS/2, Circ=2*Math.PI*r, sw=DS*0.13; let acc=0, arcs='';
-    segs.forEach(s=>{ if(s.frac<=0) return; const len=s.frac*Circ; arcs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${len} ${Circ-len}" stroke-dashoffset="${-acc*Circ}"/>`; acc+=s.frac; });
+    const r=DS*0.39, cx=DS/2, cy=DS/2, Circ=2*Math.PI*r, sw=DS*0.13;
+    const tot=segs.reduce((s,x)=>s+x.frac,0); const norm=tot>0?Math.min(0.9998,tot)/tot:1;
+    let acc=0, arcs='';
+    segs.forEach(s=>{ const f=s.frac*norm; if(f<=0) return; const len=f*Circ; arcs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${len} ${Circ-len}" stroke-dashoffset="${-acc*Circ}"/>`; acc+=f; });
     return `<svg width="${DS}" height="${DS}" viewBox="0 0 ${DS} ${DS}"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#f0ebe2" stroke-width="${sw}"/>${arcs}</svg><div class="label">${centerHTML}</div>`;
   }
   const tick=`<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#2bb98a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg>`;
@@ -656,7 +659,7 @@ function renderSummary(){
   if(showStretchDonut){
     let sseg=[], sach=0;
     keys.forEach(k=>{ const aa=domStretchAch(k); if(aa>0){ sseg.push({frac:aa/stotal,color:C[k]}); sach+=aa; } });
-    keys.forEach(k=>{ const avail=domMasteryPct(k)>=75; const rem=domStretchTotal(k)-domStretchAch(k); if(rem>0) sseg.push({frac:rem/stotal,color:avail?CM[k]:'#e3ddd0'}); });
+    keys.forEach(k=>{ const avail=domMasteryPct(k)>=75; const rem=domStretchTotal(k)-domStretchAch(k); if(rem>0) sseg.push({frac:rem/stotal,color:avail?CMP[k]:'#c8c0b0'}); });
     const spct=stotal?Math.round(sach/stotal*100):0;
     html+=`<div class="donut">${donutSVG(sseg,ctr(spct,'stretch'))}</div>`;
   }
@@ -923,7 +926,9 @@ function buildToday(){
     e.stopPropagation();
     const id=b.dataset.tid; const m=triedMap();
     if(m[id]) delete m[id]; else m[id]=true;
-    queueSave(); buildToday();
+    queueSave();
+    if(m[id]){ b.classList.add('on'); setTimeout(()=>buildToday(),450); }
+    else buildToday();
   }));
   el.querySelectorAll('.rng').forEach(inp=>{
     const grab=e=>{ e.stopPropagation(); dragging=true; };
@@ -946,13 +951,14 @@ function buildToday(){
   if(sheetEl) sheetEl.scrollTop=scroll;
 }
 
-// swipe
-let sx=0,sy=0,swiping=false;
-sheet.addEventListener('touchstart',e=>{ if(e.target.closest('.rng')){ swiping=false; return; } const t=e.touches[0]; sx=t.clientX; sy=t.clientY; swiping=true; },{passive:true});
+// swipe (horizontal = navigate, downward from top = close)
+let sx=0,sy=0,swiping=false,shScTop=0;
+sheet.addEventListener('touchstart',e=>{ if(e.target.closest('.rng')){ swiping=false; return; } const t=e.touches[0]; sx=t.clientX; sy=t.clientY; shScTop=sheet.scrollTop; swiping=true; },{passive:true});
 sheet.addEventListener('touchend',e=>{
   if(!swiping)return; swiping=false;
   const t=e.changedTouches[0]; const dx=t.clientX-sx, dy=t.clientY-sy;
   if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)*1.4){ navigate(dx<0?1:-1); }
+  else if(dy>80 && dy>Math.abs(dx)*1.5 && shScTop===0){ closeSheet(); }
 },{passive:true});
 
 /* ---------- Share / sync ---------- */
