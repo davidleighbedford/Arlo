@@ -236,7 +236,7 @@
   .caltog{flex:0 0 auto;border:none;border-left:1px solid var(--line);background:#fff;padding:0 15px;cursor:pointer;font-size:1.05rem;color:#cbbfa8;display:flex;align-items:center;}
   .caltog.on{background:var(--gross-bg);color:var(--gross-deep);}
   .triedtoggle{background:var(--gross-bg);color:var(--gross-deep);border-color:#cfe4f6;}
-  .triedtoggle .ttico{margin-right:2px;}
+  .triedtoggle .ttico{margin-right:6px;display:inline-flex;align-items:center;vertical-align:middle;}
 
   /* Refs / footer */
   .refs{margin-top:30px;animation:rise .6s .1s ease both;}
@@ -248,6 +248,7 @@
   .disclaimer{margin-top:22px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--over);border-radius:14px;padding:14px 16px;font-size:.85rem;color:var(--ink-soft);}
   .disclaimer b{color:var(--over-deep);}
   footer{text-align:center;margin-top:26px;font-size:.74rem;color:#b6ad9f;}
+  .built{font-size:.72rem;color:#c9bfae;margin-top:3px;}
 
   /* Share modal */
   .modal{position:fixed;inset:0;z-index:60;background:rgba(47,42,63,.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;}
@@ -280,13 +281,11 @@
       <button class="sharebtn" id="openShare">⇪ Share &amp; sync</button>
     </div>
     <p class="lede">Working towards Arlo's <b>10-month Ages &amp; Stages Questionnaire (ASQ-3)</b>. Tap a card to see the skills emerging now, plus simple research-based things to try, and tick what Arlo does regularly.</p>
-    <span class="agechip"><span class="dot"></span> 10-month ASQ-3 window · from <b>24 June 2026</b></span>
+    <span class="agechip" id="ageChip"><span class="dot"></span></span>
   </header>
 
   <div class="panel">
-    <h3>Your focus</h3>
-    <div class="chips" id="focusChips"></div>
-    <button class="todaybtn" id="todayBtn">📋 What to do today →</button>
+    <button class="todaybtn" id="todayBtn" style="width:100%">📋 What to do today →</button>
   </div>
 
   <div class="panel">
@@ -321,7 +320,7 @@
     <b>A gentle reminder:</b> this isn't a test, and every baby grows at their own pace. It's a play guide drawn from the ASQ-3 framework used at the UK 9–12 month review. I'm not a medical professional — if Arlo loses a skill he had, or anything worries you, have a chat with your health visitor or GP.
   </div>
 
-  <footer>Made for Arlo · synced between you &amp; your partner</footer>
+  <footer>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 8 Jun 2026 · 05:40 UTC</span></footer>
 </div>
 
 <!-- Detail overlay -->
@@ -361,7 +360,7 @@
       <div class="grip"></div>
       <button class="close" id="closeToday" aria-label="Close">✕</button>
       <h2 style="color:var(--comm-deep)">What to do today</h2>
-      <p>Top priorities first — what Arlo hasn't mastered yet. Tap 📅 once you've tried an activity with Arlo today.</p>
+      <p>Top priorities first — what Arlo hasn't mastered yet. Tap the <b>calendar button</b> on an activity once Arlo has tried it today.</p>
     </div>
     <div class="sheetbody" id="todayBody"></div>
   </div>
@@ -600,30 +599,25 @@ const FIREBASE_CONFIG = {
   appId: "1:588304685385:web:cd18b18ba8c737a48ba298"
 };
 const SHARE_ID = "arlo";
-const AUTH_EMAIL = "family@arlo-5d8a6.web.app";   // fixed; you just enter the password
+const AUTH_EMAIL = "family@arlo-5d8a6.web.app";
 
 /* ---------- State ---------- */
 let state = { skills:{}, acts:{}, focus:["comm","fine"], notes:{}, stretchOn:{}, tried:{date:"",ids:{}} };
 const KEY = "arlo-data-v2";
-let saveTimer = null;
-let storeMode = "local";
-let fbWrite = null;
-let curKey = null;
-let lastWrite = null;
+let saveTimer=null, storeMode="local", fbWrite=null, curKey=null, lastWrite=null;
 let fsMod=null, authMod=null, authObj=null, dbRef=null;
 
 function clean(s){ return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"], notes:(s&&s.notes)||{}, stretchOn:(s&&s.stretchOn)||{}, tried:(s&&s.tried)||{date:"",ids:{}} }; }
 
 function wireLogin(){
-  const pwEl=document.getElementById('loginPw'), msg=document.getElementById('loginMsg');
-  if(!pwEl) return;
-  const signIn=async()=>{ const pw=(pwEl.value||'').trim(); if(pw.length<4){ msg.textContent='Enter your password.'; return; } msg.textContent='Checking…';
-    try{ await authMod.signInWithEmailAndPassword(authObj, AUTH_EMAIL, pw); }
-    catch(e){ msg.textContent = (e&&e.code==='auth/too-many-requests')?'Too many tries — wait a moment.':'Incorrect password.'; } };
+  const pwEl=document.getElementById('loginPw'), msg=document.getElementById('loginMsg'); if(!pwEl) return;
+  const signIn=async()=>{ const pw=(pwEl.value||'').trim(); if(pw.length<4){msg.textContent='Enter your password.';return;} msg.textContent='Checking…';
+    try{ await authMod.signInWithEmailAndPassword(authObj,AUTH_EMAIL,pw); }
+    catch(e){ msg.textContent=(e&&e.code==='auth/too-many-requests')?'Too many tries — wait a moment.':'Incorrect password.'; } };
   document.getElementById('loginBtn').addEventListener('click',signIn);
   pwEl.addEventListener('keydown',e=>{ if(e.key==='Enter') signIn(); });
-  document.getElementById('loginCreate').addEventListener('click',async()=>{ const pw=(pwEl.value||'').trim(); if(pw.length<6){ msg.textContent='Pick a password of 6+ characters.'; return; } msg.textContent='Setting up…';
-    try{ await authMod.createUserWithEmailAndPassword(authObj, AUTH_EMAIL, pw); }
+  document.getElementById('loginCreate').addEventListener('click',async()=>{ const pw=(pwEl.value||'').trim(); if(pw.length<6){msg.textContent='Pick a password of 6+ characters.';return;} msg.textContent='Setting up…';
+    try{ await authMod.createUserWithEmailAndPassword(authObj,AUTH_EMAIL,pw); }
     catch(e){ msg.textContent=(e&&e.code==='auth/email-already-in-use')?'Already set — just tap Unlock.':'Could not set up — enable Email/Password in Firebase first.'; } });
   const lk=document.getElementById('lockBtn'); if(lk) lk.addEventListener('click',()=>{ try{ authMod.signOut(authObj); }catch(e){} });
 }
@@ -632,56 +626,46 @@ function startSync(){
   storeMode='firebase'; updateModeBadge();
   fsMod.getDoc(dbRef).then(snap=>{ if(snap.exists()&&snap.data().payload){ try{ state=clean(JSON.parse(snap.data().payload)); }catch(e){} } renderAll(); if(curKey&&overlay.classList.contains('open')) renderSheet(curKey,0); }).catch(()=>{});
   fsMod.onSnapshot(dbRef, snap=>{
-    if(typeof dragging!=='undefined' && dragging) return;
-    const ae=document.activeElement; if(ae && ae.tagName==='TEXTAREA') return;
-    if(!(snap.exists() && snap.data().payload)) return;
+    if(typeof dragging!=='undefined'&&dragging) return;
+    const ae=document.activeElement; if(ae&&ae.tagName==='TEXTAREA') return;
+    if(!(snap.exists()&&snap.data().payload)) return;
     const p=snap.data().payload; if(p===lastWrite) return; if(p===JSON.stringify(state)) return;
     try{ state=clean(JSON.parse(p)); renderAll(); if(curKey&&overlay.classList.contains('open')) renderSheet(curKey,0); }catch(e){}
   });
 }
 
 async function initStore(){
-  if(FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey){
+  if(FIREBASE_CONFIG&&FIREBASE_CONFIG.apiKey){
     try{
-      const appMod = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
-      fsMod        = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
-      authMod      = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js");
-      const fbapp = appMod.initializeApp(FIREBASE_CONFIG);
-      const db  = fsMod.getFirestore(fbapp);
-      authObj   = authMod.getAuth(fbapp);
-      try{ await authMod.setPersistence(authObj, authMod.browserLocalPersistence); }catch(e){}
-      dbRef = fsMod.doc(db, "trackers", SHARE_ID);
-      fbWrite = (data)=>{ lastWrite = JSON.stringify(data); return fsMod.setDoc(dbRef, { payload:lastWrite, updated:Date.now() }); };
+      const appMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
+      fsMod       =await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
+      authMod     =await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js");
+      const fbapp=appMod.initializeApp(FIREBASE_CONFIG);
+      const db=fsMod.getFirestore(fbapp); authObj=authMod.getAuth(fbapp);
+      try{ await authMod.setPersistence(authObj,authMod.browserLocalPersistence); }catch(e){}
+      dbRef=fsMod.doc(db,"trackers",SHARE_ID);
+      fbWrite=(data)=>{ lastWrite=JSON.stringify(data); return fsMod.setDoc(dbRef,{payload:lastWrite,updated:Date.now()}); };
       wireLogin();
-      authMod.onAuthStateChanged(authObj, user=>{
+      authMod.onAuthStateChanged(authObj,user=>{
         const lk=document.getElementById('lockBtn');
         if(user){ hideLogin(); if(lk) lk.style.display='block'; startSync(); }
-        else { storeMode='local'; updateModeBadge(); if(lk) lk.style.display='none'; showLogin(); }
+        else{ storeMode='local'; updateModeBadge(); if(lk) lk.style.display='none'; showLogin(); }
       });
       return null;
-    }catch(e){ console.warn("Firebase unavailable — falling back to local.", e); }
+    }catch(e){ console.warn("Firebase unavailable — falling back to local.",e); }
   }
-  if(window.storage){
-    storeMode = "claude";
-    try{ const r = await window.storage.get(KEY, true); if(r && r.value) return clean(JSON.parse(r.value)); }catch(e){}
-    return null;
-  }
-  storeMode = "local";
-  try{ const v = localStorage.getItem(KEY); if(v) return clean(JSON.parse(v)); }catch(e){}
-  return null;
+  if(window.storage){ storeMode="claude"; try{ const r=await window.storage.get(KEY,true); if(r&&r.value) return clean(JSON.parse(r.value)); }catch(e){} return null; }
+  storeMode="local"; try{ const v=localStorage.getItem(KEY); if(v) return clean(JSON.parse(v)); }catch(e){} return null;
 }
 
 async function load(){
-  const loaded = await initStore();
-  if(loaded) state = loaded;
-  updateModeBadge();
-  renderAll();
+  const loaded=await initStore(); if(loaded) state=loaded; updateModeBadge(); renderAll();
 }
 async function save(){
-  const payload = JSON.stringify(state);
-  if(storeMode==="firebase" && fbWrite){ try{ await fbWrite(state); }catch(e){ console.warn("save failed",e); } return; }
-  if(storeMode==="claude" && window.storage){ try{ await window.storage.set(KEY, payload, true); }catch(e){} return; }
-  try{ localStorage.setItem(KEY, payload); }catch(e){}
+  const payload=JSON.stringify(state);
+  if(storeMode==="firebase"&&fbWrite){ try{ await fbWrite(state); }catch(e){ console.warn("save failed",e); } return; }
+  if(storeMode==="claude"&&window.storage){ try{ await window.storage.set(KEY,payload,true); }catch(e){} return; }
+  try{ localStorage.setItem(KEY,payload); }catch(e){}
 }
 function updateModeBadge(){
   const el=document.getElementById('modeBadge'); if(!el) return;
@@ -731,7 +715,7 @@ function renderSummary(){
   if(showStretchDonut){
     let sseg=[], sach=0;
     keys.forEach(k=>{ const aa=domStretchAch(k); if(aa>0){ sseg.push({frac:aa/stotal,color:C[k]}); sach+=aa; } });
-    keys.forEach(k=>{ const rem=domStretchTotal(k)-domStretchAch(k); if(rem>0) sseg.push({frac:rem/stotal,color:CM[k]}); });
+    keys.forEach(k=>{ const avail=domMasteryPct(k)>=75; const rem=domStretchTotal(k)-domStretchAch(k); if(rem>0) sseg.push({frac:rem/stotal,color:avail?CM[k]:'#e3ddd0'}); });
     const spct=stotal?Math.round(sach/stotal*100):0;
     html+=`<div class="donut">${donutSVG(sseg,ctr(spct,'stretch'))}</div>`;
   }
@@ -769,7 +753,9 @@ function renderCards(){
   });
 }
 
-function renderAll(){ renderFocus(); renderSummary(); renderCards(); }
+function arloAge(){ return ((Date.now()-new Date('2025-09-24'))/(1000*60*60*24*30.4375)).toFixed(1); }
+function renderAge(){ const el=document.getElementById('ageChip'); if(el) el.innerHTML=`<span class="dot"></span> Arlo is <b>${arloAge()} months</b> · 10-month ASQ-3 window`; }
+function renderAll(){ renderAge(); renderSummary(); renderCards(); }
 function queueSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(save,250); }
 
 /* ---------- Sheet ---------- */
@@ -903,6 +889,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape' && todayOverlay.cla
 function showLogin(){ const o=document.getElementById('loginOverlay'); if(o) o.classList.add('open'); }
 function hideLogin(){ const o=document.getElementById('loginOverlay'); if(o) o.classList.remove('open'); }
 
+const CAL_SVG=(tick)=>`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/>${tick?'<polyline points="7,14 10.5,17.5 17,11"/>':''}</svg>`;
 function actItemHTML(o, tried){
   const v=actVal(o.a.id); const col=blend(v/3); const si=stageIdx(v);
   return `<div class="titem" data-key="${o.a.id}">
@@ -912,7 +899,7 @@ function actItemHTML(o, tried){
           <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${DATA[o.k].name} · ${STAGES[si].t}</span></span>
           <span class="tchev">▾</span>
         </button>
-        <button class="caltog ${tried?'on':''}" data-tid="${o.a.id}" aria-pressed="${tried}" title="${tried?'Tried with Arlo today':'Mark as tried today'}">📅</button>
+        <button class="caltog ${tried?'on':''}" data-tid="${o.a.id}" aria-pressed="${tried}" title="${tried?'Tried with Arlo today':'Mark as tried today'}">${CAL_SVG(tried)}</button>
       </div>
       <div class="tbody">
         <p class="doit">${o.a.do}</p>
@@ -939,7 +926,7 @@ function buildToday(){
   mainItems.sort((x,y)=>x.v-y.v);
   const triedItems=Object.keys(tm).filter(id=>tm[id]&&allActs[id]).map(id=>({k:allActs[id].k,a:allActs[id].a}));
 
-  let stretch=[]; BASE_ORDER.forEach(k=>{ if(domMasteryPct(k)>=75 && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>stretch.push({k,it,id:'st-'+k+'-'+idx})); } });
+  let stretch=[]; BASE_ORDER.forEach(k=>{ if(DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>{ const id='st-'+k+'-'+idx; if(state.stretchOn && state.stretchOn[id]) stretch.push({k,it,id}); }); } });
 
   let html='';
   if(!mainItems.length){ html+=`<div class="alldone">🎉 Nothing left on today's list right now. Slide things back as Arlo grows, or open the boxes below.</div>`; }
@@ -966,7 +953,7 @@ function buildToday(){
   }
 
   if(triedItems.length){
-    html+=`<button class="stretchtoggle triedtoggle" id="triedToggle" type="button"><span class="ttico">📅</span> Activities Arlo's tried today <span class="sopt">${triedItems.length}</span><span class="tchev">▾</span></button><div class="stretchwrap" id="triedWrap">`;
+    html+=`<button class="stretchtoggle triedtoggle" id="triedToggle" type="button"><span class="ttico">${CAL_SVG(true)}</span> Activities Arlo's tried today <span class="sopt">${triedItems.length}</span><span class="tchev">▾</span></button><div class="stretchwrap" id="triedWrap">`;
     triedItems.forEach(o=> html+=actItemHTML(o,true));
     html+=`</div>`;
   }
