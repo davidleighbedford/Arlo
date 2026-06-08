@@ -48,7 +48,7 @@
   h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.1rem,8vw,3rem);line-height:1.02;margin:0;letter-spacing:-.01em;}
   h1 em{font-style:italic;color:var(--comm);}
   .lede{color:var(--ink-soft);font-size:1rem;margin:10px 0 0;max-width:52ch;}
-  .agechip{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.86rem;box-shadow:var(--shadow);}
+  .agechip{display:flex;align-items:center;gap:8px;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.86rem;box-shadow:var(--shadow);box-sizing:border-box;}
   .agechip b{color:var(--comm-deep);}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--fine);box-shadow:0 0 0 4px var(--fine-bg);}
   .sharebtn{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font-family:inherit;font-weight:800;font-size:.8rem;color:var(--soc-deep);box-shadow:var(--shadow);cursor:pointer;display:flex;align-items:center;gap:6px;}
@@ -91,7 +91,7 @@
   /* Cards */
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
   @media(max-width:520px){.grid{grid-template-columns:1fr;}}
-  .card{position:relative;text-align:left;cursor:pointer;border:none;background:var(--card);border-radius:22px;padding:18px 18px 36px;box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .18s ease;overflow:hidden;font-family:inherit;color:inherit;animation:rise .5s ease both;}
+  .card{position:relative;text-align:left;cursor:pointer;border:none;background:var(--card);border-radius:22px;padding:18px;box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .18s ease;overflow:hidden;font-family:inherit;color:inherit;animation:rise .5s ease both;}
   .card:hover,.card:focus-visible{transform:translateY(-4px);box-shadow:var(--shadow-lg);outline:none;}
   .card::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--accent);}
   .cardhead{display:flex;justify-content:space-between;align-items:flex-start;}
@@ -249,7 +249,8 @@
   .disclaimer b{color:var(--over-deep);}
   footer{text-align:center;margin-top:26px;font-size:.74rem;color:#b6ad9f;}
   .built{font-size:.72rem;color:#c9bfae;margin-top:3px;}
-  .strchip{position:absolute;bottom:9px;right:9px;font-size:.67rem;font-weight:700;border-radius:99px;padding:3px 9px;border:1px solid;pointer-events:none;white-space:nowrap;}
+  .strchip{font-size:.67rem;font-weight:700;border-radius:99px;padding:3px 9px;border:1px solid;white-space:nowrap;}
+  .cbottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:8px;}
   .strchip.blue{background:#ddf0ff;color:#1563a8;border-color:#89c4ee;}
   .strchip.yellow{background:#fff3c4;color:#8a6000;border-color:#e8c94a;}
   .strchip.green{background:#d4f5e6;color:#0d6b46;border-color:#6ddba8;}
@@ -433,7 +434,7 @@ function domElite(k){ const t=domStretchTotal(k); return t>0 && domStretchAch(k)
 function stretchBubble(k){
   const total=domStretchTotal(k); if(!total) return '';
   let sel=0; DATA[k].look.items.forEach((_,i)=>{ if(state.stretchOn&&state.stretchOn['st-'+k+'-'+i]) sel++; });
-  if(sel===0) return '<span class="strchip blue">Stretches Available</span>';
+  if(sel===0){ if(domMasteryPct(k)<75) return ''; return '<span class="strchip blue">Stretches Available</span>'; }
   if(sel<total) return `<span class="strchip yellow">${sel}/${total} Stretches Selected</span>`;
   let mastered=0; DATA[k].look.items.forEach((_,i)=>{ if(actVal('st-'+k+'-'+i)>=2.5) mastered++; });
   if(mastered===total) return '<span class="strchip purple">Stretches Mastered</span>';
@@ -598,7 +599,7 @@ const DATA = {
 
 const BASE_ORDER = ["comm","fine","gross","prob","soc","over"];
 
-const FIREBASE_CONFIG={apiKey:"AIzaSyBVYcjxo5aKAKlwsDjui7FdQtNmhry0Mro",authDomain:"arlo-5d8a6.firebaseapp.com",databaseURL:"https://arlo-5d8a6-default-rtdb.firebaseio.com",projectId:"arlo-5d8a6",storageBucket:"arlo-5d8a6.firebasestorage.app",messagingSenderId:"588304685375",appId:"1:588304685385:web:cd18b18ba8c737a48ba298"};
+const FIREBASE_CONFIG={apiKey:"AIzaSyBVYcjxo5aKAKlwsDjui7FdQtNmhry0Mro",authDomain:"arlo-5d8a6.firebaseapp.com",databaseURL:"https://arlo-5d8a6-default-rtdb.firebaseio.com",projectId:"arlo-5d8a6",storageBucket:"arlo-5d8a6.firebasestorage.app",messagingSenderId:"588304685385",appId:"1:588304685385:web:cd18b18ba8c737a48ba298"};
 const SHARE_ID="arlo",AUTH_EMAIL="family@arlo-5d8a6.web.app";
 /* ---------- State ---------- */
 let state={skills:{},acts:{},focus:["comm","fine"],notes:{},stretchOn:{},tried:{date:"",ids:{}}};
@@ -685,7 +686,7 @@ function renderCards(){
       <div class="glyph">${d.glyph}</div>
       <h2>${d.name}</h2>
       <p>${d.sub}</p>
-      <span class="lvl" style="color:${TAGS[eff].c};background:${TAGS[eff].bg};border-color:${TAGS[eff].c}40">${TAGS[eff].t}</span>${stretchBubble(k)}`;
+      <div class="cbottom"><span class="lvl" style="color:${TAGS[eff].c};background:${TAGS[eff].bg};border-color:${TAGS[eff].c}40">${TAGS[eff].t}</span>${stretchBubble(k)}</div>`;
     btn.addEventListener('click',()=>openSheet(k));
     grid.appendChild(btn);
   });
