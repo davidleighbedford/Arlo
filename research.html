@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Research · Arlo Play & Progress</title>
+<meta name="theme-color" content="#d6492a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --comm:#ff7a59; --comm-deep:#d6492a; --comm-bg:#fff1ec;
+    --fine:#2bb98a; --fine-deep:#15805d; --fine-bg:#e8f8f1;
+    --gross:#4aa3e8; --gross-deep:#1f6db5; --gross-bg:#e9f3fc;
+    --prob:#f3b13d; --prob-deep:#b9791a; --prob-bg:#fff6e6;
+    --soc:#a988e6; --soc-deep:#6f49bf; --soc-bg:#f1ecfb;
+    --over:#ef6f8e; --over-deep:#c63e5f; --over-bg:#fdecf0;
+    --ink:#2f2a3f; --ink-soft:#6c6580; --line:#ece6dd;
+    --bg:#fffaf3; --card:#ffffff;
+    --shadow:0 2px 10px rgba(60,40,30,.06); --shadow-lg:0 16px 40px rgba(60,40,30,.16);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;font-family:"Nunito",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;
+    background-image:radial-gradient(120% 120% at 50% -10%, #fff5ec 0%, var(--bg) 46%);}
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+
+  /* hero */
+  header.hero{padding:26px 18px 8px;max-width:760px;margin:0 auto;}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--comm-deep);font-weight:800;text-decoration:none;font-size:.9rem;}
+  .back:hover{text-decoration:underline;}
+  .eyebrow{margin:18px 0 0;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--comm-deep);}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:2.05rem;line-height:1.12;margin:6px 0 8px;}
+  .lede{color:var(--ink-soft);font-size:1rem;margin:0 0 6px;max-width:60ch;}
+  .agewindow{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.84rem;box-shadow:var(--shadow);}
+  .agewindow .dot{width:9px;height:9px;border-radius:50%;background:var(--fine);box-shadow:0 0 0 4px var(--fine-bg);}
+
+  /* sticky filter nav */
+  nav.filters{position:sticky;top:0;z-index:20;background:rgba(255,250,243,.86);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);margin-top:18px;}
+  .filterrow{max-width:760px;margin:0 auto;padding:10px 14px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;}
+  .filterrow::-webkit-scrollbar{display:none;}
+  .pill{flex:0 0 auto;border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);font-family:inherit;font-weight:800;
+    font-size:.82rem;padding:7px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:.15s;}
+  .pill:hover{border-color:var(--c,#ccc);}
+  .pill.on{background:var(--c,#333);color:#fff;border-color:var(--c,#333);}
+
+  section{margin-top:30px;scroll-margin-top:64px;}
+  .sechead{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+  .sechead .glyph{font-size:1.5rem;}
+  .sechead h2{font-family:"Fraunces",serif;font-weight:600;font-size:1.5rem;margin:0;}
+  .sechead .tag{margin-left:auto;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--accent-deep);background:var(--accent-bg);border-radius:999px;padding:4px 10px;}
+  .secsub{color:var(--ink-soft);font-size:.92rem;margin:0 0 14px;}
+
+  /* key findings cards */
+  .kf{display:grid;gap:14px;}
+  .kfcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 16px 14px;box-shadow:var(--shadow);
+    border-left:5px solid var(--accent);}
+  .kfcard h3{margin:0 0 4px;font-size:1.02rem;font-family:"Fraunces",serif;font-weight:600;}
+  .kfcard p{margin:0 0 8px;font-size:.92rem;}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .cite{font-size:.78rem;color:var(--ink-soft);font-style:italic;}
+  .strength{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:999px;}
+  .s-high{background:#e8f8f1;color:#15805d;}
+  .s-med{background:#fff6e6;color:#b9791a;}
+  .s-org{background:#e9f3fc;color:#1f6db5;}
+  .srcbtn{font-size:.76rem;font-weight:800;color:var(--accent-deep);text-decoration:none;border:1px solid var(--line);
+    padding:3px 10px;border-radius:999px;}
+  .srcbtn:hover{background:var(--accent-bg);border-color:transparent;}
+
+  /* domain blocks */
+  .domain{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);
+    border-top:5px solid var(--accent);}
+  .block-label{font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-deep);margin:18px 0 8px;}
+  .block-label:first-child{margin-top:6px;}
+  ul.miles{list-style:none;margin:0;padding:0;display:grid;gap:8px;}
+  ul.miles li{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;}
+  ul.miles li::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:7px;}
+  .age-chip{font-size:.68rem;font-weight:800;color:var(--accent-deep);background:var(--accent-bg);border-radius:999px;padding:1px 7px;margin-left:4px;}
+
+  /* support accordions */
+  details.supp{border:1px solid var(--line);border-radius:14px;margin-top:8px;overflow:hidden;background:#fffdf9;}
+  details.supp summary{list-style:none;cursor:pointer;padding:13px 15px;font-weight:800;font-size:.94rem;display:flex;align-items:center;gap:10px;}
+  details.supp summary::-webkit-details-marker{display:none;}
+  details.supp summary .chev{margin-left:auto;transition:.2s;color:var(--ink-soft);}
+  details.supp[open] summary .chev{transform:rotate(180deg);}
+  details.supp .body{padding:0 15px 15px;font-size:.9rem;color:#403a52;}
+  details.supp .body .why{margin:0 0 10px;}
+  details.supp .body .evidence{background:#faf7f1;border:1px solid var(--line);border-radius:11px;padding:11px 13px;font-size:.85rem;color:var(--ink-soft);}
+  details.supp .body .evidence .cite{display:block;margin-top:6px;font-weight:700;}
+
+  /* generic note cards */
+  .note{border-radius:16px;padding:16px 18px;font-size:.92rem;}
+  .note.flag{background:var(--over-bg);border:1px solid #f6cdd6;}
+  .note.caveat{background:#f6f3ec;border:1px solid var(--line);color:#403a52;}
+  .note h3{margin:0 0 8px;font-family:"Fraunces",serif;font-weight:600;font-size:1.1rem;}
+  .note ul{margin:6px 0 0;padding-left:18px;}
+  .note li{margin:5px 0;}
+
+  /* references */
+  .refs{font-size:.84rem;color:var(--ink-soft);}
+  .refs li{margin:9px 0;}
+  .refs a{color:var(--comm-deep);}
+
+  footer{text-align:center;margin-top:40px;font-size:.76rem;color:#b6ad9f;}
+  .hidden{display:none !important;}
+  a{color:var(--comm-deep);}
+  @media(max-width:560px){ h1{font-size:1.7rem;} .sechead h2{font-size:1.3rem;} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <a href="index.html" class="back">← Back to the tracker</a>
+  <p class="eyebrow">The evidence behind the activities</p>
+  <h1>Why these activities help Arlo grow</h1>
+  <p class="lede">Every activity in the tracker is tied to research on how babies develop between 8 and 12 months. Here's the science — the milestones, what helps, and the studies behind each one.</p>
+  <span class="agewindow"><span class="dot"></span> Focus window · <b>8–12 months</b></span>
+</header>
+
+<nav class="filters">
+  <div class="filterrow" id="filterRow">
+    <button class="pill on" data-f="all" style="--c:#d6492a">Everything</button>
+    <button class="pill" data-f="key" style="--c:#5b3fb0">Key studies</button>
+    <button class="pill" data-f="comm" style="--c:#ff7a59">Communication</button>
+    <button class="pill" data-f="fine" style="--c:#2bb98a">Fine Motor</button>
+    <button class="pill" data-f="gross" style="--c:#4aa3e8">Gross Motor</button>
+    <button class="pill" data-f="prob" style="--c:#f3b13d">Problem Solving</button>
+    <button class="pill" data-f="soc" style="--c:#a988e6">Personal-Social</button>
+    <button class="pill" data-f="more" style="--c:#ef6f8e">Flags & caveats</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- KEY STUDIES -->
+  <section data-group="key" style="--accent:#5b3fb0;--accent-deep:#5b3fb0;--accent-bg:#ece6fb">
+    <div class="sechead"><span class="glyph">🔬</span><h2>Key studies at a glance</h2></div>
+    <p class="secsub">The handful of findings that shape almost everything in the tracker. Tap a source to read the original.</p>
+    <div class="kf" id="kfList"></div>
+  </section>
+
+  <!-- DOMAINS render here -->
+  <div id="domains"></div>
+
+  <!-- SEX DIFFERENCES -->
+  <section data-group="more" style="--accent:#6c6580;--accent-deep:#6c6580;--accent-bg:#f0ede7">
+    <div class="sechead"><span class="glyph">⚖️</span><h2>A note on “boys vs girls”</h2></div>
+    <div class="note caveat">
+      <p style="margin:0">Developmental guidance at this age is <b>not</b> sex-specific — the CDC, ASQ-3 and WHO use the same milestones for every baby. Research differences are tiny and mostly appear later: a small early female edge on some fine-motor and gesture measures, slightly higher average activity levels in boys. Sex often explains only ~1–2% of the variation in early language, so it's no basis for individual expectations. Track Arlo against the standard milestones, and raise any single missed one with your clinician rather than putting it down to being a boy. One practical finding: adults sometimes talk and gesture a little <i>more</i> with girls — a nudge to be intentional about rich, gesture-filled chat with a son.</p>
+    </div>
+  </section>
+
+  <!-- FLAGS -->
+  <section data-group="more" style="--accent:#c63e5f;--accent-deep:#c63e5f;--accent-bg:#fdecf0">
+    <div class="sechead"><span class="glyph">🚩</span><h2>When to check in with a professional</h2></div>
+    <div class="note flag">
+      <p style="margin:0 0 6px">Milestones describe what most babies do — not a pass/fail test. But talk to your health visitor or GP (and ask about developmental screening) if, by around 12 months, Arlo:</p>
+      <ul>
+        <li>isn't babbling, gesturing (no waving or pointing), or responding to his name;</li>
+        <li>doesn't look for hidden objects or play back-and-forth games;</li>
+        <li>isn't sitting steadily, or isn't bearing weight / pulling to stand;</li>
+        <li>isn't using a thumb-and-finger (pincer) grasp; or</li>
+        <li>has <b>lost</b> a skill he previously had.</li>
+      </ul>
+      <p style="margin:10px 0 0">The AAP recommends routine developmental screening at 9, 18 and 30 months regardless of concerns. Use <b>corrected age</b> if he was born more than 3 weeks early.</p>
+    </div>
+  </section>
+
+  <!-- CAVEATS -->
+  <section data-group="more" style="--accent:#6c6580;--accent-deep:#6c6580;--accent-bg:#f0ede7">
+    <div class="sechead"><span class="glyph">🧭</span><h2>Honest caveats</h2></div>
+    <div class="note caveat">
+      <ul style="margin:0;padding-left:18px">
+        <li>Milestones are population markers; healthy babies vary widely. The CDC sets them at the level ~75% of children reach (and deliberately moved away from “wait and see”).</li>
+        <li>The classic “30-million-word gap” (Hart &amp; Risley, 1995; just 42 families) has been criticised for sample size and bias, and a larger study found a much smaller gap. The field has shifted toward interaction <b>quality</b> (Romeo; Hirsh-Pasek).</li>
+        <li>Piaget's ages for object permanence are debated — some experiments suggest babies understand it earlier than he thought.</li>
+        <li>Several support studies were done with slightly older toddlers or specific communities, so effects on the very youngest infants are less certain.</li>
+        <li>This page is educational and isn't a substitute for advice from Arlo's own clinician.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section data-group="key" style="--accent:#5b3fb0;--accent-deep:#5b3fb0;--accent-bg:#ece6fb">
+    <div class="sechead"><span class="glyph">📚</span><h2>References</h2></div>
+    <ol class="refs" id="refList"></ol>
+  </section>
+
+  <footer>Compiled for Arlo from public-health and peer-reviewed sources. Educational use only.</footer>
+</div>
+
+<script>
+/* ---------- data ---------- */
+const KEY_STUDIES = [
+  {accent:"#ff7a59",dom:"comm",title:"Conversation beats word-count",
+   text:"In 4–6-year-olds, the number of back-and-forth conversational <b>turns</b> — not how many words a child heard — predicted stronger language and more activity in Broca's area (the brain's language hub), independent of family income.",
+   cite:"Romeo et al., Psychological Science, 2018", strength:"high", url:"https://pmc.ncbi.nlm.nih.gov/articles/PMC5901393/"},
+  {accent:"#ff7a59",dom:"comm",title:"Quality of talk > quantity",
+   text:"Communication <b>quality</b> at ~24 months — fluent back-and-forth, shared focus, routines — predicted later language far better than the sheer number of words, explaining about a quarter of the variation a year on.",
+   cite:"Hirsh-Pasek et al., Psychological Science, 2015", strength:"high", url:"https://pubmed.ncbi.nlm.nih.gov/26054866/"},
+  {accent:"#ff7a59",dom:"comm",title:"Early gestures forecast vocabulary",
+   text:"How much a child gestures (pointing, showing) at 14 months predicted their vocabulary at 4½, and helped explain income-related vocabulary gaps at school entry.",
+   cite:"Rowe & Goldin-Meadow, Science, 2009", strength:"high", url:"https://pmc.ncbi.nlm.nih.gov/articles/PMC2853063/"},
+  {accent:"#ff7a59",dom:"comm",title:"Interactive book-sharing works",
+   text:"A randomised trial coaching carers to share picture books <i>dialogically</i> with 14–16-month-olds produced significantly greater gains in vocabulary and attention than in untrained families.",
+   cite:"Vally et al., J. Child Psychology & Psychiatry, 2015", strength:"high", url:"https://pubmed.ncbi.nlm.nih.gov/25441002/"},
+  {accent:"#a988e6",dom:"soc",title:"Sensitive care builds secure attachment",
+   text:"A meta-analysis of 70 studies found that helping parents respond more sensitively measurably raised babies' attachment security — evidence that responsive care helps <b>cause</b> secure attachment, not just accompany it.",
+   cite:"Bakermans-Kranenburg, van IJzendoorn & Juffer, Psychological Bulletin, 2003", strength:"high", url:"https://pubmed.ncbi.nlm.nih.gov/12696839/"},
+  {accent:"#4aa3e8",dom:"gross",title:"Skip the baby walker",
+   text:"Sit-in baby walkers were linked to ~230,000 US emergency visits in under-15-month-olds over 1990–2014 (about 90% head/neck), and don't help babies walk. A push-along wagon is the safer choice.",
+   cite:"Sims et al., Pediatrics, 2018", strength:"high", url:"https://pubmed.ncbi.nlm.nih.gov/30224366/"},
+  {accent:"#4aa3e8",dom:"gross",title:"Motor milestones have wide windows",
+   text:"Across five countries, walking alone appeared anywhere from about 8 to 18 months, and ~4% of babies skipped hands-and-knees crawling entirely — variation that's normal and unrelated to later ability.",
+   cite:"WHO Motor Development Study, Acta Paediatrica, 2006", strength:"org", url:"https://pubmed.ncbi.nlm.nih.gov/16817681/"},
+  {accent:"#2bb98a",dom:"fine",title:"Serve & return shapes the brain",
+   text:"Responsive, back-and-forth interaction — a baby babbles or gestures, the adult responds in kind — is described as literally building brain architecture for language and emotion.",
+   cite:"Harvard Center on the Developing Child", strength:"org", url:"https://developingchild.harvard.edu/science/key-concepts/serve-and-return/"}
+];
+
+const DOMAINS = [
+  {key:"comm",glyph:"🗣️",name:"Communication & Language",accent:"#ff7a59",deep:"#d6492a",bg:"#fff1ec",
+   tag:"Arlo's focus",
+   miles:[
+     ["Makes lots of sounds like “mamama” and “bababa”","9 mo"],
+     ["Lifts arms up to be picked up","9 mo"],
+     ["Waves “bye-bye”","12 mo"],
+     ["Calls a parent “mama”/“dada” or a special name","12 mo"],
+     ["Understands “no” (briefly pauses)","12 mo"]
+   ],
+   supp:[
+     {t:"Serve & return chats",why:"Copy his babble back, then add a real word, and wait for his “turn”.",
+      ev:"Conversational turns predicted language and Broca's-area activity more strongly than word count.",cite:"Romeo et al., 2018",url:"https://pmc.ncbi.nlm.nih.gov/articles/PMC5901393/"},
+     {t:"Dialogic book-sharing",why:"Ask “what's that?”, follow his lead, and expand his answer (“a duck — a yellow duck!”).",
+      ev:"Coaching this interactive style raised infants' vocabulary and attention in a randomised trial.",cite:"Vally et al., 2015",url:"https://pubmed.ncbi.nlm.nih.gov/25441002/"},
+     {t:"Gesture & respond to pointing",why:"Model waving and pointing; when he points, put it into words.",
+      ev:"Early gesture is one of the strongest predictors of later vocabulary.",cite:"Rowe & Goldin-Meadow, 2009",url:"https://pmc.ncbi.nlm.nih.gov/articles/PMC2853063/"},
+     {t:"Keep screens out",why:"Babies learn language from real faces, not screens (video-calls aside).",
+      ev:"WHO/AAP advise no screen time under 18–24 months.",cite:"WHO; AAP",url:"https://www.who.int/publications/i/item/9789241550536"}
+   ]},
+  {key:"fine",glyph:"✋",name:"Fine Motor",accent:"#2bb98a",deep:"#15805d",bg:"#e8f8f1",
+   tag:"Arlo's focus",
+   miles:[
+     ["Moves things from one hand to the other","9 mo"],
+     ["Rakes food toward himself with fingers","9 mo"],
+     ["Picks things up between thumb and finger (pincer)","12 mo"],
+     ["Drinks from a cup you hold (no lid)","12 mo"]
+   ],
+   supp:[
+     {t:"Self-feeding finger foods",why:"Offer soft, choke-safe pea-sized pieces and let him pick them up.",
+      ev:"Self-feeding is repeatedly cited as the main driver of the pincer grasp — food beats any toy.",cite:"CDC; AAP / HealthyChildren",url:"https://www.cdc.gov/act-early/milestones/9-months.html"},
+     {t:"Drop, post & refill",why:"Post blocks into a cup, tip out, repeat; hand items back so he can drop them again.",
+      ev:"Deliberate release develops now; repetition is the practice.",cite:"ASQ-3; CDC",url:"https://agesandstages.com"},
+     {t:"Flaps, pages & posting",why:"Lift-the-flap books and posting discs into a slot isolate one finger.",
+      ev:"Fine-motor control develops shoulder-to-fingertip; this practises the fingertip end.",cite:"AAP / HealthyChildren",url:"https://www.healthychildren.org/English/MotorDelay/Pages/default.aspx"}
+   ]},
+  {key:"gross",glyph:"🚶",name:"Gross Motor",accent:"#4aa3e8",deep:"#1f6db5",bg:"#e9f3fc",
+   tag:"Next steps",
+   miles:[
+     ["Sits without support; gets to sitting himself","9 mo"],
+     ["Pulls up to stand","12 mo"],
+     ["Walks holding furniture (cruising)","12 mo"],
+     ["First independent steps","often 12–15 mo"]
+   ],
+   supp:[
+     {t:"Floor play, no restraints",why:"Lots of supervised floor time to pull up, cruise and crawl; avoid long stretches strapped in.",
+      ev:"WHO advises active floor play several times a day and no restraint over an hour at a time.",cite:"WHO guidelines, 2019",url:"https://www.who.int/publications/i/item/9789241550536"},
+     {t:"Build a cruising loop",why:"Sturdy furniture in a circuit with toys spaced along it; widen the gaps over weeks.",
+      ev:"Open space and reasons to move matter more than equipment; windows are wide and orderly.",cite:"WHO Motor Development Study, 2006",url:"https://pubmed.ncbi.nlm.nih.gov/16817681/"},
+     {t:"Push-along walking — not a sit-in walker",why:"A weighted push-toy rehearses stepping safely.",
+      ev:"Sit-in walkers caused ~230,000 ER visits over 1990–2014 and don't help walking.",cite:"Sims et al., 2018",url:"https://pubmed.ncbi.nlm.nih.gov/30224366/"}
+   ]},
+  {key:"prob",glyph:"🧩",name:"Problem Solving",accent:"#f3b13d",deep:"#b9791a",bg:"#fff6e6",
+   tag:"",
+   miles:[
+     ["Looks for objects dropped out of sight","9 mo"],
+     ["Bangs two things together","9 mo"],
+     ["Puts something into a container","12 mo"],
+     ["Looks for things he sees you hide (object permanence)","12 mo"]
+   ],
+   supp:[
+     {t:"Hide-and-find",why:"Hide a toy under a cloth while he watches — “where's it gone?… there it is!”",
+      ev:"Searching for hidden objects marks object permanence; the “A-not-B” slip is normal now.",cite:"Piaget; CDC",url:"https://www.cdc.gov/act-early/milestones/1-year.html"},
+     {t:"The drop game & cause-effect toys",why:"Hand back dropped toys; add pop-ups, buttons, a ball-run.",
+      ev:"Endless “drop and retrieve” is real experimentation, not misbehaviour.",cite:"Zero to Three",url:"https://www.zerotothree.org"},
+     {t:"Dump & fill",why:"Tip blocks out, put them back; stacking cups work well.",
+      ev:"Filling and emptying is hands-on cause-and-effect and “in vs out”.",cite:"Zero to Three; CDC",url:"https://www.zerotothree.org"}
+   ]},
+  {key:"soc",glyph:"🤗",name:"Personal-Social",accent:"#a988e6",deep:"#6f49bf",bg:"#f1ecfb",
+   tag:"",
+   miles:[
+     ["Shy/clingy or fearful with strangers","9 mo"],
+     ["Reacts when you leave (looks, reaches, cries)","9 mo"],
+     ["Smiles or laughs at peekaboo","9 mo"],
+     ["Plays games like pat-a-cake","12 mo"]
+   ],
+   supp:[
+     {t:"Be his secure base",why:"Respond promptly and warmly to comfort-seeking, then let him explore knowing you're there.",
+      ev:"Boosting parental sensitivity measurably increased attachment security across 70 studies.",cite:"Bakermans-Kranenburg et al., 2003",url:"https://pubmed.ncbi.nlm.nih.gov/12696839/"},
+     {t:"Predictable goodbyes",why:"Cheerful “bye-bye, back soon” rather than slipping away; announce your return.",
+      ev:"Separation anxiety peaks ~10–18 months and signals healthy attachment, not “spoiling”.",cite:"AAP / HealthyChildren; Zero to Three",url:"https://www.healthychildren.org/English/ages-stages/baby/Pages/Separation-Anxiety.aspx"},
+     {t:"Turn-taking & copy-me games",why:"Pass a toy back and forth; clap, wave and pause for him to copy.",
+      ev:"Imitation and turn-taking are 12-month milestones and roots of sharing and conversation.",cite:"CDC; ASQ-3",url:"https://www.cdc.gov/act-early/milestones/1-year.html"}
+   ]}
+];
+
+const REFS = [
+  ['Romeo, R. R., et al. (2018). Beyond the 30-Million-Word Gap: Children\u2019s Conversational Exposure Is Associated With Language-Related Brain Function. <i>Psychological Science</i>, 29(5), 700\u2013710.','https://pmc.ncbi.nlm.nih.gov/articles/PMC5901393/'],
+  ['Hirsh-Pasek, K., et al. (2015). The Contribution of Early Communication Quality to Low-Income Children\u2019s Language Success. <i>Psychological Science</i>, 26(7), 1071\u20131083.','https://pubmed.ncbi.nlm.nih.gov/26054866/'],
+  ['Rowe, M. L., & Goldin-Meadow, S. (2009). Differences in Early Gesture Explain SES Disparities in Child Vocabulary Size at School Entry. <i>Science</i>, 323(5916), 951\u2013953.','https://pmc.ncbi.nlm.nih.gov/articles/PMC2853063/'],
+  ['Vally, Z., Murray, L., Tomlinson, M., & Cooper, P. J. (2015). The impact of dialogic book-sharing training on infant language and attention: a randomized controlled trial. <i>Journal of Child Psychology and Psychiatry</i>, 56(8), 865\u2013873.','https://pubmed.ncbi.nlm.nih.gov/25441002/'],
+  ['Bakermans-Kranenburg, M. J., van IJzendoorn, M. H., & Juffer, F. (2003). Less Is More: Meta-Analyses of Sensitivity and Attachment Interventions in Early Childhood. <i>Psychological Bulletin</i>, 129(2), 195\u2013215.','https://pubmed.ncbi.nlm.nih.gov/12696839/'],
+  ['Sims, A., et al. (2018). Infant Walker\u2013Related Injuries in the United States. <i>Pediatrics</i>, 142(4), e20174332.','https://pubmed.ncbi.nlm.nih.gov/30224366/'],
+  ['WHO Multicentre Growth Reference Study Group (2006). WHO Motor Development Study: windows of achievement for six gross motor milestones. <i>Acta Paediatrica</i> Suppl, 450, 86\u201395.','https://pubmed.ncbi.nlm.nih.gov/16817681/'],
+  ['World Health Organization (2019). Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age.','https://www.who.int/publications/i/item/9789241550536'],
+  ['Center on the Developing Child, Harvard University. Serve and Return.','https://developingchild.harvard.edu/science/key-concepts/serve-and-return/'],
+  ['CDC. Learn the Signs. Act Early. \u2014 Milestones by 9 Months & by 1 Year (revised with AAP, 2022).','https://www.cdc.gov/act-early/milestones/9-months.html'],
+  ['Squires, J., & Bricker, D. (2009). Ages & Stages Questionnaires, Third Edition (ASQ-3).','https://agesandstages.com'],
+  ['Zero to Three. Early development resources.','https://www.zerotothree.org']
+];
+
+const SMAP={high:["s-high","Strong evidence"],med:["s-med","Emerging"],org:["s-org","Expert body"]};
+
+/* ---------- render ---------- */
+const kf=document.getElementById('kfList');
+KEY_STUDIES.forEach(s=>{
+  const sc=SMAP[s.strength];
+  const d=document.createElement('div');
+  d.className='kfcard'; d.dataset.dom=s.dom; d.style.setProperty('--accent',s.accent);
+  d.style.setProperty('--accent-bg','#f6f3ec'); d.style.setProperty('--accent-deep',s.accent);
+  d.innerHTML=`<h3>${s.title}</h3><p>${s.text}</p>
+    <div class="meta">
+      <span class="strength ${sc[0]}">${sc[1]}</span>
+      <span class="cite">${s.cite}</span>
+      <a class="srcbtn" href="${s.url}" target="_blank" rel="noopener">Source ↗</a>
+    </div>`;
+  kf.appendChild(d);
+});
+
+const dwrap=document.getElementById('domains');
+DOMAINS.forEach(D=>{
+  const sec=document.createElement('section');
+  sec.dataset.group=D.key;
+  sec.style.cssText=`--accent:${D.accent};--accent-deep:${D.deep};--accent-bg:${D.bg}`;
+  const miles=D.miles.map(m=>`<li>${m[0]}<span class="age-chip">${m[1]}</span></li>`).join('');
+  const supp=D.supp.map(a=>`
+    <details class="supp">
+      <summary>${a.t}<span class="chev">▾</span></summary>
+      <div class="body">
+        <p class="why">${a.why}</p>
+        <div class="evidence">${a.ev}<span class="cite">${a.cite} · <a href="${a.url}" target="_blank" rel="noopener">read ↗</a></span></div>
+      </div>
+    </details>`).join('');
+  sec.innerHTML=`
+    <div class="sechead"><span class="glyph">${D.glyph}</span><h2>${D.name}</h2>${D.tag?`<span class="tag">${D.tag}</span>`:''}</div>
+    <div class="domain">
+      <p class="block-label">Milestones · 8–12 months</p>
+      <ul class="miles">${miles}</ul>
+      <p class="block-label">How to support — tap to see the evidence</p>
+      ${supp}
+    </div>`;
+  dwrap.appendChild(sec);
+});
+
+const rl=document.getElementById('refList');
+REFS.forEach(r=>{ const li=document.createElement('li'); li.innerHTML=`${r[0]} <a href="${r[1]}" target="_blank" rel="noopener">↗</a>`; rl.appendChild(li); });
+
+/* ---------- filtering ---------- */
+const pills=[...document.querySelectorAll('.pill')];
+function applyFilter(f){
+  pills.forEach(p=>p.classList.toggle('on',p.dataset.f===f));
+  // sections
+  document.querySelectorAll('section[data-group]').forEach(sec=>{
+    const g=sec.dataset.group;
+    let show = (f==='all') || (g===f) ||
+      (f==='more' && g==='more') ||
+      (f==='key' && (g==='key'));
+    sec.classList.toggle('hidden',!show);
+  });
+  // key-study cards filter to a domain when a domain pill is chosen
+  const isDomain=['comm','fine','gross','prob','soc'].includes(f);
+  document.querySelectorAll('#kfList .kfcard').forEach(c=>{
+    c.classList.toggle('hidden', isDomain && c.dataset.dom!==f);
+  });
+  // when a domain is picked, also surface the key-studies section (filtered)
+  if(isDomain){ document.querySelector('section[data-group="key"]').classList.remove('hidden'); }
+  else { document.querySelectorAll('#kfList .kfcard').forEach(c=>c.classList.remove('hidden')); }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('filterRow').addEventListener('click',e=>{
+  const p=e.target.closest('.pill'); if(!p) return; applyFilter(p.dataset.f);
+});
+</script>
+</body>
+</html>
