@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="Arlo" />
 <title>Arlo · Play & Progress</title>
-<meta name="theme-color" content="#d6492a">
+<meta name="theme-color" content="#f3eef7">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -48,7 +48,7 @@
   h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(2.1rem,8vw,3rem);line-height:1.02;margin:0;letter-spacing:-.01em;}
   h1 em{font-style:italic;color:var(--comm);}
   .lede{color:var(--ink-soft);font-size:1rem;margin:10px 0 0;max-width:52ch;}
-  .agechip{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.86rem;box-shadow:var(--shadow);}
+  .agechip{display:flex;align-items:center;gap:8px;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.86rem;box-shadow:var(--shadow);box-sizing:border-box;}
   .agechip b{color:var(--comm-deep);}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--fine);box-shadow:0 0 0 4px var(--fine-bg);}
   .sharebtn{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font-family:inherit;font-weight:800;font-size:.8rem;color:var(--soc-deep);box-shadow:var(--shadow);cursor:pointer;display:flex;align-items:center;gap:6px;}
@@ -146,6 +146,11 @@
   .act .doit{margin:8px 0 0;font-size:.92rem;}
   .why{margin:12px 0 0;padding:11px 13px;border-radius:12px;background:var(--accent-bg);font-size:.86rem;}
   .why b{color:var(--accent-deep);}
+  .infobtn{margin-top:10px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);font-family:inherit;font-weight:800;font-size:.74rem;padding:5px 11px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
+  .infobtn.open{background:var(--accent-bg);color:var(--accent-deep);border-color:transparent;}
+  .infobox{display:none;margin-top:8px;padding:11px 13px;border-radius:12px;background:#faf7f1;border:1px solid var(--line);font-size:.82rem;color:var(--ink-soft);line-height:1.5;}
+  .infobox.open{display:block;}
+  .infobox cite{display:block;margin-top:7px;font-style:normal;font-weight:700;font-size:.72rem;color:#b6ad9f;}
   .src{margin:10px 0 0;font-size:.74rem;color:var(--ink-soft);font-weight:700;}
   .src a{display:inline-block;background:#f3eee6;color:#7a6c54;border-radius:6px;padding:3px 8px;margin:3px 5px 0 0;font-weight:800;text-decoration:none;border:1px solid transparent;transition:.15s;}
   .src a:hover{border-color:var(--accent);color:var(--accent-deep);}
@@ -153,6 +158,8 @@
 
   .lookahead{border:2px solid var(--accent);border-radius:18px;padding:4px 16px 16px;margin:6px 0 20px;background:linear-gradient(180deg,var(--accent-bg),#fff 60%);}
   .lookahead .la-h{display:flex;align-items:center;gap:8px;margin:14px 0 4px;}
+  .lookahead-info{background:#f7f4ff;border-color:#d6cdf5;}
+  .lookahead-info .la-h .badge{background:#8b72cc;}
   .la-h .badge{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:999px;}
   .la-h h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.2rem;margin:0;color:var(--accent-deep);}
   .la-sub{font-size:.85rem;color:var(--ink-soft);margin:0 0 8px;}
@@ -163,7 +170,7 @@
   .tipbox{margin-top:6px;border:1px dashed var(--accent);border-radius:14px;padding:13px 15px;background:#fff;font-size:.86rem;}
   .tipbox b{color:var(--accent-deep);}
   /* level pill on cards */
-  .lvl{display:inline-flex;align-items:center;margin-top:13px;font-size:.74rem;font-weight:800;padding:5px 12px;border-radius:999px;border:1.6px solid transparent;}
+  .lvl{display:inline-flex;align-items:center;font-size:.74rem;font-weight:800;padding:5px 12px;border-radius:999px;border:1.6px solid transparent;}
   .lvlswatch{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:6px;}
   /* practice slider */
   .slider{margin:14px 0 2px;}
@@ -182,7 +189,7 @@
   .notesarea{width:100%;min-height:92px;border:1px solid var(--line);border-radius:14px;padding:12px;font-family:inherit;font-size:.92rem;color:var(--ink);background:#fffdf9;resize:vertical;margin-top:2px;}
   .notesarea:focus{outline:none;border-color:var(--accent);}
   /* what-to-do-today button + accordion */
-  .todaybtn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;border:none;background:var(--comm);color:#fff;font-family:inherit;font-weight:800;font-size:.92rem;padding:11px 18px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow);}
+  .todaybtn{display:flex;align-items:center;gap:6px;border:none;background:var(--comm);color:#fff;font-family:inherit;font-weight:800;font-size:.92rem;padding:11px 18px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow);}
   .todaybtn:hover{transform:translateY(-1px);}
   .today .sheet{--accent:#ff7a59;--accent-bg:#fff3ec;--accent-deep:#d6492a;}
   .titem{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);}
@@ -236,7 +243,7 @@
   .caltog{flex:0 0 auto;border:none;border-left:1px solid var(--line);background:#fff;padding:0 15px;cursor:pointer;font-size:1.05rem;color:#cbbfa8;display:flex;align-items:center;}
   .caltog.on{background:var(--gross-bg);color:var(--gross-deep);}
   .triedtoggle{background:var(--gross-bg);color:var(--gross-deep);border-color:#cfe4f6;}
-  .triedtoggle .ttico{margin-right:2px;}
+  .triedtoggle .ttico{margin-right:6px;display:inline-flex;align-items:center;vertical-align:middle;}
 
   /* Refs / footer */
   .refs{margin-top:30px;animation:rise .6s .1s ease both;}
@@ -248,6 +255,15 @@
   .disclaimer{margin-top:22px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--over);border-radius:14px;padding:14px 16px;font-size:.85rem;color:var(--ink-soft);}
   .disclaimer b{color:var(--over-deep);}
   footer{text-align:center;margin-top:26px;font-size:.74rem;color:#b6ad9f;}
+  .built{font-size:.72rem;color:#c9bfae;margin-top:3px;}
+  .reslink{display:inline-block;margin-bottom:8px;color:var(--comm-deep);font-weight:800;text-decoration:none;font-size:.84rem;}
+  .reslink:hover{text-decoration:underline;}
+  .strchip{display:inline-flex;align-items:center;font-size:.74rem;font-weight:800;padding:5px 11px;border-radius:999px;border:1.6px solid;white-space:nowrap;}
+  .cbottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .strchip.blue{background:#ddf0ff;color:#1563a8;border-color:#89c4ee;}
+  .strchip.yellow{background:#fff3c4;color:#8a6000;border-color:#e8c94a;}
+  .strchip.green{background:#d4f5e6;color:#0d6b46;border-color:#6ddba8;}
+  .strchip.purple{background:#ece6fb;color:#5b3fb0;border-color:#b8a4e8;}
 
   /* Share modal */
   .modal{position:fixed;inset:0;z-index:60;background:rgba(47,42,63,.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;}
@@ -266,6 +282,78 @@
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-weight:700;font-size:.85rem;opacity:0;pointer-events:none;transition:.3s;z-index:80;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+  /* ---------- Age bands & earlier sections ---------- */
+  .agehdr{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--ink-soft);margin:4px 0 8px;display:flex;align-items:center;gap:8px;}
+  .agehdr::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sheetbody .skills{margin-bottom:16px;}
+  details.earlier{margin:4px 0 22px;border-radius:16px;border:1px dashed var(--line);padding:0 12px;}
+  details.earlier summary{list-style:none;cursor:pointer;padding:12px 2px;font-weight:800;font-size:.86rem;color:var(--ink-soft);display:flex;align-items:center;gap:8px;}
+  details.earlier summary::-webkit-details-marker{display:none;}
+  details.earlier summary::after{content:"▾";margin-left:auto;transition:transform .2s ease;}
+  details.earlier[open] summary::after{transform:rotate(180deg);}
+  details.earlier .ecount{font-weight:700;color:#b6ad9f;}
+  details.earlier .skills{margin-top:2px;}
+  .earlynote{font-size:.8rem;color:var(--ink-soft);margin:0 0 12px;}
+  .todaymore{width:100%;margin:4px 0 6px;border:1px solid var(--glass-border,#fff);border-radius:14px;padding:12px;font-family:inherit;font-weight:800;font-size:.88rem;color:var(--comm-deep);cursor:pointer;background:rgba(255,255,255,.55);}
+
+  /* ---------- Glass theme ---------- */
+  :root{
+    --bg:#f5f0f8;
+    --line:rgba(110,90,140,.16);
+    --glass:rgba(255,255,255,.52);
+    --glass-soft:rgba(255,255,255,.62);
+    --glass-strong:rgba(252,249,254,.80);
+    --glass-border:rgba(255,255,255,.78);
+    --blur:saturate(170%) blur(20px);
+    --shadow:0 8px 30px -12px rgba(70,50,100,.26), inset 0 1px 0 rgba(255,255,255,.85);
+    --shadow-lg:0 22px 56px -18px rgba(70,50,100,.36), inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  body{background:#f3eef7;background-image:none;}
+  body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(38% 32% at 14% 8%, rgba(255,122,89,.40), transparent 70%),
+      radial-gradient(36% 32% at 90% 10%, rgba(169,136,230,.42), transparent 70%),
+      radial-gradient(44% 38% at 84% 64%, rgba(74,163,232,.30), transparent 72%),
+      radial-gradient(42% 36% at 10% 78%, rgba(43,185,138,.30), transparent 72%),
+      radial-gradient(30% 28% at 52% 42%, rgba(243,177,61,.20), transparent 70%),
+      linear-gradient(160deg,#fdf2ee 0%,#f2ecfb 50%,#e9f5f3 100%);}
+  .panel,.card,.agechip,.sharebtn,.disclaimer,.logincard{
+    background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+    border:1px solid var(--glass-border);box-shadow:var(--shadow);}
+  .card{border:1px solid var(--glass-border);}
+  .card:hover,.card:focus-visible{box-shadow:var(--shadow-lg);}
+  .glyph{background:color-mix(in srgb,var(--accent-bg) 70%,transparent);border:1px solid rgba(255,255,255,.7);}
+  .refs{background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--glass-border);border-radius:20px;padding:18px 20px;box-shadow:var(--shadow);}
+  .refs a{border-bottom-color:rgba(31,109,181,.25);}
+  .disclaimer{border-left:5px solid var(--over);}
+  .todaybtn{background:linear-gradient(135deg,rgba(255,138,104,.95),rgba(214,73,42,.95));border:1px solid rgba(255,255,255,.45);box-shadow:0 10px 26px -10px rgba(214,73,42,.6), inset 0 1px 0 rgba(255,255,255,.45);}
+  .swtch{background:rgba(110,90,140,.26);}
+  .overlay{background:rgba(47,42,63,.26);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+  .sheet,.modalcard{background:var(--glass-strong);-webkit-backdrop-filter:saturate(170%) blur(26px);backdrop-filter:saturate(170%) blur(26px);border:1px solid var(--glass-border);}
+  .sheet{border-bottom:none;}
+  .sheethead{background:color-mix(in srgb,var(--accent-bg) 97%,transparent) !important;-webkit-backdrop-filter:saturate(170%) blur(24px);backdrop-filter:saturate(170%) blur(24px);border-bottom:1px solid rgba(255,255,255,.6);}
+  .close,.closex,.navbtn{background:rgba(255,255,255,.7);border:1px solid var(--glass-border);}
+  .skill,.act,.titem,.mstep{background:var(--glass-soft);border:1px solid var(--glass-border);box-shadow:0 6px 20px -14px rgba(70,50,100,.30), inset 0 1px 0 rgba(255,255,255,.85);}
+  .thead,.caltog{background:transparent;}
+  .caltog{border-left:1px solid var(--line);}
+  .caltog.on{background:color-mix(in srgb,var(--gross-bg) 80%,transparent);}
+  .skbox{background:rgba(255,255,255,.75);}
+  .why{background:color-mix(in srgb,var(--accent-bg) 72%,transparent);}
+  .infobtn{background:rgba(255,255,255,.65);border:1px solid var(--glass-border);}
+  .infobox{background:rgba(255,255,255,.55);border:1px solid var(--glass-border);}
+  .src a{background:rgba(255,255,255,.6);border:1px solid var(--glass-border);}
+  .lookahead{background:linear-gradient(180deg,color-mix(in srgb,var(--accent-bg) 78%,transparent),rgba(255,255,255,.38) 65%);}
+  .lookahead-info{background:linear-gradient(180deg,rgba(239,233,255,.85),rgba(255,255,255,.4) 65%);}
+  .tipbox{background:rgba(255,255,255,.5);}
+  details.earlier{background:rgba(255,255,255,.32);border-color:rgba(110,90,140,.22);}
+  .stretchtoggle{background:color-mix(in srgb,var(--soc-bg) 72%,transparent);border-color:rgba(255,255,255,.7);}
+  .triedtoggle{background:color-mix(in srgb,var(--gross-bg) 72%,transparent);}
+  .alldone{background:color-mix(in srgb,var(--fine-bg) 75%,transparent);}
+  .notesarea,.syncfield,.logincard input{background:rgba(255,255,255,.72);}
+  .mbtn.ghost{background:rgba(255,255,255,.7);}
+  .loginoverlay{background:linear-gradient(160deg,#fde4da 0%,#efe7fb 55%,#e2f3ef 100%);}
+  .toast{background:rgba(47,42,63,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+
   @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -279,14 +367,12 @@
       </div>
       <button class="sharebtn" id="openShare">⇪ Share &amp; sync</button>
     </div>
-    <p class="lede">Working towards Arlo's <b>10-month Ages &amp; Stages Questionnaire (ASQ-3)</b>. Tap a card to see the skills emerging now, plus simple research-based things to try, and tick what Arlo does regularly.</p>
-    <span class="agechip"><span class="dot"></span> 10-month ASQ-3 window · from <b>24 June 2026</b></span>
+    <p class="lede">Tracking Arlo's <b>12 to 18 month milestones</b>, guided by the Ages &amp; Stages Questionnaire (ASQ-3) and the CDC and NHS checklists. Tap a card to see what to look for and research-based things to try together.</p>
+    <span class="agechip" id="ageChip"><span class="dot"></span></span>
   </header>
 
   <div class="panel">
-    <h3>Your focus</h3>
-    <div class="chips" id="focusChips"></div>
-    <button class="todaybtn" id="todayBtn">📋 What to do today →</button>
+    <button class="todaybtn" id="todayBtn" style="width:100%">📋 What to do today →</button>
   </div>
 
   <div class="panel">
@@ -307,21 +393,21 @@
   <div class="refs">
     <h3>Why &amp; where it's from</h3>
     <ol>
-      <li>Ages &amp; Stages Questionnaires (ASQ-3), Squires &amp; Bricker — the milestone framework your 10-month form is built on. Brookes Publishing / <a href="https://agesandstages.com" target="_blank" rel="noopener">agesandstages.com</a></li>
-      <li>CDC "Learn the Signs. Act Early." — Milestones &amp; tips by 9 months. <a href="https://www.cdc.gov/act-early/milestones/9-months.html" target="_blank" rel="noopener">cdc.gov · 9 months</a></li>
-      <li>CDC — Milestones by 1 year (the "look ahead" targets). <a href="https://www.cdc.gov/act-early/milestones/1-year.html" target="_blank" rel="noopener">cdc.gov · 1 year</a></li>
-      <li>NHS Start for Life — Listening &amp; learning, 6 to 12 months. <a href="https://www.nhs.uk/start-for-life/baby/learning-to-talk/listening-and-learning-6-to-12-months/" target="_blank" rel="noopener">nhs.uk/start-for-life</a></li>
-      <li>NHS — Help your baby learn to talk. <a href="https://www.nhs.uk/baby/babys-development/play-and-learning/help-your-baby-learn-to-talk/" target="_blank" rel="noopener">nhs.uk/baby</a></li>
-      <li>Harvard Center on the Developing Child — "Serve &amp; return". <a href="https://developingchild.harvard.edu/science/key-concepts/serve-and-return/" target="_blank" rel="noopener">developingchild.harvard.edu</a></li>
-      <li>American Academy of Pediatrics — HealthyChildren.org. <a href="https://www.healthychildren.org/English/MotorDelay/Pages/default.aspx" target="_blank" rel="noopener">healthychildren.org</a></li>
+      <li>Ages &amp; Stages Questionnaires (ASQ-3), Squires &amp; Bricker: the framework used at UK health visitor reviews (12, 14, 16 and 18 month questionnaires, and the 2 to 2½ year review). <a href="https://agesandstages.com" target="_blank" rel="noopener">agesandstages.com</a></li>
+      <li>CDC "Learn the Signs. Act Early." milestones by 15 and 18 months (revised with the AAP, 2022). <a href="https://www.cdc.gov/act-early/milestones/15-months.html" target="_blank" rel="noopener">cdc.gov · 15 months</a> · <a href="https://www.cdc.gov/act-early/milestones/18-months.html" target="_blank" rel="noopener">cdc.gov · 18 months</a></li>
+      <li>Zubler et al. (2022), Evidence-informed milestones for developmental surveillance tools, <i>Pediatrics</i>. <a href="https://publications.aap.org/pediatrics/article/149/3/e2021052138/184748/Evidence-Informed-Milestones-for-Developmental" target="_blank" rel="noopener">publications.aap.org</a></li>
+      <li>Speech and Language UK: ages and stages, 12 to 18 months. <a href="https://speechandlanguage.org.uk/help-for-families/ages-and-stages/12-18-months/" target="_blank" rel="noopener">speechandlanguage.org.uk</a></li>
+      <li>NHS: help your baby learn to talk, and preparing food safely. <a href="https://www.nhs.uk/baby/babys-development/play-and-learning/help-your-baby-learn-to-talk/" target="_blank" rel="noopener">nhs.uk</a></li>
+      <li>WHO (2019) guidelines on physical activity, sedentary behaviour and sleep for children under 5. <a href="https://www.who.int/publications/i/item/9789241550536" target="_blank" rel="noopener">who.int</a></li>
+      <li>Harvard Center on the Developing Child: serve and return. <a href="https://developingchild.harvard.edu/science/key-concepts/serve-and-return/" target="_blank" rel="noopener">developingchild.harvard.edu</a></li>
     </ol>
   </div>
 
   <div class="disclaimer">
-    <b>A gentle reminder:</b> this isn't a test, and every baby grows at their own pace. It's a play guide drawn from the ASQ-3 framework used at the UK 9–12 month review. I'm not a medical professional — if Arlo loses a skill he had, or anything worries you, have a chat with your health visitor or GP.
+    <b>A gentle reminder:</b> this isn't a test, and every baby grows at their own pace. It's a play guide drawn from the ASQ-3 framework used at UK health visitor reviews and the CDC/AAP milestone checklists. I'm not a medical professional. If Arlo loses a skill he had, or anything worries you, have a chat with your health visitor or GP.
   </div>
 
-  <footer>Made for Arlo · synced between you &amp; your partner</footer>
+  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 11:29 UTC</span></footer>
 </div>
 
 <!-- Detail overlay -->
@@ -361,7 +447,7 @@
       <div class="grip"></div>
       <button class="close" id="closeToday" aria-label="Close">✕</button>
       <h2 style="color:var(--comm-deep)">What to do today</h2>
-      <p>Top priorities first — what Arlo hasn't mastered yet. Tap 📅 once you've tried an activity with Arlo today.</p>
+      <p>Top priorities first: what Arlo hasn't mastered yet. Tap the <b>calendar button</b> on an activity once Arlo has tried it today.</p>
     </div>
     <div class="sheetbody" id="todayBody"></div>
   </div>
@@ -372,7 +458,7 @@
     <button class="closex" id="closeShare">✕</button>
     <h2>Share with your partner</h2>
     <p id="modeBadge" style="font-weight:700;margin-top:0"></p>
-    <p>Open your published web address on both phones and sign in with the family password. On iPhone: open it in Safari → <b>Share</b> → <b>Add to Home Screen</b>. Both phones then share one live tracker.</p>
+    <p>Open your published web address on both phones and sign in with the family password. On iPhone: open in Safari → <b>Share</b> → <b>Add to Home Screen</b>.</p>
     <div class="mstep">
       <p style="margin-top:0"><b>1 · Send them the link</b><br>Use the <b>Share</b> button at the top of this Claude conversation to get a link. On their iPhone, open it in Safari → tap <b>Share</b> → <b>Add to Home Screen</b> for one-tap access.</p>
     </div>
@@ -397,6 +483,7 @@
 /* ---------- Colours ---------- */
 const C  = {comm:'#ff7a59',fine:'#2bb98a',gross:'#4aa3e8',prob:'#f3b13d',soc:'#a988e6',over:'#ef6f8e'};
 const CM = {comm:'#ead9d1',fine:'#d6e4dc',gross:'#d8e3ed',prob:'#ece2cf',soc:'#e2d9ee',over:'#ecd8dc'};
+const CMP= {comm:'#f7b29d',fine:'#8dd2b6',gross:'#9dc7e5',prob:'#f1ce8f',soc:'#ccb9e4',over:'#efadb8'}; // 50%-blend, visible stretch-pending tints
 const CD = {comm:'#d6492a',fine:'#15805d',gross:'#1f6db5',prob:'#b9791a',soc:'#6f49bf',over:'#c63e5f'};
 
 /* ---------- Practice slider + level tags ---------- */
@@ -422,10 +509,20 @@ function domMasteryPct(k){ const a=scorableActs(k); if(!a.length) return 0; let 
 let showStretchDonut=false;
 function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function triedMap(){ if(!state.tried || state.tried.date!==todayStr()){ state.tried={date:todayStr(),ids:{}}; queueSave(); } return state.tried.ids; }
+function stId(k,i){ const it=DATA[k].look&&DATA[k].look.items[i]; return (it&&it.id)||('st-'+k+'-'+i); }
 function stretchAchieved(id){ return !!(state.stretchOn&&state.stretchOn[id]) && actVal(id)>=2.5; }
-function domStretchTotal(k){ return (DATA[k].look&&DATA[k].look.items.length)||0; }
-function domStretchAch(k){ if(!DATA[k].look) return 0; let n=0; DATA[k].look.items.forEach((it,i)=>{ if(stretchAchieved('st-'+k+'-'+i)) n++; }); return n; }
+function domStretchTotal(k){ if(k==='over') return 0; return (DATA[k].look&&DATA[k].look.items.length)||0; }
+function domStretchAch(k){ if(k==='over'||!DATA[k].look) return 0; let n=0; DATA[k].look.items.forEach((it,i)=>{ if(stretchAchieved(stId(k,i))) n++; }); return n; }
 function domElite(k){ const t=domStretchTotal(k); return t>0 && domStretchAch(k)/t>=0.75; }
+function stretchBubble(k){
+  const total=domStretchTotal(k); if(!total) return '';
+  let sel=0; DATA[k].look.items.forEach((_,i)=>{ if(state.stretchOn&&state.stretchOn[stId(k,i)]) sel++; });
+  if(sel===0){ if(domMasteryPct(k)<75) return ''; return '<span class="strchip blue">Stretches Available</span>'; }
+  if(sel<total) return `<span class="strchip yellow">${sel}/${total} Stretches Selected</span>`;
+  let mastered=0; DATA[k].look.items.forEach((_,i)=>{ if(actVal(stId(k,i))>=2.5) mastered++; });
+  if(mastered===total) return '<span class="strchip purple">Stretches Mastered</span>';
+  return '<span class="strchip green">Stretches In Progress</span>';
+}
 function stretchControls(id){
   const on=!!(state.stretchOn&&state.stretchOn[id]); const v=actVal(id); const si=stageIdx(v);
   return `<div class="strow"><span class="strack-lbl">Track Arlo's progress</span><button class="swtch ${on?'on':''}" data-stretch="${id}" role="switch" aria-checked="${on}"><span class="knob"></span></button></div>
@@ -460,235 +557,290 @@ const SRC = {
   "Harvard: Serve & return":"https://developingchild.harvard.edu/science/key-concepts/serve-and-return/",
   "AAP / HealthyChildren":"https://www.healthychildren.org/English/MotorDelay/Pages/default.aspx",
   "AAP":"https://www.healthychildren.org/English/MotorDelay/Pages/default.aspx",
-  "AAP motor":"https://www.healthychildren.org/English/MotorDelay/Pages/default.aspx"
+  "AAP motor":"https://www.healthychildren.org/English/MotorDelay/Pages/default.aspx",
+  "Vally et al. 2015":"https://pubmed.ncbi.nlm.nih.gov/25441002/",
+  "Romeo et al. 2018":"https://pmc.ncbi.nlm.nih.gov/articles/PMC5901393/",
+  "Hirsh-Pasek et al. 2015":"https://pubmed.ncbi.nlm.nih.gov/26054866/",
+  "Rowe & Goldin-Meadow 2009":"https://pmc.ncbi.nlm.nih.gov/articles/PMC2853063/",
+  "Bakermans-Kranenburg et al. 2003":"https://pubmed.ncbi.nlm.nih.gov/12696839/",
+  "Sims et al. 2018":"https://pubmed.ncbi.nlm.nih.gov/30224366/",
+  "WHO Motor Development Study":"https://pubmed.ncbi.nlm.nih.gov/16817681/",
+  "WHO 24-hour guidelines":"https://www.who.int/publications/i/item/9789241550536",
+  "Zero to Three":"https://www.zerotothree.org",
+  "CDC: 15 months":"https://www.cdc.gov/act-early/milestones/15-months.html",
+  "CDC: 18 months":"https://www.cdc.gov/act-early/milestones/18-months.html",
+  "CDC: 2 years":"https://www.cdc.gov/act-early/milestones/2-years.html",
+  "Zubler et al. 2022":"https://publications.aap.org/pediatrics/article/149/3/e2021052138/184748/Evidence-Informed-Milestones-for-Developmental",
+  "Heidlage et al. 2020":"https://doi.org/10.1016/j.ecresq.2018.12.006",
+  "Dowdall et al. 2020":"https://pubmed.ncbi.nlm.nih.gov/30737957/",
+  "Colonnesi et al. 2010":"https://doi.org/10.1016/j.dr.2010.10.001",
+  "Adolph et al. 2012":"https://doi.org/10.1177/0956797612446346",
+  "Karasik et al. 2011":"https://pmc.ncbi.nlm.nih.gov/articles/PMC3163171/",
+  "Garrett et al. 2002":"https://doi.org/10.1136/bmj.324.7352.1494",
+  "Meltzoff 1988":"https://pmc.ncbi.nlm.nih.gov/articles/PMC4137879/",
+  "Hanna & Meltzoff 1993":"https://pmc.ncbi.nlm.nih.gov/articles/PMC4215951/",
+  "Sorce et al. 1985":"https://doi.org/10.1037/0012-1649.21.1.195",
+  "Robins et al. 2014":"https://pubmed.ncbi.nlm.nih.gov/24366990/",
+  "Speech and Language UK":"https://speechandlanguage.org.uk/help-for-families/ages-and-stages/12-18-months/",
+  "Health for Under 5s":"https://healthforunder5s.co.uk/sections/toddler/learning-to-walk/",
+  "NHS: Food safety":"https://www.nhs.uk/best-start-in-life/baby/weaning/safe-weaning/preparing-food-safely/",
+  "NHS OT: Move & play":"https://www.leicspart.nhs.uk/wp-content/uploads/2020/06/434-Move-and-play-9-18mnths-2.pdf",
+  "CAPT":"https://capt.org.uk/choking-prevention/"
 };
 function srcHTML(arr){return 'Source:'+arr.map(s=>`<a href="${SRC[s]||'#'}" target="_blank" rel="noopener">${s}</a>`).join('');}
+function infoHTML(o){ return (o&&o.info)?`<button class="infobtn" type="button">ⓘ Research</button><div class="infobox">${o.info}</div>`:''; }
 
 /* ---------- Content ---------- */
 const DATA = {
-  comm:{name:"Communication",glyph:"🗣️",sub:"Babbling, turn-taking, and the very first words.",
+  comm:{
+    name:"Communication",
+    glyph:"🗣️",
+    sub:"First words, pointing and following simple instructions.",
     skills:[
-      {id:"c-s1",t:"Babbles with consonants",d:"Strings of \u201cba-ba\u201d, \u201cda-da\u201d, \u201cga\u201d, \u201cka\u201d."},
-      {id:"c-s2",t:"Copies sounds back",d:"Repeats a sound you make \u2014 early conversation \u2018turns\u2019."},
-      {id:"c-s3",t:"Plays gesture games",d:"Joins in with bye-bye, peekaboo, clap, pat-a-cake."},
-      {id:"c-s4",t:"Follows a simple request",d:"e.g. \u201cgive it to me\u201d without you showing him."},
-      {id:"c-s5",t:"First meaningful words",d:"A sound used consistently for a person or thing."}
+      {"id":"c-s5","age":15,"t":"Says 1–2 words","d":"Besides mama/dada, e.g. “ba” for ball, used for the same thing each time."},
+      {"id":"c15-2","age":15,"t":"Looks when you name things","d":"Turns to a familiar object when you say its name."},
+      {"id":"c15-3","age":15,"t":"Follows a request with a gesture","d":"“Give me the toy” with your hand held out."},
+      {"id":"c15-4","age":15,"t":"Points to ask for things","d":"Points to get something he wants or to get help."},
+      {"id":"c18-1","age":18,"t":"Tries 3 or more words","d":"Besides mama/dada. Attempts count; they don't need to be clear."},
+      {"id":"c-s4","age":18,"t":"Follows a request without gestures","d":"e.g. “give it to me” with your hands still."},
+      {"id":"c18-3","age":18,"t":"Copies words and actions","d":"Tries to repeat a word or action you've just done."}
+    ],
+    earlySkills:[
+      {"id":"c-s1","t":"Babbles with consonants","d":"Strings of “ba-ba”, “da-da”, “ga”, “ka”."},
+      {"id":"c-s2","t":"Copies sounds back","d":"Repeats a sound you make — early conversation ‘turns’."},
+      {"id":"c-s3","t":"Plays gesture games","d":"Joins in with bye-bye, peekaboo, clap, pat-a-cake."}
     ],
     acts:[
-      {id:"c1",t:"\u201cServe & return\u201d chats",do:"When Arlo babbles \u201cbababa\u201d, copy it straight back \u2014 then add a real word: \u201cbababa\u2026 book!\u201d Pause and wait for his turn.",why:"Back-and-forth exchanges wire the brain's language circuits \u2014 it's your <b>responsiveness</b>, not word count, that drives early talking.",src:["Harvard: Serve & return","CDC 9-mo tips"]},
-      {id:"c2",t:"Name-and-point reading",do:"With a board book, point to pictures and name them: \u201cdog\u2026 big dog\u201d. Let him grab and turn pages.",why:"Labelling what he looks at builds <b>understanding</b> long before his first spoken word.",src:["NHS Start for Life","CDC"]},
-      {id:"c3",t:"Gesture & rhyme games",do:"Peekaboo and pat-a-cake daily; wave while saying \u201cbye-bye\u201d. Sing action rhymes like \u201cWind the bobbin up\u201d.",why:"These teach turn-taking, attention and listening \u2014 the social foundations of conversation.",src:["NHS: Learn to talk","ASQ-3"]},
-      {id:"c4",t:"Tiny everyday instructions",do:"Hold your hand out and ask \u201cgive it to me\u201d; narrate his world: \u201cred, round ball\u201d.",why:"Pairing a word with a consistent action builds comprehension, which comes before speaking.",src:["CDC","ASQ-3"]}
+      {"id":"c2-1","t":"Serve, return and wait","do":"When Arlo points, babbles or holds something up, look at it with him, name it, then wait 3 to 5 seconds so he can take another turn.","why":"Back-and-forth turns, not the number of words he hears, are what make him a conversation partner.","src":["Harvard: Serve & return","Romeo et al. 2018"],"info":"Adult–child conversational turns predicted children's verbal scores and activity in Broca's area more than the number of adult words did. The children were 4 to 6 and the study was correlational, so it supports the principle rather than proving it for toddlers.<cite>Romeo et al., Psychological Science, 2018</cite>"},
+      {"id":"c2-2","t":"Expand and recast","do":"Say his attempt back correctly and add one word: “Ba!” becomes “Ball! Big ball.” Never correct him or ask him to say it again.","why":"He hears the right sounds and a slightly longer phrase straight after his own try, when he's paying most attention.","src":["Heidlage et al. 2020","NHS: Learn to talk"],"info":"Across 25 randomised trials, coaching parents in responsive talk and modelling (including expansions) improved children's expressive vocabulary (g = 0.42). Most children were language-delayed or at risk, so effects in typical toddlers may be smaller.<cite>Heidlage et al., Early Childhood Research Quarterly, 2020</cite>"},
+      {"id":"c2-3","t":"Point, name, pause","do":"When he points, name the thing and wait a few seconds before handing it over. If he makes any sound, celebrate it and say the word back: “Yes! Cup.”","why":"Pointing is how he starts a conversation, and answering it gives him the word at the moment he wants it.","src":["CDC: 15 months","Colonnesi et al. 2010"],"info":"A meta-analysis of 25 studies linked infant pointing to later language, more strongly for pointing to share interest than pointing to ask. A later meta-analysis found a smaller link (r = .20), so treat pointing as a helpful sign rather than a crystal ball.<cite>Colonnesi et al., Developmental Review, 2010; Kirk et al., 2022</cite>"},
+      {"id":"c2-4","t":"“Look at that!” sharing walks","do":"On walks or at the window, point at buses, dogs and birds and say “Look!”. When he points to show you something, respond with excitement and the word.","why":"Pointing to share builds joint attention, the shared focus that word learning depends on.","src":["Colonnesi et al. 2010","CDC: 18 months"],"info":"Showing-pointing was more strongly linked to later language than asking-pointing, and pointing to show you something interesting is a CDC 18-month milestone.<cite>Colonnesi et al., 2010; CDC/AAP 2022</cite>"},
+      {"id":"c2-5","t":"Interactive book-sharing","do":"Let him choose the book and turn the pages. Point and ask “Where's the dog?”, wait, praise any response, then add a word: “Woof! A brown dog.” A few pages is plenty.","why":"Books bring words that don't come up in everyday talk, and asking rather than reading makes him an active partner.","src":["Dowdall et al. 2020","CDC: 18 months"],"info":"A meta-analysis of 19 randomised trials (children aged 1 to 6) found book-sharing programmes improved expressive language (d = 0.41) and receptive language (d = 0.26), with bigger gains when reading was interactive.<cite>Dowdall et al., Child Development, 2020</cite>"},
+      {"id":"c2-6","t":"Fade the gesture","do":"Move from “Give it to me” with your hand out to the same words with your hands still. Add “Get your shoes” and “Put it in the basket” during real routines.","why":"It moves him from following your body to understanding the words alone, the change expected between 15 and 18 months.","src":["CDC: 15 months","Zubler et al. 2022"],"info":"The 2022 CDC/AAP milestones put following directions with a gesture at 15 months, and one-step directions without a gesture at 18 months.<cite>Zubler et al., Pediatrics, 2022</cite>"},
+      {"id":"c2-7","t":"Body-part games","do":"Play “Where's your nose?” in the bath, at nappy changes and with teddy. Touch and name first, then ask and wait for him to point.","why":"Body parts are always there and easy to point to, which makes them ideal first words to understand.","src":["CDC: 18 months","ASQ-3"],"info":"Pointing to body parts was in older CDC 18-month materials and appears in ASQ-3 communication themes around 16 to 20 months. Treat it as practice, not a pass or fail item.<cite>CDC; Squires & Bricker, ASQ-3</cite>"},
+      {"id":"c2-8","t":"Choices out loud","do":"Hold up two things: “Apple or banana?” Accept a point or reach at first, then say the word as you hand it over.","why":"Choices give him a strong reason to communicate, and he gets the word right when he wants the thing.","src":["NHS: Learn to talk","Heidlage et al. 2020"],"info":"NHS advice for 12 to 18 months recommends offering choices, and choice-making is a common part of the parent-coaching programmes in the Heidlage meta-analysis.<cite>NHS; Heidlage et al., 2020</cite>"},
+      {"id":"c2-9","t":"Action rhymes with a pause","do":"Sing “Wheels on the Bus” or “Round and Round the Garden” with the actions. Pause before the last word or action and let him fill it in.","why":"Predictable repetition plus actions gives him a gesture “word” before he can say the spoken one.","src":["CDC: 15 months","NHS: Learn to talk"],"info":"CDC 15-month tips recommend songs with gestures. Early gesture predicts later vocabulary, but there's no strong trial evidence that formal baby-sign programmes speed up speech.<cite>CDC; Colonnesi et al., 2010</cite>"}
     ],
-    tip:{h:"Two quick swaps",b:"Keep screens out (not advised under 2 \u2014 babies learn from real faces), and go easy on the dummy while awake (aim to drop it by 12 months) \u2014 it's hard to babble with a dummy in. <i>NHS / CDC</i>"},
-    look:{sub:"He's flying here \u2014 nudge toward 12-month talking:",items:[
-      {t:"Answer his points",do:"When Arlo points, put words to it: \u201cYou want the cup? Here's your cup.\u201d Point things out to him too.",why:"Responding to pointing teaches that gestures get results \u2014 a key step toward first words.",src:["CDC: 1 year"]},
-      {t:"Offer spoken choices",do:"\u201cApple or banana?\u201d When he tries a word (\u201cca\u201d for cat), say it back fully: \u201cyes \u2014 cat!\u201d",why:"Choices and gentle expansions grow vocabulary and model the right word without correcting him.",src:["NHS"]}
+    earlyActs:[
+      {"id":"c1","t":"“Serve & return” chats","do":"When Arlo babbles “bababa”, copy it straight back — then add a real word: “bababa… book!” Pause and wait for his turn.","why":"Back-and-forth exchanges wire the brain's language circuits — it's your <b>responsiveness</b>, not word count, that drives early talking.","src":["Harvard: Serve & return","Romeo et al. 2018"],"info":"In 4–6-year-olds, the number of back-and-forth conversational <b>turns</b> — not the number of words heard — predicted stronger language scores and more activity in Broca's area (the brain's language hub), regardless of family income. Talk <b>with</b> Arlo, not just at him.<cite>Romeo et al., Psychological Science, 2018</cite>"},
+      {"id":"c2","t":"Name-and-point reading","do":"With a board book, point to pictures and name them: “dog… big dog”. Let him grab and turn pages.","why":"Labelling what he looks at builds <b>understanding</b> long before his first spoken word.","src":["NHS Start for Life","Vally et al. 2015"],"info":"A randomised trial that coached carers to share picture books interactively with 14–16-month-olds found significantly greater gains in the children's vocabulary and attention than in untrained families.<cite>Vally et al., J. Child Psychology & Psychiatry, 2015</cite>"},
+      {"id":"c3","t":"Gesture & rhyme games","do":"Peekaboo and pat-a-cake daily; wave while saying “bye-bye”. Sing action rhymes like “Wind the bobbin up”.","why":"These teach turn-taking, attention and listening — the social foundations of conversation.","src":["NHS: Learn to talk","Rowe & Goldin-Meadow 2009"],"info":"How much a child gestures (pointing, showing) early on predicts their vocabulary years later and helps explain income-related vocabulary gaps at school entry. Modelling and responding to gestures matters.<cite>Rowe & Goldin-Meadow, Science, 2009</cite>"},
+      {"id":"c4","t":"Tiny everyday instructions","do":"Hold your hand out and ask “give it to me”; narrate his world: “red, round ball”.","why":"Pairing a word with a consistent action builds comprehension, which comes before speaking.","src":["Hirsh-Pasek et al. 2015","ASQ-3"],"info":"The <b>quality</b> of communication — fluent back-and-forth, shared focus, familiar routines — at about two years predicted later language far better than the sheer quantity of words.<cite>Hirsh-Pasek et al., Psychological Science, 2015</cite>"},
+      {"id":"c5","t":"Dialogic ‘page chats’","do":"On a familiar book ask ‘what's that?’ and wait. Whatever he does, name it and add a little: ‘a duck — a yellow duck!’ Follow what he points at.","why":"Letting him lead the ‘conversation’ and expanding his attempts is the part of shared reading that actually grows vocabulary.","src":["Vally et al. 2015","NHS Start for Life"],"info":"It's the interactive ‘dialogic’ style — questions, following his lead, expanding his answers — rather than just reading words aloud, that drives the vocabulary gains seen in trials.<cite>Vally et al., 2015</cite>"}
+    ],
+    tip:{"h":"About the word spurt","b":"Many parents expect a vocabulary explosion around 16 months. In one study that followed 38 children, only 5 had a true spurt; most sped up gradually. Keep screens to video calls, and keep the dummy for sleep so he can babble freely. <i>Ganger & Brent 2004; WHO 2019</i>"},
+    look:{"sub":"Towards 2-year talking (18–24 months):",items:[
+      {"id":"st2-comm-0","t":"Two-word phrases","do":"Model short pairs: “more milk”, “daddy gone”, “big bus”. When he says one word, give it back as two.","why":"Joining two words is the next step after single words; the CDC expects it by 2 years.","src":["CDC: 2 years"],"info":"Two-word phrases are on the CDC 2-year checklist. Speech and Language UK suggests contacting your health visitor if, at about 2, he only uses single words or points rather than talks.<cite>CDC/AAP 2022; Speech and Language UK</cite>"},
+      {"id":"st2-comm-1","t":"Point to pictures when asked","do":"In familiar books ask “Where's the duck?” and wait for him to point. Then swap roles and let him ask you.","why":"Finding named pictures shows his understanding running ahead of his talking.","src":["CDC: 2 years","Dowdall et al. 2020"],"info":"Interactive book-sharing with questions and pauses has the strongest trial evidence for toddler language.<cite>Dowdall et al., 2020</cite>"},
+      {"id":"st2-comm-2","t":"Two-step instructions","do":"Try “Get your hat and bring it to me” in real routines. Break it back into one step if he gets stuck.","why":"Holding two parts of an instruction in mind stretches both understanding and memory.","src":["CDC: 2 years"],"info":"Two-step directions build on the one-step directions expected at 18 months.<cite>CDC/AAP 2022</cite>"}
     ]}
   },
-  fine:{name:"Fine Motor",glyph:"\u270B",sub:"Little fingers learning to grip, pinch and let go.",
+  fine:{
+    name:"Fine Motor",
+    glyph:"✋",
+    sub:"Stacking, scribbling and feeding himself.",
     skills:[
-      {id:"f-s1",t:"One-handed pickup",d:"Lifts a small toy with one hand."},
-      {id:"f-s2",t:"Raking \u2192 pincer grasp",d:"Moving from a whole-hand rake to thumb + fingertip."},
-      {id:"f-s3",t:"Picks up tiny things",d:"Thumb and one finger, gap between toy and palm."},
-      {id:"f-s4",t:"Deliberate release",d:"Puts a toy down on purpose and lets go."}
+      {"id":"f15-1","age":15,"t":"Stacks two blocks","d":"Puts one small block or cup on top of another."},
+      {"id":"f15-2","age":15,"t":"Feeds himself with fingers","d":"Picks up and eats some of his food."},
+      {"id":"f15-3","age":15,"t":"Turns board-book pages","d":"Often several at once, which is fine."},
+      {"id":"f15-4","age":15,"t":"Posts things into small openings","d":"Pushes a lid or block through a slot or hole."},
+      {"id":"f18-1","age":18,"t":"Scribbles","d":"Makes marks with a crayon, any grip."},
+      {"id":"f18-2","age":18,"t":"Tries to use a spoon","d":"Gets some food to his mouth, with spills."}
+    ],
+    earlySkills:[
+      {"id":"f-s1","t":"One-handed pickup","d":"Lifts a small toy with one hand."},
+      {"id":"f-s2","t":"Raking → pincer grasp","d":"Moving from a whole-hand rake to thumb + fingertip."},
+      {"id":"f-s3","t":"Picks up tiny things","d":"Thumb and one finger, gap between toy and palm."},
+      {"id":"f-s4","t":"Deliberate release","d":"Puts a toy down on purpose and lets go."}
     ],
     acts:[
-      {id:"f1",t:"Self-feeding finger foods",do:"Offer soft pea-sized pieces \u2014 cooked veg sticks, banana, toast fingers \u2014 and let him pick them up. Smaller pieces nudge the pincer.",why:"Self-feeding is the <b>number-one driver</b> of the pincer grasp \u2014 food beats any toy. (Supervise; safe textures for choking.)",src:["CDC 9-mo tips","AAP / HealthyChildren"]},
-      {id:"f2",t:"Drop, post & refill",do:"Post blocks into a tub or your stacking cups, then tip out and start again. Hand items back so he can drop them again.",why:"Letting go <b>on purpose</b> is developing now; \u2018drop it again\u2019 turns it into practice.",src:["CDC","ASQ-3"]},
-      {id:"f3",t:"Pincer targets",do:"Pop a piece of cereal inside a clear sealed bottle to poke at, or set out one small soft target to pick up.",why:"A target smaller than his hand forces the fingertip grasp \u2014 daylight between object and palm.",src:["ASQ-3","AAP"]},
-      {id:"f4",t:"Hand-to-hand transfer",do:"Give a toy in one hand, then offer a second to the same hand \u2014 he learns to pass the first across.",why:"Moving objects across the midline builds coordination between both sides.",src:["CDC","ASQ-3"]}
+      {"id":"f2-1","t":"Finger-food independence","do":"Offer safe finger foods at every meal and let him feed himself before you help. Prepare them to NHS choking guidance (see the tip below).","why":"Pick-ups at mealtimes add up to hundreds of practice pinches a day.","src":["CDC: 15 months","NHS: Food safety"],"info":"Using fingers to feed himself some food is a CDC 15-month milestone, and NHS weaning guidance supports self-feeding with suitably prepared foods.<cite>CDC/AAP 2022; NHS</cite>"},
+      {"id":"f2-2","t":"Two-block, then three-block towers","do":"Build little towers for him to knock down, then hand him a block to put on top. Go up to three or four as he manages it.","why":"Placing a block on another needs a controlled let-go, which is harder than dropping.","src":["CDC: 15 months","Zubler et al. 2022"],"info":"Stacking at least two small objects is a CDC 15-month milestone, reached by at least 75% of children by then.<cite>CDC/AAP 2022</cite>"},
+      {"id":"f2-3","t":"Chunky crayon scribbles","do":"Tape a big sheet to the high-chair tray or the floor and offer one thick crayon. Make a mark yourself, then hand it over. Any grip is fine.","why":"Scribbling joins up grip, wrist movement and the cause and effect of “I made that”.","src":["CDC: 18 months"],"info":"Scribbling is a CDC 18-month milestone. A whole-fist grip is typical now; finer grips develop over the next few years.<cite>CDC/AAP 2022</cite>"},
+      {"id":"f2-4","t":"Spoon practice with a loaded spoon","do":"Give him his own spoon with sticky food like yoghurt, porridge or mash. Load it for him and let him bring it to his mouth while you use a second spoon.","why":"Spoon use combines grip, a wrist turn and aim, and independence keeps him practising.","src":["CDC: 15 months","CDC: 18 months"],"info":"Trying to use a spoon is a CDC 18-month milestone, and the 15-month tips say to let him practise because learning to eat is messy.<cite>CDC</cite>"},
+      {"id":"f2-5","t":"Shape-sorter ladder","do":"Start with one round hole: cut a slot in a tub lid and post jar lids or big blocks. Then try a shape sorter with only one or two shapes showing.","why":"Matching an object's shape and angle to a hole adds a thinking step to posting.","src":["CDC: 1 year","ASQ-3"],"info":"Container play is a 12-month milestone and shape sorting is a common ASQ-3 theme from 16 to 24 months. No trials show shape sorters speed development; they're good practice at the right level.<cite>CDC; ASQ-3</cite>"},
+      {"id":"f2-6","t":"Board-book page turning","do":"During reading, pause and let him turn each page himself. Lift-the-flap and touch-and-feel books work best.","why":"Separating thick pages builds finger control and keeps him involved in the story.","src":["CDC: 1 year","Dowdall et al. 2020"],"info":"This does double duty: page turning practises fine motor control, and interactive book-sharing has strong language evidence.<cite>CDC; Dowdall et al., 2020</cite>"}
+    ],
+    earlyActs:[
+      {"id":"f1","t":"Self-feeding finger foods","do":"Offer soft pea-sized pieces — cooked veg sticks, banana, toast fingers — and let him pick them up. Smaller pieces nudge the pincer.","why":"Self-feeding is the <b>number-one driver</b> of the pincer grasp — food beats any toy. (Supervise; safe textures for choking.)","src":["CDC 9-mo tips","AAP / HealthyChildren"],"info":"Letting babies pick up their own food is repeatedly cited as the main driver of the pincer grasp; supervise closely and use soft, choke-safe textures.<cite>CDC; AAP / HealthyChildren</cite>"},
+      {"id":"f2","t":"Drop, post & refill","do":"Post blocks into a tub or your stacking cups, then tip out and start again. Hand items back so he can drop them again.","why":"Letting go <b>on purpose</b> is developing now; ‘drop it again’ turns it into practice.","src":["CDC","ASQ-3"],"info":"Deliberate release (letting go on purpose) develops in the second half of the first year; repeated ‘drop and retrieve’ is natural practice for it.<cite>ASQ-3; CDC</cite>"},
+      {"id":"f3","t":"Pincer targets","do":"Pop a piece of cereal inside a clear sealed bottle to poke at, or set out one small soft target to pick up.","why":"A target smaller than his hand forces the fingertip grasp — daylight between object and palm.","src":["ASQ-3","AAP"],"info":"A target smaller than the palm forces a fingertip (pincer) grasp rather than a whole-hand rake — picking up a single piece of cereal is ideal practice.<cite>CDC 12-month milestones</cite>"},
+      {"id":"f4","t":"Hand-to-hand transfer","do":"Give a toy in one hand, then offer a second to the same hand — he learns to pass the first across.","why":"Moving objects across the midline builds coordination between both sides.","src":["CDC","ASQ-3"],"info":"Passing objects across the body's midline is an early sign of the two sides of the brain coordinating, underpinning later skills like crawling and handwriting.<cite>ASQ-3</cite>"},
+      {"id":"f5","t":"Flaps, pages & posting","do":"Lift-the-flap books, chunky board pages to turn, and posting lids or large discs into a slot (supervised).","why":"Isolating one finger and turning pages refines the precise control behind the pincer grasp.","src":["AAP","ASQ-3"],"info":"Fine-motor control develops shoulder-to-fingertip; flap-lifting and posting practise the fingertip end of that sequence.<cite>AAP / HealthyChildren</cite>"}
+    ],
+    tip:{"h":"Safe finger foods","b":"Quarter grapes and cherry tomatoes lengthways, cut sausages into thin lengthways strips with the skins off, no whole nuts or popcorn, peanut butter only as a thin spread, and always sit him upright and stay with him while he eats. <i>NHS / CAPT</i>"},
+    look:{"sub":"Next steps for busy hands (18–24 months):",items:[
+      {"id":"st2-fine-0","t":"Taller towers","do":"Work up to towers of 4 to 6 blocks, taking turns to add one each.","why":"Taller towers need steadier hands and a gentler release.","src":["ASQ-3"],"info":"Towers of several blocks feature in ASQ-3 fine motor themes towards 2 years.<cite>ASQ-3</cite>"},
+      {"id":"st2-fine-1","t":"Copy a line","do":"Draw a slow up-and-down line and say “your turn”. Any attempt counts.","why":"Copying a stroke he's just watched links seeing and doing.","src":["ASQ-3"],"info":"Imitating a vertical stroke is a common next step after free scribbling.<cite>ASQ-3</cite>"},
+      {"id":"st2-fine-2","t":"Knob puzzles and lids","do":"Try a 2 to 3 piece inset puzzle with big knobs, and let him unscrew a loose lid on a plastic jar.","why":"Turning and fitting pieces builds wrist rotation and planning.","src":["ASQ-3","CDC: 2 years"],"info":"Simple inset puzzles and twisting lids appear in fine motor and problem-solving themes between 18 and 24 months.<cite>ASQ-3</cite>"}
+    ]}
+  },
+  gross:{
+    name:"Gross Motor",
+    glyph:"🚶",
+    sub:"From first steps to steady walking and climbing.",
+    skills:[
+      {"id":"g-s4","age":15,"t":"Stands alone","d":"A few seconds without holding on."},
+      {"id":"g15-2","age":15,"t":"Takes a few steps on his own","d":"Even 2 or 3 wobbly steps count."},
+      {"id":"g18-1","age":18,"t":"Walks without holding on","d":"Gets across a room by himself."},
+      {"id":"g18-2","age":18,"t":"Climbs on and off the sofa","d":"Gets on and off a sofa or chair without help."},
+      {"id":"g18-3","age":18,"t":"Squats to pick up a toy","d":"Bends down and stands back up without holding on."}
+    ],
+    earlySkills:[
+      {"id":"g-s1","t":"Pulls to stand","d":"Chest off the furniture — Arlo's doing this."},
+      {"id":"g-s2","t":"Cruises with one hand","d":"Sidesteps along furniture holding on."},
+      {"id":"g-s3","t":"Lowers with control","d":"Sits back down without flopping."}
+    ],
+    acts:[
+      {"id":"g2-1","t":"Free-practice floor and garden time","do":"Build up daily stretches of barefoot or soft-soled free movement on safe floors, grass and park surfaces. Keep pram, car-seat and high-chair stretches under an hour.","why":"Walking improves through lots of varied practice, including falling over and getting back up.","src":["Adolph et al. 2012","WHO 24-hour guidelines"],"info":"In free play, 12 to 19-month-olds averaged about 2,368 steps and 17 falls an hour. WHO advises at least 180 minutes of varied activity a day for 1 to 2-year-olds and no restraint for more than an hour at a time.<cite>Adolph et al., Psychological Science, 2012; WHO 2019</cite>"},
+      {"id":"g2-2","t":"Walking between two adults","do":"Kneel a short distance from another adult and let him toddle between you, widening the gap over time. If you hold his hands, keep them at shoulder height or lower.","why":"Short, motivating trips with a safe landing build confidence and balance.","src":["Health for Under 5s"],"info":"NHS health visiting guidance recommends this progression, and says to speak to your health visitor or GP if he isn't walking on his own by 18 months.<cite>Health for Under 5s (NHS)</cite>"},
+      {"id":"g2-3","t":"Push-along walking, never a sit-in walker","do":"Use a sturdy, weighted push toy or an empty laundry basket on carpet. Skip sit-in walkers and jumpers.","why":"Push toys make him balance and carry his own weight; sit-in walkers do the balancing for him.","src":["Garrett et al. 2002","Sims et al. 2018"],"info":"In an Irish study of 190 infants, each 24 hours of walker use was linked to walking alone 3.3 days later (observational). US emergency departments treated about 230,000 under-15-month-olds for walker injuries between 1990 and 2014.<cite>Garrett et al., BMJ, 2002; Sims et al., Pediatrics, 2018</cite>"},
+      {"id":"g2-4","t":"Carry-and-deliver missions","do":"Ask him to carry a soft block, a sock or a book to you or to a basket across the room: “Can you bring me teddy?”","why":"Carrying while walking trains balance with busy hands and turns walking into sharing and talk.","src":["Karasik et al. 2011"],"info":"In home observations of 13-month-olds, 44% of walkers' bids to share an object involved carrying it to their mother, against 3% for crawlers, and mothers answered with more talk.<cite>Karasik et al., Child Development, 2011</cite>"},
+      {"id":"g2-5","t":"Supervised stairs and sofa climbing","do":"With a gate at the top and you right behind him, let him crawl up the bottom few stairs and come down backwards, feet first. Let him practise getting on and off a low sofa.","why":"Climbing builds strength, planning and a sense of his own limits.","src":["CDC: 18 months","CAPT"],"info":"Climbing on and off a couch is a CDC 18-month milestone. Falls are the main cause of injury admissions in under-5s, mostly from furniture and stairs, which is why gates and close supervision matter.<cite>CDC/AAP 2022; Child Accident Prevention Trust</cite>"},
+      {"id":"g2-6","t":"Squat-and-pick-up games","do":"Scatter balls or bath toys on the floor while he's standing and invite him to collect them into a bucket without sitting down.","why":"Squatting and standing back up without holding on builds leg strength and balance.","src":["ASQ-3","NHS OT: Move & play"],"info":"Squatting to pick up toys appears in ASQ-3 gross motor themes from 14 to 18 months. Treat it as practice, not a test.<cite>ASQ-3; Leicestershire Partnership NHS Trust</cite>"},
+      {"id":"g2-7","t":"Roll, throw, kick","do":"Roll a big soft ball while standing, try a two-handed throw forward, and once he walks steadily show him a kick by walking into the ball.","why":"Throwing and kicking need a quick weight shift, which builds on walking.","src":["CDC: 2 years","ASQ-3"],"info":"Throwing and early kicking appear in ASQ-3 themes from 16 to 24 months, and kicking a ball is on the CDC 2-year list, so expect these to come gradually.<cite>CDC; ASQ-3</cite>"},
+      {"id":"g2-8","t":"Outdoor uneven-ground walks","do":"Let him walk on grass, gentle slopes, sand and park paths, holding one hand if needed.","why":"Changing surfaces make his balance adapt in ways flat floors can't.","src":["NHS OT: Move & play","WHO 24-hour guidelines"],"info":"NHS paediatric occupational therapy guidance for 9 to 18 months encourages play on grass, uneven surfaces and steps.<cite>Leicestershire Partnership NHS Trust; WHO 2019</cite>"}
+    ],
+    earlyActs:[
+      {"id":"g1","t":"Build a cruising loop","do":"Arrange sturdy furniture in a circuit with toys spaced along it. Over weeks, widen the gaps so he reaches across open space.","why":"Cruising builds balance and weight-shifting; bigger gaps coax those first <b>moments standing free</b>.","src":["CDC","WHO Motor Development Study"],"info":"WHO data show wide-but-orderly motor windows, and about 4% of babies skip hands-and-knees crawling entirely. Open floor space and reasons to move matter more than any equipment.<cite>WHO Motor Development Study, 2006</cite>"},
+      {"id":"g2","t":"Pull-up & lower-down","do":"Put a toy on a low table so he pulls up to reach it — then encourage a gentle lower back down.","why":"Controlled lowering protects against bumps and is a listed milestone.","src":["ASQ-3","CDC"],"info":"Lowering with control rather than flopping is a listed milestone and protects against head bumps as he learns to stand.<cite>ASQ-3; CDC</cite>"},
+      {"id":"g3","t":"Push-along walking","do":"Once steady standing, let him push a weighted push-toy or sturdy wagon and walk behind it.","why":"Supported walking rehearses the stepping pattern. (Skip seated baby-walkers — not recommended.)","src":["AAP","NHS"],"info":"Sit-in baby walkers are linked to thousands of injuries — one US study counted ~230,000 ER visits in under-15-month-olds over 1990–2014, ~90% head/neck — and don't help walking. A push-along wagon is the safer choice.<cite>Sims et al., Pediatrics, 2018</cite>"},
+      {"id":"g4","t":"Sit-and-roll a ball","do":"Sit facing him and roll a ball back and forth; he'll lean, reach and recover to sitting.","why":"Reaching from sitting trains trunk control and ‘catch myself’ reflexes.","src":["CDC"],"info":"Reaching from sitting trains trunk control and the protective ‘catch myself’ reactions that make standing and walking safer.<cite>CDC; AAP motor</cite>"},
+      {"id":"g5","t":"Floor play, no restraints","do":"Plenty of supervised floor time to pull up, cruise and crawl. Avoid long stretches strapped in a seat, and skip sit-in walkers.","why":"Active floor time is what builds the strength and balance for standing and first steps.","src":["WHO 24-hour guidelines","AAP"],"info":"WHO advises infants be physically active through floor-based play several times a day and not be restrained (stroller, high chair, carrier) for more than an hour at a time.<cite>WHO physical activity & sedentary behaviour guidelines, 2019</cite>"}
+    ],
+    tip:{"h":"Toddler-proofing","b":"Fit stair gates top and bottom, anchor bookcases and drawers to the wall, move furniture away from windows and fit window restrictors, and keep blind cords out of reach. <i>CAPT / NHS</i>"},
+    look:{"sub":"Towards running and stairs (18–24 months):",items:[
+      {"id":"st2-gross-0","t":"Run, push and pull","do":"Give him space to try a stiff little run, and a pull-along toy to walk with.","why":"Running and pulling a toy while walking are the next balance challenges.","src":["CDC: 2 years"],"info":"Running and walking while pulling a toy are typical progressions between 18 and 24 months.<cite>CDC</cite>"},
+      {"id":"st2-gross-1","t":"Stairs with a hand","do":"Walk up a few stairs together, with him holding your hand or the rail.","why":"Stepping up builds single-leg strength and balance.","src":["CDC: 2 years"],"info":"Walking up stairs with support usually arrives between 18 and 24 months.<cite>CDC</cite>"},
+      {"id":"st2-gross-2","t":"Kick and throw","do":"Line up a big ball for him to kick forward, and play two-handed throwing into a box.","why":"Both need a quick weight shift onto one leg or a strong push through both arms.","src":["CDC: 2 years","ASQ-3"],"info":"Kicking a ball is on the CDC 2-year checklist.<cite>CDC/AAP 2022</cite>"}
+    ]}
+  },
+  prob:{
+    name:"Problem Solving",
+    glyph:"🧩",
+    sub:"Using things the right way, copying and first pretend play.",
+    skills:[
+      {"id":"p15-1","age":15,"t":"Uses things the right way","d":"Puts a phone to his ear, a cup to his mouth, opens a book."},
+      {"id":"p15-2","age":15,"t":"Copies an action he's seen","d":"Repeats something you showed him, like tapping a spoon."},
+      {"id":"p18-1","age":18,"t":"Copies you doing chores","d":"Wipes, sweeps or tidies like you do."},
+      {"id":"p18-2","age":18,"t":"Plays with toys in a simple way","d":"Pushes a car, rolls a ball, fills a cup."},
+      {"id":"p18-3","age":18,"t":"Simple pretend play","d":"Gives teddy a drink, or pretends to phone someone."}
+    ],
+    earlySkills:[
+      {"id":"p-s1","t":"Bangs two things together","d":"Brings objects to the middle and clashes them."},
+      {"id":"p-s2","t":"Holds a toy in each hand","d":"Manages two objects at once."},
+      {"id":"p-s3","t":"Finds hidden toys","d":"Looks for a toy you hide — object permanence."},
+      {"id":"p-s4","t":"Hunts for dropped objects","d":"Looks for the spoon that fell out of sight."}
+    ],
+    acts:[
+      {"id":"p2-1","t":"“What's it for?” play","do":"Show him an everyday object such as a hat, brush, cup or phone, ask “What do we do with this?”, show him, then hand it over.","why":"Knowing what things are for is the stepping stone to pretend play and to naming things.","src":["CDC: 15 months","Zubler et al. 2022"],"info":"Trying to use things the right way, like a phone, cup or book, is a CDC 15-month milestone.<cite>CDC/AAP 2022</cite>"},
+      {"id":"p2-2","t":"Teddy's tea party","do":"Pretend to give teddy a drink and say “Mmm!”, then hand him the cup: “Teddy's thirsty, can you help?” Try pretend phone calls too.","why":"Letting one thing stand for another is early symbolic thinking, the same skill that lets words stand for things.","src":["Speech and Language UK","CDC: 15 months"],"info":"Speech and Language UK lists simple pretend play, like giving dolly a drink, as typical by 18 months.<cite>Speech and Language UK</cite>"},
+      {"id":"p2-3","t":"Show-me-once copying","do":"Show a new action once, slowly: put a lid on a pot, or tap a spoon on a bowl. Offer the same objects later that day or the next.","why":"Toddlers learn a lot by watching and copying later, so one clear demonstration lasts.","src":["Meltzoff 1988"],"info":"14-month-olds copied actions they had only watched a week earlier: 67% copied a completely new action, against 0% of children who hadn't seen it. A small lab study, but a striking one.<cite>Meltzoff, Developmental Psychology, 1988</cite>"},
+      {"id":"p2-4","t":"Two-cloth hide-and-find","do":"Hide a toy under one of two cloths while he watches, then move it under the other. Later, hide it inside a cup under a cloth.","why":"Following an object as it moves trains memory and the idea that things still exist out of sight.","src":["CDC: 1 year","ASQ-3"],"info":"Finding a toy you hide is a 12-month milestone; tracking it through visible moves develops across the second year.<cite>CDC; ASQ-3</cite>"},
+      {"id":"p2-5","t":"Pull the string","do":"Tie a ribbon to a toy and put the toy out of reach on a tray or blanket. Show him that pulling the ribbon or blanket brings it closer. Stay with him and put the ribbon away after.","why":"Using one thing to get another is the foundation of planning.","src":["ASQ-3"],"info":"Using an object to get another appears in ASQ-3 problem-solving themes around 12 to 16 months.<cite>ASQ-3</cite>"},
+      {"id":"p2-6","t":"Clean-up song and sorting","do":"Sing the same short tidy-up song while he helps put toys in a basket. Later, sort into two baskets: balls and blocks.","why":"Routines plus simple categories practise memory, sequencing and following instructions.","src":["CDC: 15 months","CDC: 18 months"],"info":"The CDC 15-month tips suggest a clean-up song, and copying you doing chores is an 18-month milestone.<cite>CDC</cite>"},
+      {"id":"p2-7","t":"Cause-and-effect upgrades","do":"Move on to toys with two steps (press, then it pops up), bubbles to chase and pop, and pots and pans to drum.","why":"Waiting for a result, or doing steps in order, stretches attention and planning.","src":["CDC: 1 year","CDC: 15 months"],"info":"CDC tips suggest pots, pans and simple instruments at 1 year, and bubbles with words at 15 months.<cite>CDC</cite>"}
+    ],
+    earlyActs:[
+      {"id":"p1","t":"Hide-and-find","do":"While he watches, hide a toy under a cloth. Ask “where's it gone?” then reveal with a big “there it is!”","why":"This is the dawn of <b>object permanence</b> — a huge cognitive leap around 9 months.","src":["CDC","ASQ-3"],"info":"Searching for a hidden object marks <b>object permanence</b> — knowing things still exist out of sight. The ‘A-not-B’ slip (looking where it was last time) is normal as working memory develops.<cite>Piaget; CDC</cite>"},
+      {"id":"p2","t":"Dump & fill","do":"Tip blocks out of a container, then put them back together. Stacking cups or any safe tub work.","why":"Emptying and filling teaches cause-and-effect and ‘in vs out’.","src":["CDC","Zero to Three"],"info":"Filling and emptying is hands-on cause-and-effect learning and an early grasp of ‘in vs out’.<cite>Zero to Three</cite>"},
+      {"id":"p3","t":"Bang & clap","do":"Give a block or cup in each hand and show banging them together, or clapping like pat-a-cake.","why":"Bringing two objects together at the midline builds two-handed coordination.","src":["ASQ-3","CDC"],"info":"Bringing two objects together at the midline is a 9-month problem-solving milestone and builds two-handed coordination.<cite>ASQ-3; CDC</cite>"},
+      {"id":"p4","t":"The clear-bottle puzzle","do":"Seal a piece of cereal inside a clear bottle and let him work out how to get it.","why":"Pure trial-and-error: he sees the goal and works out the route.","src":["ASQ-3"],"info":"Seeing a goal and working out the steps to reach it is early means-end problem solving.<cite>ASQ-3</cite>"},
+      {"id":"p5","t":"The drop game & cause-effect toys","do":"When he drops a toy from the highchair, hand it back so he can do it again. Add pop-ups, light-up buttons or a ball-run.","why":"Repeating an action to make the same thing happen is how he learns cause and effect — and that objects don't vanish.","src":["CDC","Zero to Three"],"info":"The endlessly repeated ‘drop and retrieve’ is genuine experimentation — testing object permanence and cause-and-effect, not misbehaving.<cite>Zero to Three</cite>"}
     ],
     tip:null,
-    look:{sub:"Hands are strong \u2014 stretch toward 12 months:",items:[
-      {t:"Posting & putting-in",do:"Encourage dropping blocks into a cup on purpose, then tip out and repeat. A simple shape-sorter is a great next toy.",why:"Placing an object into a container deliberately is a 12-month skill beyond simple release.",src:["CDC: 1 year"]},
-      {t:"First marks",do:"Offer a chunky crayon and big paper; guide hand-over-hand to make marks.",why:"Early mark-making builds grip strength and wrist control.",src:["AAP"]}
+    look:{"sub":"Thinking ahead (18–24 months):",items:[
+      {"id":"st2-prob-0","t":"Inset puzzles and shape matching","do":"Offer a 2 to 3 piece knob puzzle and a shape sorter with three shapes.","why":"Matching shapes adds turning and trial and error to posting.","src":["ASQ-3"],"info":"Simple puzzles and shape matching are common ASQ-3 problem-solving themes towards 2 years.<cite>ASQ-3</cite>"},
+      {"id":"st2-prob-1","t":"Two-step pretend","do":"Join pretend actions together: feed teddy, then put teddy to bed.","why":"Linking actions into a little story is the next step in symbolic play.","src":["Speech and Language UK"],"info":"Pretend play grows from single actions into short sequences across the second year.<cite>Speech and Language UK</cite>"},
+      {"id":"st2-prob-2","t":"Find it after hidden moves","do":"Hide a toy in your hand, slip it under a cloth, then show your empty hand. Can he work out where it went?","why":"Working out where something went without seeing it move is harder memory and reasoning.","src":["ASQ-3"],"info":"Tracking objects through hidden moves develops towards the end of the second year.<cite>ASQ-3</cite>"}
     ]}
   },
-  gross:{name:"Gross Motor",glyph:"\uD83D\uDEB6",sub:"Arlo's cruising \u2014 so these aim at standing free & first steps.",
+  soc:{
+    name:"Personal-Social",
+    glyph:"🤗",
+    sub:"Exploring from a safe base, helping out and big feelings.",
     skills:[
-      {id:"g-s1",t:"Pulls to stand",d:"Chest off the furniture \u2014 Arlo's doing this."},
-      {id:"g-s2",t:"Cruises with one hand",d:"Sidesteps along furniture holding on."},
-      {id:"g-s3",t:"Lowers with control",d:"Sits back down without flopping."},
-      {id:"g-s4",t:"Stands free (next step)",d:"A second or two unsupported."}
+      {"id":"s15-1","age":15,"t":"Copies other children","d":"Watches and copies what other children are doing."},
+      {"id":"s15-2","age":15,"t":"Shows you a toy he likes","d":"Holds it up or brings it over to share."},
+      {"id":"s15-3","age":15,"t":"Claps when excited","d":"Claps along, or claps on his own."},
+      {"id":"s15-4","age":15,"t":"Shows affection","d":"Hugs, cuddles or kisses you, or hugs a teddy."},
+      {"id":"s18-1","age":18,"t":"Explores and checks back","d":"Moves away from you, then looks to make sure you're close."},
+      {"id":"s18-2","age":18,"t":"Points to show you things","d":"Points at something interesting just to share it."},
+      {"id":"s-s4","age":18,"t":"Helps with dressing","d":"Pushes an arm through a sleeve or lifts a foot."},
+      {"id":"s18-4","age":18,"t":"Holds hands out to be washed","d":"Joins in with hand-washing."},
+      {"id":"s18-5","age":18,"t":"Drinks from an open cup","d":"Holds it himself; spills are normal."}
+    ],
+    earlySkills:[
+      {"id":"s-s1","t":"Drinks from a held cup","d":"Sips water from a cup you hold."},
+      {"id":"s-s2","t":"Feeds self finger foods","d":"Brings a cracker or chapati to his mouth."},
+      {"id":"s-s3","t":"Offers & releases a toy","d":"Hands a toy to you when asked."},
+      {"id":"s-s5","t":"Shy with strangers","d":"Notices and reacts when you leave — healthy attachment."}
     ],
     acts:[
-      {id:"g1",t:"Build a cruising loop",do:"Arrange sturdy furniture in a circuit with toys spaced along it. Over weeks, widen the gaps so he reaches across open space.",why:"Cruising builds balance and weight-shifting; bigger gaps coax those first <b>moments standing free</b>.",src:["CDC","AAP motor"]},
-      {id:"g2",t:"Pull-up & lower-down",do:"Put a toy on a low table so he pulls up to reach it \u2014 then encourage a gentle lower back down.",why:"Controlled lowering protects against bumps and is a listed milestone.",src:["ASQ-3","CDC"]},
-      {id:"g3",t:"Push-along walking",do:"Once steady standing, let him push a weighted push-toy or sturdy wagon and walk behind it.",why:"Supported walking rehearses the stepping pattern. (Skip seated baby-walkers \u2014 not recommended.)",src:["AAP","NHS"]},
-      {id:"g4",t:"Sit-and-roll a ball",do:"Sit facing him and roll a ball back and forth; he'll lean, reach and recover to sitting.",why:"Reaching from sitting trains trunk control and \u2018catch myself\u2019 reflexes.",src:["CDC"]}
+      {"id":"s2-1","t":"Secure base, safe haven","do":"At the playground, sit where he can see you, smile when he looks back and welcome him when he returns. Don't call him back unless it isn't safe.","why":"Exploring and checking back is exactly the 18-month milestone, and a reliable base makes exploring feel safe.","src":["CDC: 18 months","Bakermans-Kranenburg et al. 2003"],"info":"A meta-analysis of 70 studies found that helping parents respond more sensitively increased children's attachment security.<cite>Bakermans-Kranenburg et al., Psychological Bulletin, 2003; CDC/AAP 2022</cite>"},
+      {"id":"s2-2","t":"“Is it OK?” faces","do":"When he meets something new, like a dog, a slide or a noisy toy, let him look at you. Give a clear, honest face and a few words: a relaxed smile and “That's OK!” for safe things, a calm “No, hot” for dangers.","why":"Toddlers read their parent's face to decide whether something is safe, so your expression is real information to him.","src":["Sorce et al. 1985"],"info":"On a visual cliff, about 74% of 1-year-olds crossed when their mother looked happy and none did when she looked fearful. It's a small lab study and the figures come from textbook summaries.<cite>Sorce, Emde, Campos & Klinnert, Developmental Psychology, 1985</cite>"},
+      {"id":"s2-3","t":"Little helper jobs","do":"Give him real small jobs: fetch his shoes, put socks in the basket, put snacks in the park bag, push his arm through a sleeve, hold his hands out for washing.","why":"Helping builds independence and practises following instructions in real life.","src":["CDC: 15 months","CDC: 18 months"],"info":"Helping with dressing and putting hands out to be washed are both CDC 18-month milestones.<cite>CDC/AAP 2022</cite>"},
+      {"id":"s2-4","t":"Open cup, two hands","do":"Use a small open cup with a little water at every meal. Let him hold it with both hands and only steady it if needed.","why":"It builds lip control and careful tipping that a valved beaker can't teach.","src":["CDC: 18 months","NHS"],"info":"At 12 months the milestone is drinking from a cup you hold; by 18 months it's drinking from an open cup himself, with spills expected.<cite>CDC/AAP 2022; NHS</cite>"},
+      {"id":"s2-5","t":"Name the feeling, hold the limit","do":"When he's upset, name it: “You're cross, you wanted the ball.” State the limit briefly, “I won't let you hit,” and offer something else. Let tantrums pass calmly.","why":"Hearing feelings named is how toddlers start to understand and manage them.","src":["CDC: 15 months","CDC: 1 year"],"info":"CDC guidance says tantrums are normal and more likely when tired or hungry, and it's fine to let one pass. It advises saving “no” for danger and redirecting otherwise.<cite>CDC</cite>"},
+      {"id":"s2-6","t":"Show the wanted behaviour","do":"Instead of only stopping things, show what to do, like “gentle hands” stroking teddy, and praise or hug him when he does it.","why":"Toddlers learn faster from being shown what to do than being told what not to do.","src":["CDC: 1 year","CDC: 15 months"],"info":"This is explicitly recommended in CDC 1-year and 15-month guidance.<cite>CDC</cite>"},
+      {"id":"s2-7","t":"Predictable goodbyes and settling in","do":"Use the same short goodbye every time (a hug, “Bye-bye, see you after nap”, a wave) and never sneak out. With new carers, settle him in gradually with a familiar comfort toy.","why":"Separation worries often peak in the second year, and predictability teaches him you come back.","src":["CDC: 1 year","AAP / HealthyChildren"],"info":"Separation anxiety usually peaks between about 10 and 18 months and is a sign of healthy attachment.<cite>AAP / HealthyChildren; CDC</cite>"},
+      {"id":"s2-8","t":"Toddler groups and playdates","do":"Go to regular toddler groups or library rhyme times, or play with another child. Sit nearby and say what the other child is doing.","why":"Copying other children is a 15-month milestone, and other toddlers are powerful models.","src":["CDC: 15 months","Hanna & Meltzoff 1993"],"info":"14 to 18-month-olds copied actions shown by a 14-month-old ‘expert peer’, even two days later at home.<cite>Hanna & Meltzoff, Developmental Psychology, 1993</cite>"}
+    ],
+    earlyActs:[
+      {"id":"s1","t":"Open-cup sips","do":"At meals, offer a little water in an open or free-flow cup while you steady it. Expect mess — that's the learning.","why":"Early cup drinking builds oral-motor skills; NHS favours open/free-flow over spouted cups.","src":["NHS","CDC"],"info":"NHS recommends moving to an open or free-flow cup from around 6 months and away from bottles by 12 months, for speech and dental health.<cite>NHS</cite>"},
+      {"id":"s2","t":"“My turn, your turn”","do":"Pass a toy back and forth. Hold your hand out, ask for it, thank him warmly when he gives it.","why":"Turn-taking and offering a toy are the roots of sharing and cooperation.","src":["CDC","ASQ-3"],"info":"Turn-taking games rehearse the give-and-take that underlies both sharing and conversation.<cite>CDC; ASQ-3</cite>"},
+      {"id":"s3","t":"Dressing helper","do":"Start his arm into a sleeve, then pause — let him push it through the rest of the way.","why":"Joining in with self-care builds body awareness and an early “I can do it” sense.","src":["ASQ-3"],"info":"Joining in with self-care builds body awareness and early autonomy — an ‘I can do it’ sense.<cite>ASQ-3</cite>"},
+      {"id":"s4","t":"Predictable goodbyes","do":"Say a cheerful “bye-bye, back soon” rather than slipping away — and announce your return: “I’m back!”","why":"Consistent goodbyes teach that you always come back, building <b>secure attachment</b>.","src":["CDC","ASQ-3"],"info":"Separation anxiety typically appears around 9 months and peaks ~10–18 months — a sign of healthy attachment, not ‘spoiling’. Brief, warm goodbyes and reliable returns help.<cite>AAP / HealthyChildren; Zero to Three</cite>"},
+      {"id":"s5","t":"Be his secure base","do":"Respond promptly and warmly to his cries and bids for comfort, then let him explore knowing you're there. Name feelings: ‘you're upset — I'm here.’","why":"Consistent, sensitive responses are what build <b>secure attachment</b> — which predicts better coping and relationships later.","src":["Bakermans-Kranenburg et al. 2003","Harvard: Serve & return"],"info":"A meta-analysis of 70 studies found that helping parents respond more sensitively measurably increased babies' attachment security — evidence that responsive care helps <b>cause</b> secure attachment, not just accompany it.<cite>Bakermans-Kranenburg, van IJzendoorn & Juffer, Psychological Bulletin, 2003</cite>"}
     ],
     tip:null,
-    look:{sub:"He's at the top of this window \u2014 here come first steps:",items:[
-      {t:"Stand & balance",do:"Hold a toy out so he lets go of the furniture to reach it; cheer the seconds he stands free.",why:"Standing unsupported is the direct precursor to first steps.",src:["CDC: 1 year","AAP"]},
-      {t:"Walk with your hands",do:"Walk him holding both hands, then one hand, then let him push a sturdy wagon.",why:"Reducing support lets him take more of his own weight and balance.",src:["CDC: 1 year"]},
-      {t:"Don't clock-watch",do:"First independent steps often come anywhere from 12\u201315 months \u2014 a totally normal range.",why:"Walking age varies hugely and isn't linked to later ability.",src:["NHS","AAP"]}
+    look:{"sub":"Growing social skills (18–24 months):",items:[
+      {"id":"st2-soc-0","t":"Comfort others","do":"When someone's sad, show concern and invite him to help: “Let's give teddy a cuddle.”","why":"Noticing and comforting others is early empathy.","src":["CDC: 2 years"],"info":"Noticing when others are hurt or upset is on the CDC 2-year checklist.<cite>CDC/AAP 2022</cite>"},
+      {"id":"st2-soc-1","t":"Play alongside, take short turns","do":"With another child, offer two of the same toy, then try very short turns with one.","why":"Side-by-side play comes before sharing and turn-taking.","src":["CDC: 2 years"],"info":"Playing alongside others and starting short turns develops between 18 and 24 months.<cite>CDC</cite>"},
+      {"id":"st2-soc-2","t":"More self-dressing","do":"Let him pull off his own socks and hat, and push his feet into wide shoes.","why":"Doing more for himself builds confidence and coordination.","src":["ASQ-3"],"info":"Taking off simple clothes is a common personal-social theme towards 2 years.<cite>ASQ-3</cite>"}
     ]}
   },
-  prob:{name:"Problem Solving",glyph:"\uD83E\uDDE9",sub:"Figuring out the world \u2014 cause, effect & hidden things.",
+  over:{
+    name:"Overall & Wellbeing",
+    glyph:"💛",
+    sub:"Ongoing checks, and when to ask for help.",
     skills:[
-      {id:"p-s1",t:"Bangs two things together",d:"Brings objects to the middle and clashes them."},
-      {id:"p-s2",t:"Holds a toy in each hand",d:"Manages two objects at once."},
-      {id:"p-s3",t:"Finds hidden toys",d:"Looks for a toy you hide \u2014 object permanence."},
-      {id:"p-s4",t:"Hunts for dropped objects",d:"Looks for the spoon that fell out of sight."}
+      {"id":"o-s1","t":"Uses both sides evenly","d":"Both hands and both legs working about the same."},
+      {"id":"o-s2","t":"Feet flat when stood","d":"Soles down on the floor most of the time."},
+      {"id":"o-s3","t":"Babbling and trying words","d":"Vocalising freely and trying out words."},
+      {"id":"o-s4","t":"Hearing & eyesight","d":"Responds to sounds and his name; eyes track and focus well."}
     ],
     acts:[
-      {id:"p1",t:"Hide-and-find",do:"While he watches, hide a toy under a cloth. Ask \u201cwhere's it gone?\u201d then reveal with a big \u201cthere it is!\u201d",why:"This is the dawn of <b>object permanence</b> \u2014 a huge cognitive leap around 9 months.",src:["CDC","ASQ-3"]},
-      {id:"p2",t:"Dump & fill",do:"Tip blocks out of a container, then put them back together. Stacking cups or any safe tub work.",why:"Emptying and filling teaches cause-and-effect and \u2018in vs out\u2019.",src:["CDC"]},
-      {id:"p3",t:"Bang & clap",do:"Give a block or cup in each hand and show banging them together, or clapping like pat-a-cake.",why:"Bringing two objects together at the midline builds two-handed coordination.",src:["ASQ-3","CDC"]},
-      {id:"p4",t:"The clear-bottle puzzle",do:"Seal a piece of cereal inside a clear bottle and let him work out how to get it.",why:"Pure trial-and-error: he sees the goal and works out the route.",src:["ASQ-3"]}
+      {"id":"o1","t":"Notice symmetry and hand use","do":"Watch that he reaches, walks and uses both hands about evenly. Put toys straight in front of him and notice which hand he picks, without encouraging one.","why":"Using both hands for most of the second year is normal; a strong one-sided preference well before 18 months is worth mentioning.","src":["CDC","AAP / HealthyChildren"],"info":"Hand preference usually settles in the preschool years. A strong preference before 18 months can occasionally reflect weakness on the other side, so it's worth raising with your health visitor rather than worrying about.<cite>AAP / HealthyChildren</cite>"},
+      {"id":"o2","t":"Hearing, sight and response to name","do":"Call his name from out of view, notice if he turns to sounds and tracks moving things, and that he looks at you when you talk.","why":"Hearing and vision underpin talking and play, so raise any concern straight away.","src":["CDC: 18 months","AAP / HealthyChildren"],"info":"The AAP recommends developmental screening at 9, 18 and 30 months even without concerns; mention any family history of childhood hearing loss early.<cite>AAP / HealthyChildren</cite>"},
+      {"id":"o4","t":"Sleep, screens and active play","do":"Aim for 11 to 14 hours of sleep in 24 (naps included), screens only for video calls, and around 3 hours of active play spread through the day.","why":"Sleep and movement feed every other area, and toddlers learn language from people, not screens.","src":["WHO 24-hour guidelines"],"info":"WHO recommends no sedentary screen time for 1-year-olds, at least 180 minutes of varied physical activity a day, and 11 to 14 hours of good-quality sleep including naps.<cite>WHO, 2019</cite>"},
+      {"id":"o3","notes":true,"t":"Notes for his reviews","do":"Keep a dated log of new words, gestures and first steps, with short videos, to take to the health visitor and to his 2 to 2½ year review.","why":"You know Arlo best; dated observations make reviews and any concerns far more useful.","src":["ASQ-3","CDC: Act Early"],"info":"In England the 2 to 2½ year review uses the ASQ-3 and the ASQ:SE-2 social-emotional questionnaire. If your invitation doesn't come, contact your health visiting team.<cite>NHS England Healthy Child Programme</cite>"}
     ],
-    tip:null,
-    look:{sub:"Sharp thinker \u2014 step it up toward 12 months:",items:[
-      {t:"In-and-out & sorting",do:"Lots of filling and emptying; introduce a simple shape-sorter or posting box.",why:"Putting things into containers is a 12-month cognitive milestone.",src:["CDC: 1 year"]},
-      {t:"Trickier hide-and-find",do:"Hide a toy under one of two cloths and let him choose; he'll start remembering where.",why:"Stretches object permanence and working memory.",src:["CDC"]}
-    ]}
-  },
-  soc:{name:"Personal-Social",glyph:"\uD83E\uDD17",sub:"Feeding himself, sharing toys, feeling securely attached.",
-    skills:[
-      {id:"s-s1",t:"Drinks from a held cup",d:"Sips water from a cup you hold."},
-      {id:"s-s2",t:"Feeds self finger foods",d:"Brings a cracker or chapati to his mouth."},
-      {id:"s-s3",t:"Offers & releases a toy",d:"Hands a toy to you when asked."},
-      {id:"s-s4",t:"Helps with dressing",d:"Pushes an arm through a started sleeve."},
-      {id:"s-s5",t:"Shy with strangers",d:"Notices and reacts when you leave \u2014 healthy attachment."}
-    ],
-    acts:[
-      {id:"s1",t:"Open-cup sips",do:"At meals, offer a little water in an open or free-flow cup while you steady it. Expect mess \u2014 that's the learning.",why:"Early cup drinking builds oral-motor skills; NHS favours open/free-flow over spouted cups.",src:["NHS","CDC"]},
-      {id:"s2",t:"\u201cMy turn, your turn\u201d",do:"Pass a toy back and forth. Hold your hand out, ask for it, thank him warmly when he gives it.",why:"Turn-taking and offering a toy are the roots of sharing and cooperation.",src:["CDC","ASQ-3"]},
-      {id:"s3",t:"Dressing helper",do:"Start his arm into a sleeve, then pause \u2014 let him push it through the rest of the way.",why:"Joining in with self-care builds body awareness and an early \u201cI can do it\u201d sense.",src:["ASQ-3"]},
-      {id:"s4",t:"Predictable goodbyes",do:"Say a cheerful \u201cbye-bye, back soon\u201d rather than slipping away \u2014 and announce your return: \u201cMummy's back!\u201d",why:"Consistent goodbyes teach that you always come back, building <b>secure attachment</b>.",src:["CDC","ASQ-3"]}
-    ],
-    tip:null,
-    look:{sub:"Lovely social skills \u2014 build toward 12 months:",items:[
-      {t:"Wave & clap routines",do:"Build bye-bye waves and clapping into daily goodbyes and songs.",why:"Waving and clapping on cue are 12-month social milestones.",src:["CDC: 1 year"]},
-      {t:"Spoon & cup tries",do:"Let him hold a spoon and an open cup himself \u2014 messy practice counts.",why:"Builds self-feeding independence and coordination.",src:["NHS","CDC"]}
-    ]}
-  },
-  over:{name:"Overall & Wellbeing",glyph:"\uD83D\uDC9B",sub:"The \u2018keep an eye on it\u2019 checks \u2014 and when to ask for help.",
-    skills:[
-      {id:"o-s1",t:"Uses both sides evenly",d:"Both hands and both legs working about the same."},
-      {id:"o-s2",t:"Feet flat when stood",d:"Soles down on the surface most of the time."},
-      {id:"o-s3",t:"Makes sounds like peers",d:"Babbling and vocalising freely."},
-      {id:"o-s4",t:"Hearing & eyesight",d:"Responds to sounds; eyes track and focus well."}
-    ],
-    acts:[
-      {id:"o1",t:"Notice symmetry",do:"During play, watch that Arlo reaches, kicks and bears weight fairly evenly on both sides over time.",why:"A strong early one-sided preference is worth mentioning at his review \u2014 not a worry, just a flag.",src:["ASQ-3","CDC"]},
-      {id:"o2",t:"Sound & sight check-ins",do:"Call his name from out of view to see if he turns; notice if he tracks toys and makes eye contact.",why:"Hearing and vision underpin talking and play \u2014 mention any family history of childhood hearing loss.",src:["ASQ-3","CDC"]},
-      {id:"o3",notes:true,t:"Bring this to his review",do:"Jot down anything you've noticed \u2014 favourites, wins, or things that puzzle you \u2014 to take to the 9\u201312 month health visitor review.",why:"You know Arlo best; sharing observations is exactly how the review is designed to work.",src:["CDC: Act Early","ASQ-3"]}
-    ],
-    tip:{h:"If something feels off",b:"Trust your instinct. If Arlo loses a skill he had, isn't making sounds, or anything worries you, contact your <b>health visitor or GP</b> \u2014 early support is always easier than waiting."},
-    look:{sub:"All steady \u2014 look toward the 12-month review:",items:[
-      {t:"Look toward the 1-year review",do:"Keep noticing how he plays, moves and communicates, and complete the CDC 1-year checklist as he nears 12 months.",why:"Steady monitoring catches anything early and gives you talking points for his review.",src:["CDC: 1 year","ASQ-3"]}
+    tip:{"h":"Act straight away if","b":"Arlo loses a skill he had, doesn't respond to sounds or his name, or you have a gut feeling something isn't right. Contact your <b>health visitor or GP</b>. For suspected poisoning call NHS 111, or 999 in an emergency."},
+    look:{"title":"Towards the 2–2½ year review","sub":"When to check in, and what's coming up:",items:[
+      {"t":"Check-in points by 15 months","do":"Talk to your health visitor if he isn't taking a few steps, pointing to ask for things, saying 1 to 2 words besides mama/dada, or looking at familiar things when you name them.","why":"Milestones are set at the level 75% of children reach, so missing one is a reason to ask, not a diagnosis.","src":["CDC: 15 months","Zubler et al. 2022"],"info":"The 2022 revision deliberately set milestones at the 75th percentile so that a missed one prompts a conversation rather than “wait and see”.<cite>Zubler et al., Pediatrics, 2022</cite>"},
+      {"t":"Check-in points by 18 months","do":"Speak up if he isn't walking on his own, has no words, doesn't point to show you things, doesn't seem to understand simple words, or doesn't follow one-step instructions.","why":"Early support is easier than waiting, and you don't need to wait for a scheduled review.","src":["CDC: 18 months","Health for Under 5s","Speech and Language UK"],"info":"NHS health visiting guidance gives 18 months as the point to raise not walking independently, and Speech and Language UK gives no first words by 18 months as a reason to seek advice.<cite>Health for Under 5s; Speech and Language UK</cite>"},
+      {"t":"About autism screening","do":"You may come across the M-CHAT-R/F, a free parent questionnaire for 16 to 30 months. If you use it, take the result to your health visitor or GP rather than reading it alone.","why":"A positive screen means “look more closely”, not a diagnosis, and the UK doesn't screen every child at 18 months.","src":["Robins et al. 2014"],"info":"In a study of 16,071 toddlers, about 47.5% of children who still screened positive after the follow-up interview were later diagnosed with autism, and 94.6% had some developmental delay or concern.<cite>Robins et al., Pediatrics, 2014</cite>"},
+      {"t":"The 2 to 2½ year review","do":"Expect an invitation from your health visiting team between about September 2027 and March 2028. Bring your notes and videos.","why":"It uses the ASQ-3 and ASQ:SE-2, so your everyday observations are exactly what's needed.","src":["ASQ-3"],"info":"National data show not every eligible child gets the review, so chase it if the invitation doesn't arrive.<cite>UCL Children's Policy Research Unit</cite>"}
     ]}
   }
 };
 
 const BASE_ORDER = ["comm","fine","gross","prob","soc","over"];
 
-/* ===================================================================
-   Firebase + password login for project "arlo-5d8a6".
-   Cloud Firestore for data, Firebase Auth (email/password) for the family
-   password. Session is remembered per device. See README for setup.
-   =================================================================== */
-const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyBVYcjxo5aKAKlwsDjui7FdQtNmhry0Mro",
-  authDomain: "arlo-5d8a6.firebaseapp.com",
-  databaseURL: "https://arlo-5d8a6-default-rtdb.firebaseio.com",
-  projectId: "arlo-5d8a6",
-  storageBucket: "arlo-5d8a6.firebasestorage.app",
-  messagingSenderId: "588304685385",
-  appId: "1:588304685385:web:cd18b18ba8c737a48ba298"
-};
-const SHARE_ID = "arlo";
-const AUTH_EMAIL = "family@arlo-5d8a6.web.app";   // fixed; you just enter the password
-
+const FIREBASE_CONFIG={apiKey:"AIzaSyBVYcjxo5aKAKlwsDjui7FdQtNmhry0Mro",authDomain:"arlo-5d8a6.firebaseapp.com",databaseURL:"https://arlo-5d8a6-default-rtdb.firebaseio.com",projectId:"arlo-5d8a6",storageBucket:"arlo-5d8a6.firebasestorage.app",messagingSenderId:"588304685385",appId:"1:588304685385:web:cd18b18ba8c737a48ba298"};
+const SHARE_ID="arlo",AUTH_EMAIL="family@arlo-5d8a6.web.app";
 /* ---------- State ---------- */
-let state = { skills:{}, acts:{}, focus:["comm","fine"], notes:{}, stretchOn:{}, tried:{date:"",ids:{}} };
-const KEY = "arlo-data-v2";
-let saveTimer = null;
-let storeMode = "local";
-let fbWrite = null;
-let curKey = null;
-let lastWrite = null;
-let fsMod=null, authMod=null, authObj=null, dbRef=null;
-
-function clean(s){ return { skills:(s&&s.skills)||{}, acts:(s&&s.acts)||{}, focus:(s&&s.focus)||["comm","fine"], notes:(s&&s.notes)||{}, stretchOn:(s&&s.stretchOn)||{}, tried:(s&&s.tried)||{date:"",ids:{}} }; }
-
-function wireLogin(){
-  const pwEl=document.getElementById('loginPw'), msg=document.getElementById('loginMsg');
-  if(!pwEl) return;
-  const signIn=async()=>{ const pw=(pwEl.value||'').trim(); if(pw.length<4){ msg.textContent='Enter your password.'; return; } msg.textContent='Checking…';
-    try{ await authMod.signInWithEmailAndPassword(authObj, AUTH_EMAIL, pw); }
-    catch(e){ msg.textContent = (e&&e.code==='auth/too-many-requests')?'Too many tries — wait a moment.':'Incorrect password.'; } };
-  document.getElementById('loginBtn').addEventListener('click',signIn);
-  pwEl.addEventListener('keydown',e=>{ if(e.key==='Enter') signIn(); });
-  document.getElementById('loginCreate').addEventListener('click',async()=>{ const pw=(pwEl.value||'').trim(); if(pw.length<6){ msg.textContent='Pick a password of 6+ characters.'; return; } msg.textContent='Setting up…';
-    try{ await authMod.createUserWithEmailAndPassword(authObj, AUTH_EMAIL, pw); }
-    catch(e){ msg.textContent=(e&&e.code==='auth/email-already-in-use')?'Already set — just tap Unlock.':'Could not set up — enable Email/Password in Firebase first.'; } });
-  const lk=document.getElementById('lockBtn'); if(lk) lk.addEventListener('click',()=>{ try{ authMod.signOut(authObj); }catch(e){} });
-}
-
-function startSync(){
-  storeMode='firebase'; updateModeBadge();
-  fsMod.getDoc(dbRef).then(snap=>{ if(snap.exists()&&snap.data().payload){ try{ state=clean(JSON.parse(snap.data().payload)); }catch(e){} } renderAll(); if(curKey&&overlay.classList.contains('open')) renderSheet(curKey,0); }).catch(()=>{});
-  fsMod.onSnapshot(dbRef, snap=>{
-    if(typeof dragging!=='undefined' && dragging) return;
-    const ae=document.activeElement; if(ae && ae.tagName==='TEXTAREA') return;
-    if(!(snap.exists() && snap.data().payload)) return;
-    const p=snap.data().payload; if(p===lastWrite) return; if(p===JSON.stringify(state)) return;
-    try{ state=clean(JSON.parse(p)); renderAll(); if(curKey&&overlay.classList.contains('open')) renderSheet(curKey,0); }catch(e){}
-  });
-}
-
-async function initStore(){
-  if(FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey){
-    try{
-      const appMod = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
-      fsMod        = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
-      authMod      = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js");
-      const fbapp = appMod.initializeApp(FIREBASE_CONFIG);
-      const db  = fsMod.getFirestore(fbapp);
-      authObj   = authMod.getAuth(fbapp);
-      try{ await authMod.setPersistence(authObj, authMod.browserLocalPersistence); }catch(e){}
-      dbRef = fsMod.doc(db, "trackers", SHARE_ID);
-      fbWrite = (data)=>{ lastWrite = JSON.stringify(data); return fsMod.setDoc(dbRef, { payload:lastWrite, updated:Date.now() }); };
-      wireLogin();
-      authMod.onAuthStateChanged(authObj, user=>{
-        const lk=document.getElementById('lockBtn');
-        if(user){ hideLogin(); if(lk) lk.style.display='block'; startSync(); }
-        else { storeMode='local'; updateModeBadge(); if(lk) lk.style.display='none'; showLogin(); }
-      });
-      return null;
-    }catch(e){ console.warn("Firebase unavailable — falling back to local.", e); }
-  }
-  if(window.storage){
-    storeMode = "claude";
-    try{ const r = await window.storage.get(KEY, true); if(r && r.value) return clean(JSON.parse(r.value)); }catch(e){}
-    return null;
-  }
-  storeMode = "local";
-  try{ const v = localStorage.getItem(KEY); if(v) return clean(JSON.parse(v)); }catch(e){}
-  return null;
-}
-
-async function load(){
-  const loaded = await initStore();
-  if(loaded) state = loaded;
-  updateModeBadge();
-  renderAll();
-}
-async function save(){
-  const payload = JSON.stringify(state);
-  if(storeMode==="firebase" && fbWrite){ try{ await fbWrite(state); }catch(e){ console.warn("save failed",e); } return; }
-  if(storeMode==="claude" && window.storage){ try{ await window.storage.set(KEY, payload, true); }catch(e){} return; }
-  try{ localStorage.setItem(KEY, payload); }catch(e){}
-}
-function updateModeBadge(){
-  const el=document.getElementById('modeBadge'); if(!el) return;
-  if(storeMode==="firebase"){ el.innerHTML='🟢 <b>Live sync is ON</b> — you and your partner share this tracker.'; el.style.color='var(--fine-deep)'; }
-  else{ el.innerHTML='⚪ Not synced yet. Sign in, and make sure Firestore + Email/Password are enabled (see README).'; el.style.color='var(--ink-soft)'; }
-}
-
+let state={skills:{},acts:{},focus:["comm","fine"],notes:{},stretchOn:{},tried:{date:"",ids:{}}};
+const KEY="arlo-data-v2";
+let saveTimer=null,storeMode="local",fbWrite=null,curKey=null,lastWrite=null,fsMod=null,authMod=null,authObj=null,dbRef=null;
+function clean(s){return{skills:(s&&s.skills)||{},acts:(s&&s.acts)||{},focus:(s&&s.focus)||["comm","fine"],notes:(s&&s.notes)||{},stretchOn:(s&&s.stretchOn)||{},tried:(s&&s.tried)||{date:"",ids:{}}};}
+function wireLogin(){const pwEl=document.getElementById('loginPw'),msg=document.getElementById('loginMsg');if(!pwEl)return;const signIn=async()=>{const pw=(pwEl.value||'').trim();if(pw.length<4){msg.textContent='Enter your password.';return;}msg.textContent='Checking…';try{await authMod.signInWithEmailAndPassword(authObj,AUTH_EMAIL,pw);}catch(e){msg.textContent=(e&&e.code==='auth/too-many-requests')?'Too many tries, wait a moment.':'Incorrect password.';}};document.getElementById('loginBtn').addEventListener('click',signIn);pwEl.addEventListener('keydown',e=>{if(e.key==='Enter')signIn();});document.getElementById('loginCreate').addEventListener('click',async()=>{const pw=(pwEl.value||'').trim();if(pw.length<6){msg.textContent='Pick a password of 6+ characters.';return;}msg.textContent='Setting up…';try{await authMod.createUserWithEmailAndPassword(authObj,AUTH_EMAIL,pw);}catch(e){msg.textContent=(e&&e.code==='auth/email-already-in-use')?'Already set, just tap Unlock.':'Could not set up. Enable Email/Password in Firebase first.';}});const lk=document.getElementById('lockBtn');if(lk)lk.addEventListener('click',()=>{try{authMod.signOut(authObj);}catch(e){}});}
+function startSync(){storeMode='firebase';updateModeBadge();fsMod.getDoc(dbRef).then(snap=>{if(snap.exists()&&snap.data().payload){try{state=clean(JSON.parse(snap.data().payload));}catch(e){}}renderAll();if(curKey&&overlay.classList.contains('open'))renderSheet(curKey,0);}).catch(()=>{});fsMod.onSnapshot(dbRef,snap=>{if(typeof dragging!=='undefined'&&dragging)return;const ae=document.activeElement;if(ae&&ae.tagName==='TEXTAREA')return;if(!(snap.exists()&&snap.data().payload))return;const p=snap.data().payload;if(p===lastWrite)return;if(p===JSON.stringify(state))return;try{state=clean(JSON.parse(p));renderAll();if(curKey&&overlay.classList.contains('open'))renderSheet(curKey,0);}catch(e){}});}
+async function initStore(){if(FIREBASE_CONFIG&&FIREBASE_CONFIG.apiKey){try{const appMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");fsMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");authMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js");const fbapp=appMod.initializeApp(FIREBASE_CONFIG);const db=fsMod.getFirestore(fbapp);authObj=authMod.getAuth(fbapp);try{await authMod.setPersistence(authObj,authMod.browserLocalPersistence);}catch(e){}dbRef=fsMod.doc(db,"trackers",SHARE_ID);fbWrite=(data)=>{lastWrite=JSON.stringify(data);return fsMod.setDoc(dbRef,{payload:lastWrite,updated:Date.now()});};wireLogin();authMod.onAuthStateChanged(authObj,user=>{const lk=document.getElementById('lockBtn');if(user){hideLogin();if(lk)lk.style.display='block';startSync();}else{storeMode='local';updateModeBadge();if(lk)lk.style.display='none';showLogin();}});return null;}catch(e){console.warn("Firebase unavailable",e);}}if(window.storage){storeMode="claude";try{const r=await window.storage.get(KEY,true);if(r&&r.value)return clean(JSON.parse(r.value));}catch(e){}return null;}storeMode="local";try{const v=localStorage.getItem(KEY);if(v)return clean(JSON.parse(v));}catch(e){}return null;}
+async function load(){const loaded=await initStore();if(loaded)state=loaded;updateModeBadge();renderAll();}
+async function save(){const payload=JSON.stringify(state);if(storeMode==="firebase"&&fbWrite){try{await fbWrite(state);}catch(e){console.warn("save failed",e);}return;}if(storeMode==="claude"&&window.storage){try{await window.storage.set(KEY,payload,true);}catch(e){}return;}try{localStorage.setItem(KEY,payload);}catch(e){}}
+function updateModeBadge(){const el=document.getElementById('modeBadge');if(!el)return;if(storeMode==="firebase"){el.innerHTML='🟢 <b>Live sync is ON</b>: you and your partner share this tracker.';el.style.color='var(--fine-deep)';}else{el.innerHTML='⚪ Not synced yet. Sign in and enable Firestore + Email/Password (see README).';el.style.color='var(--ink-soft)';}}
 /* ---------- Helpers ---------- */
 function orderedKeys(){
   const f = state.focus.filter(k=>BASE_ORDER.includes(k));
@@ -717,8 +869,10 @@ function renderSummary(){
   const o=overall(); const keys=orderedKeys();
   const DS=132;
   function donutSVG(segs,centerHTML){
-    const r=DS*0.39, cx=DS/2, cy=DS/2, Circ=2*Math.PI*r, sw=DS*0.13; let acc=0, arcs='';
-    segs.forEach(s=>{ if(s.frac<=0) return; const len=s.frac*Circ; arcs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${len} ${Circ-len}" stroke-dashoffset="${-acc*Circ}"/>`; acc+=s.frac; });
+    const r=DS*0.39, cx=DS/2, cy=DS/2, Circ=2*Math.PI*r, sw=DS*0.13;
+    const tot=segs.reduce((s,x)=>s+x.frac,0); const norm=tot>0?Math.min(0.9998,tot)/tot:1;
+    let acc=0, arcs='';
+    segs.forEach(s=>{ const f=s.frac*norm; if(f<=0) return; const len=f*Circ; arcs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${len} ${Circ-len}" stroke-dashoffset="${-acc*Circ}"/>`; acc+=f; });
     return `<svg width="${DS}" height="${DS}" viewBox="0 0 ${DS} ${DS}"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#f0ebe2" stroke-width="${sw}"/>${arcs}</svg><div class="label">${centerHTML}</div>`;
   }
   const tick=`<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#2bb98a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg>`;
@@ -731,7 +885,7 @@ function renderSummary(){
   if(showStretchDonut){
     let sseg=[], sach=0;
     keys.forEach(k=>{ const aa=domStretchAch(k); if(aa>0){ sseg.push({frac:aa/stotal,color:C[k]}); sach+=aa; } });
-    keys.forEach(k=>{ const rem=domStretchTotal(k)-domStretchAch(k); if(rem>0) sseg.push({frac:rem/stotal,color:CM[k]}); });
+    keys.forEach(k=>{ const avail=domMasteryPct(k)>=75; const rem=domStretchTotal(k)-domStretchAch(k); if(rem>0) sseg.push({frac:rem/stotal,color:avail?CMP[k]:'#c8c0b0'}); });
     const spct=stotal?Math.round(sach/stotal*100):0;
     html+=`<div class="donut">${donutSVG(sseg,ctr(spct,'stretch'))}</div>`;
   }
@@ -763,13 +917,15 @@ function renderCards(){
       <div class="glyph">${d.glyph}</div>
       <h2>${d.name}</h2>
       <p>${d.sub}</p>
-      <span class="lvl" style="color:${TAGS[eff].c};background:${TAGS[eff].bg};border-color:${TAGS[eff].c}40">${TAGS[eff].t}</span>`;
+      <div class="cbottom"><span class="lvl" style="color:${TAGS[eff].c};background:${TAGS[eff].bg};border-color:${TAGS[eff].c}40">${TAGS[eff].t}</span>${stretchBubble(k)}</div>`;
     btn.addEventListener('click',()=>openSheet(k));
     grid.appendChild(btn);
   });
 }
 
-function renderAll(){ renderFocus(); renderSummary(); renderCards(); }
+function arloAge(){ return ((Date.now()-new Date('2025-09-24'))/(1000*60*60*24*30.4375)).toFixed(1); }
+function renderAge(){ const el=document.getElementById('ageChip'); if(el) el.innerHTML=`<span class="dot"></span> Arlo is <b>${arloAge()} months</b>`; }
+function renderAll(){ renderAge(); renderSummary(); renderCards(); }
 function queueSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(save,250); }
 
 /* ---------- Sheet ---------- */
@@ -803,32 +959,44 @@ function renderSheet(k,dir){
   document.getElementById('dots').innerHTML=keys.map((kk,i)=>`<i class="${kk===k?'cur':''}" style="${kk===k?('background:var(--'+k+')'):''}"></i>`).join('');
 
   const s=domStat(k);
-  const skills=`<p class="section-label">Skills emerging now <small>· tick what Arlo does regularly (${s.done}/${s.total})</small></p>
-    <ul class="skills">${d.skills.map(sk=>{const on=state.skills[sk.id]?'done':'';return `
+  const skItem=sk=>{const on=state.skills[sk.id]?'done':'';return `
       <li class="skill ${on}">
         <button class="skbox ${on}" data-sk="${sk.id}" aria-label="Mark mastered"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg></button>
         <div class="tx"><b>${sk.t}</b><small>${sk.d}</small></div>
-      </li>`;}).join('')}</ul>`;
+      </li>`;};
+  const ages=[...new Set(d.skills.map(x=>x.age).filter(Boolean))];
+  let skills=`<p class="section-label">${ages.length?'Milestones to look for':'Ongoing checks'} <small>· tick what Arlo does regularly (${s.done}/${s.total})</small></p>`;
+  if(ages.length){ ages.forEach(a=>{ skills+=`<p class="agehdr">By ${a} months</p><ul class="skills">${d.skills.filter(x=>x.age===a).map(skItem).join('')}</ul>`; }); }
+  else { skills+=`<ul class="skills">${d.skills.map(skItem).join('')}</ul>`; }
+  if(d.earlySkills&&d.earlySkills.length){
+    const ed=d.earlySkills.filter(x=>state.skills[x.id]).length;
+    skills+=`<details class="earlier" data-key="es"><summary>Earlier milestones · 9–12 months <span class="ecount">${ed}/${d.earlySkills.length}</span></summary><ul class="skills">${d.earlySkills.map(skItem).join('')}</ul></details>`;
+  }
 
   let look='';
-  if(isStretch(k) && d.look){
+  if(k==='over' && d.look){
+    look=`<div class="lookahead lookahead-info">
+      <div class="la-h"><span class="badge">Coming up</span><h3>${d.look.title||'Coming up'}</h3></div>
+      <p class="la-sub">${d.look.sub}</p>
+      ${d.look.items.map(it=>`<div class="laitem"><h4>${it.t}</h4><p>${it.do}</p><div class="why"><b>Why:</b> ${it.why}</div><div class="src">${srcHTML(it.src)}</div>${infoHTML(it)}</div>`).join('')}
+    </div>`;
+  } else if(isStretch(k) && d.look){
     look=`<div class="lookahead">
       <div class="la-h"><span class="badge">Look ahead</span><h3>Stretch targets</h3></div>
       <p class="la-sub">${d.look.sub}</p>
-      ${d.look.items.map((it,i)=>{const sid='st-'+k+'-'+i;return `<div class="laitem"><h4>${it.t}</h4><p>${it.do}</p><div class="why"><b>Why:</b> ${it.why}</div><div class="src">${srcHTML(it.src)}</div>${stretchControls(sid)}</div>`;}).join('')}
+      ${d.look.items.map((it,i)=>{const sid=stId(k,i);return `<div class="laitem"><h4>${it.t}</h4><p>${it.do}</p><div class="why"><b>Why:</b> ${it.why}</div><div class="src">${srcHTML(it.src)}</div>${infoHTML(it)}${stretchControls(sid)}</div>`;}).join('')}
     </div>`;
   }
 
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
-  const acts=`<p class="section-label">Things to try together <small>· slide to show how Arlo's getting on</small></p>
-    ${d.acts.map(a=>{
+  const actHTML=a=>{
       if(a.notes){ const nv=(state.notes&&state.notes[a.id])||''; return `
       <div class="act">
         <h4>${a.t}</h4>
         <p class="doit">${a.do}</p>
         <textarea class="notesarea" data-note="${a.id}" placeholder="Type your notes for the review…">${esc(nv)}</textarea>
         <div class="why"><b>Why it works:</b> ${a.why}</div>
-        <div class="src">${srcHTML(a.src)}</div>
+        <div class="src">${srcHTML(a.src)}</div>${infoHTML(a)}
       </div>`; }
       const v=actVal(a.id);const si=stageIdx(v);return `
       <div class="act">
@@ -840,11 +1008,18 @@ function renderSheet(k,dir){
           <div class="slabel" data-lab="${a.id}" style="color:${STAGES[si].text}">${STAGES[si].t}</div>
         </div>
         <div class="why"><b>Why it works:</b> ${a.why}</div>
-        <div class="src">${srcHTML(a.src)}</div>
-      </div>`;}).join('')}
-    ${d.tip?`<div class="tipbox"><b>${d.tip.h}:</b> ${d.tip.b}</div>`:''}`;
+        <div class="src">${srcHTML(a.src)}</div>${infoHTML(a)}
+      </div>`;};
+  const early=(d.earlyActs&&d.earlyActs.length)?`<details class="earlier" data-key="ea"><summary>Earlier activities · 9–12 months <span class="ecount">${d.earlyActs.length}</span></summary><p class="earlynote">Kept with your progress for reference. These no longer count towards levels or the Today list.</p>${d.earlyActs.map(actHTML).join('')}</details>`:'';
+  const acts=`<p class="section-label">Things to try together <small>· slide to show how Arlo's getting on</small></p>
+    ${d.acts.map(actHTML).join('')}
+    ${d.tip?`<div class="tipbox"><b>${d.tip.h}:</b> ${d.tip.b}</div>`:''}
+    ${early}`;
 
+  const keepOpen=(body.dataset.k===k)?[...body.querySelectorAll('details.earlier[open]')].map(x=>x.dataset.key):[];
   body.innerHTML = skills + look + acts;
+  keepOpen.forEach(key=>{ const x=body.querySelector('details.earlier[data-key="'+key+'"]'); if(x) x.open=true; });
+  body.dataset.k=k;
 
   // wire toggles
   body.querySelectorAll('.skbox').forEach(b=>b.addEventListener('click',()=>{
@@ -890,12 +1065,20 @@ overlay.addEventListener('click',e=>{ if(e.target===overlay) closeSheet(); });
 document.addEventListener('keydown',e=>{ if(!overlay.classList.contains('open'))return; const ae=document.activeElement; const inField=ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'); if(e.key==='Escape')closeSheet(); if(inField)return; if(e.key==='ArrowRight')navigate(1); if(e.key==='ArrowLeft')navigate(-1); });
 let dragging=false;
 ['pointerup','touchend','touchcancel'].forEach(ev=>document.addEventListener(ev,()=>{ if(dragging){ dragging=false; queueSave(); } }));
+document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('.infobtn'); if(!b)return; e.stopPropagation(); b.classList.toggle('open'); const box=b.nextElementSibling; if(box&&box.classList.contains('infobox')) box.classList.toggle('open'); });
 
 /* ---------- What to do today ---------- */
 const todayOverlay=document.getElementById('todayOverlay');
-function openToday(){ buildToday(); todayOverlay.classList.add('open'); todayOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; todayOverlay.querySelector('.sheet').scrollTop=0; }
+let todayShowAll=false;
+function openToday(){ todayShowAll=false; buildToday(); todayOverlay.classList.add('open'); todayOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; todayOverlay.querySelector('.sheet').scrollTop=0; }
 function closeToday(){ todayOverlay.classList.remove('open'); todayOverlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
 document.getElementById('closeToday').addEventListener('click',closeToday);
+{ // swipe-down to close today panel
+  const _sh=todayOverlay.querySelector('.sheet');
+  let _ty=0,_tx=0,_sc=0;
+  _sh.addEventListener('touchstart',e=>{ _ty=e.touches[0].clientY; _tx=e.touches[0].clientX; _sc=_sh.scrollTop; },{passive:true});
+  _sh.addEventListener('touchend',e=>{ const dy=e.changedTouches[0].clientY-_ty, dx=Math.abs(e.changedTouches[0].clientX-_tx); if(dy>80&&dx<70&&_sc===0) closeToday(); });
+}
 todayOverlay.addEventListener('click',e=>{ if(e.target===todayOverlay) closeToday(); });
 document.getElementById('todayBtn').addEventListener('click',openToday);
 document.getElementById('stretchDonutTog').addEventListener('click',()=>{ showStretchDonut=!showStretchDonut; renderSummary(); });
@@ -903,6 +1086,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape' && todayOverlay.cla
 function showLogin(){ const o=document.getElementById('loginOverlay'); if(o) o.classList.add('open'); }
 function hideLogin(){ const o=document.getElementById('loginOverlay'); if(o) o.classList.remove('open'); }
 
+const CAL_SVG=(tick)=>`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2.5"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/>${tick?'<polyline points="7,14 10.5,17.5 17,11"/>':''}</svg>`;
 function actItemHTML(o, tried){
   const v=actVal(o.a.id); const col=blend(v/3); const si=stageIdx(v);
   return `<div class="titem" data-key="${o.a.id}">
@@ -912,7 +1096,7 @@ function actItemHTML(o, tried){
           <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${DATA[o.k].name} · ${STAGES[si].t}</span></span>
           <span class="tchev">▾</span>
         </button>
-        <button class="caltog ${tried?'on':''}" data-tid="${o.a.id}" aria-pressed="${tried}" title="${tried?'Tried with Arlo today':'Mark as tried today'}">📅</button>
+        <button class="caltog ${tried?'on':''}" data-tid="${o.a.id}" aria-pressed="${tried}" title="${tried?'Tried with Arlo today':'Mark as tried today'}">${CAL_SVG(tried)}</button>
       </div>
       <div class="tbody">
         <p class="doit">${o.a.do}</p>
@@ -922,7 +1106,7 @@ function actItemHTML(o, tried){
           <div class="slabel" data-lab="${o.a.id}" style="color:${STAGES[si].text}">${STAGES[si].t}</div>
         </div>
         <div class="why"><b>Why it works:</b> ${o.a.why}</div>
-        <div class="src">${srcHTML(o.a.src)}</div>
+        <div class="src">${srcHTML(o.a.src)}</div>${infoHTML(o.a)}
       </div>
     </div>`;
 }
@@ -935,15 +1119,18 @@ function buildToday(){
 
   const tm=triedMap();
   const allActs={}; BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ allActs[a.id]={k,a}; }));
-  let mainItems=[]; BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ const v=actVal(a.id); if(v<2.5 && !tm[a.id]) mainItems.push({k,a,v}); }));
-  mainItems.sort((x,y)=>x.v-y.v);
+  const ord=orderedKeys();
+  let mainItems=[]; BASE_ORDER.forEach(k=>scorableActs(k).forEach((a,pos)=>{ const v=actVal(a.id); if(v<2.5 && !tm[a.id]) mainItems.push({k,a,v,pos}); }));
+  mainItems.sort((x,y)=>(x.v-y.v)||(x.pos-y.pos)||(ord.indexOf(x.k)-ord.indexOf(y.k)));
   const triedItems=Object.keys(tm).filter(id=>tm[id]&&allActs[id]).map(id=>({k:allActs[id].k,a:allActs[id].a}));
 
-  let stretch=[]; BASE_ORDER.forEach(k=>{ if(domMasteryPct(k)>=75 && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>stretch.push({k,it,id:'st-'+k+'-'+idx})); } });
+  let stretch=[]; BASE_ORDER.forEach(k=>{ if(k!=='over' && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>{ const id=stId(k,idx); if(state.stretchOn && state.stretchOn[id]) stretch.push({k,it,id}); }); } });
 
   let html='';
   if(!mainItems.length){ html+=`<div class="alldone">🎉 Nothing left on today's list right now. Slide things back as Arlo grows, or open the boxes below.</div>`; }
-  mainItems.forEach(o=> html+=actItemHTML(o,false));
+  const TODAY_LIMIT=8; const shown=todayShowAll?mainItems:mainItems.slice(0,TODAY_LIMIT);
+  shown.forEach(o=> html+=actItemHTML(o,false));
+  if(mainItems.length>TODAY_LIMIT){ html+=`<button class="todaymore" id="todayMore" type="button">${todayShowAll?'Show fewer':'Show '+(mainItems.length-TODAY_LIMIT)+' more activities'}</button>`; }
 
   if(stretch.length){
     html+=`<button class="stretchtoggle" id="stretchToggle" type="button">Stretch targets <span class="sopt">optional next steps</span><span class="tchev">▾</span></button><div class="stretchwrap" id="stretchWrap">`;
@@ -957,7 +1144,7 @@ function buildToday(){
         <div class="tbody">
           <p class="doit">${o.it.do}</p>
           <div class="why"><b>Why:</b> ${o.it.why}</div>
-          <div class="src">${srcHTML(o.it.src)}</div>
+          <div class="src">${srcHTML(o.it.src)}</div>${infoHTML(o.it)}
           ${stretchControls(o.id)}
         </div>
       </div>`;
@@ -966,7 +1153,7 @@ function buildToday(){
   }
 
   if(triedItems.length){
-    html+=`<button class="stretchtoggle triedtoggle" id="triedToggle" type="button"><span class="ttico">📅</span> Activities Arlo's tried today <span class="sopt">${triedItems.length}</span><span class="tchev">▾</span></button><div class="stretchwrap" id="triedWrap">`;
+    html+=`<button class="stretchtoggle triedtoggle" id="triedToggle" type="button"><span class="ttico">${CAL_SVG(true)}</span> Activities Arlo's tried today <span class="sopt">${triedItems.length}</span><span class="tchev">▾</span></button><div class="stretchwrap" id="triedWrap">`;
     triedItems.forEach(o=> html+=actItemHTML(o,true));
     html+=`</div>`;
   }
@@ -975,6 +1162,8 @@ function buildToday(){
 
   const stog=document.getElementById('stretchToggle');
   if(stog) stog.addEventListener('click',()=>{ stog.classList.toggle('open'); document.getElementById('stretchWrap').classList.toggle('open'); });
+  const tmore=document.getElementById('todayMore');
+  if(tmore) tmore.addEventListener('click',()=>{ todayShowAll=!todayShowAll; buildToday(); });
   const ttog=document.getElementById('triedToggle');
   if(ttog) ttog.addEventListener('click',()=>{ ttog.classList.toggle('open'); document.getElementById('triedWrap').classList.toggle('open'); });
   wireStretch(el);
@@ -983,7 +1172,9 @@ function buildToday(){
     e.stopPropagation();
     const id=b.dataset.tid; const m=triedMap();
     if(m[id]) delete m[id]; else m[id]=true;
-    queueSave(); buildToday();
+    queueSave();
+    if(m[id]){ b.classList.add('on'); setTimeout(()=>buildToday(),450); }
+    else buildToday();
   }));
   el.querySelectorAll('.rng').forEach(inp=>{
     const grab=e=>{ e.stopPropagation(); dragging=true; };
@@ -1006,13 +1197,14 @@ function buildToday(){
   if(sheetEl) sheetEl.scrollTop=scroll;
 }
 
-// swipe
-let sx=0,sy=0,swiping=false;
-sheet.addEventListener('touchstart',e=>{ if(e.target.closest('.rng')){ swiping=false; return; } const t=e.touches[0]; sx=t.clientX; sy=t.clientY; swiping=true; },{passive:true});
+// swipe (horizontal = navigate, downward from top = close)
+let sx=0,sy=0,swiping=false,shScTop=0;
+sheet.addEventListener('touchstart',e=>{ if(e.target.closest('.rng')){ swiping=false; return; } const t=e.touches[0]; sx=t.clientX; sy=t.clientY; shScTop=sheet.scrollTop; swiping=true; },{passive:true});
 sheet.addEventListener('touchend',e=>{
   if(!swiping)return; swiping=false;
   const t=e.changedTouches[0]; const dx=t.clientX-sx, dy=t.clientY-sy;
   if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)*1.4){ navigate(dx<0?1:-1); }
+  else if(dy>80 && dy>Math.abs(dx)*1.5 && shScTop===0){ closeSheet(); }
 },{passive:true});
 
 /* ---------- Share / sync ---------- */
@@ -1041,7 +1233,7 @@ function toast(m){ const el=document.getElementById('toast'); el.textContent=m; 
 load();
 </script>
 <script>
-if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 </script>
 </body>
 </html>
