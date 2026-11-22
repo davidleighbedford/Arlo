@@ -458,6 +458,17 @@
     #planPrint .pp-tools{display:none !important;}
   }
 
+  /* ---------- Larger Today and Potty panels ---------- */
+  .overlay.today .sheet{height:calc(100vh - 14px);height:calc(100dvh - 14px);max-height:none;}
+  .sheethead.slim{padding:8px 18px 10px;}
+  .sheethead.slim .grip{margin:0 auto 6px;}
+  .sheethead.slim h2{font-size:1.32rem;line-height:1.2;padding-right:44px;}
+  .sheethead.slim .close{top:9px;right:14px;width:34px;height:34px;}
+  .sheethead.slim .ptabs{margin-top:8px;}
+  .sheethead.slim .ptabs button{padding:6px 14px;font-size:.82rem;}
+  .sheetintro{margin:0;padding:12px 20px 0;font-size:.86rem;color:var(--ink-soft);line-height:1.45;}
+  .sheetintro + .sheetbody{padding-top:14px;}
+
   @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -512,7 +523,7 @@
     <b>A gentle reminder:</b> this isn't a test, and every baby grows at their own pace. It's a play guide drawn from the ASQ-3 framework used at UK health visitor reviews and the CDC/AAP milestone checklists. I'm not a medical professional. If Arlo loses a skill he had, or anything worries you, have a chat with your health visitor or GP.
   </div>
 
-  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 16:36 UTC</span></footer>
+  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 16:44 UTC</span></footer>
 </div>
 
 <!-- Detail overlay -->
@@ -548,25 +559,25 @@
 
 <div class="overlay today" id="todayOverlay" aria-hidden="true">
   <div class="sheet" role="dialog" aria-modal="true">
-    <div class="sheethead" id="todayHead" style="background:#fff3ec">
+    <div class="sheethead slim" id="todayHead" style="background:#fff3ec">
       <div class="grip"></div>
       <button class="close" id="closeToday" aria-label="Close">✕</button>
       <h2 style="color:var(--comm-deep)">What to do today</h2>
-      <p>Top priorities first: what Arlo hasn't mastered yet. Tap the <b>calendar button</b> on an activity once Arlo has tried it today.</p>
     </div>
+    <p class="sheetintro">Top priorities first: what Arlo hasn't mastered yet. Tap the <b>calendar button</b> on an activity once Arlo has tried it today.</p>
     <div class="sheetbody" id="todayBody"></div>
   </div>
 </div>
 
 <div class="overlay today potty" id="pottyOverlay" aria-hidden="true">
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pottyTitle">
-    <div class="sheethead" id="pottyHead" style="background:#e9f3fc">
+    <div class="sheethead slim" id="pottyHead" style="background:#e9f3fc">
       <div class="grip"></div>
       <button class="close" id="closePotty" aria-label="Close">✕</button>
       <h2 id="pottyTitle" style="color:var(--gross-deep)">Potty plan</h2>
-      <p>From first potty books to dry nights, with dates worked out from Arlo's birthday. Everything here syncs between your phones.</p>
       <div class="ptabs" id="pottyTabs" role="tablist"><button type="button" role="tab" data-tab="timeline" class="on" aria-selected="true">Timeline</button><button type="button" role="tab" data-tab="plan" aria-selected="false">Family plan</button></div>
     </div>
+    <p class="sheetintro">From first potty books to dry nights, with dates worked out from Arlo's birthday. Everything here syncs between your phones.</p>
     <div class="sheetbody" id="pottyBody"></div>
   </div>
 </div>
