@@ -354,6 +354,110 @@
   .loginoverlay{background:linear-gradient(160deg,#fde4da 0%,#efe7fb 55%,#e2f3ef 100%);}
   .toast{background:rgba(47,42,63,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
 
+  /* ---------- Potty plan ---------- */
+  .potty .sheet{--accent:#4aa3e8;--accent-bg:#e9f3fc;--accent-deep:#1f6db5;}
+  .pottybtn{display:flex;align-items:center;gap:12px;width:100%;margin-top:10px;padding:11px 16px;border-radius:18px;border:1px solid var(--glass-border,#fff);background:rgba(255,255,255,.62);font-family:inherit;color:var(--ink);cursor:pointer;text-align:left;box-shadow:0 6px 20px -14px rgba(70,50,100,.30), inset 0 1px 0 rgba(255,255,255,.85);}
+  .pb-ic{font-size:1.35rem;line-height:1;}
+  .pb-tx{display:flex;flex-direction:column;flex:1;min-width:0;line-height:1.25;}
+  .pb-tx b{font-size:.95rem;color:var(--gross-deep);}
+  .pb-tx small{font-size:.78rem;color:var(--ink-soft);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pb-arrow{font-weight:800;color:var(--gross-deep);}
+  .ptabs{display:inline-flex;gap:2px;padding:4px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid var(--glass-border,#fff);margin-top:12px;}
+  .ptabs button{border:none;background:transparent;font-family:inherit;font-weight:800;font-size:.84rem;color:var(--ink-soft);padding:7px 15px;border-radius:999px;cursor:pointer;}
+  .ptabs button.on{background:var(--ink);color:#fff;}
+  .pottytag{display:inline-block;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:1px 7px;border-radius:999px;background:var(--gross-bg);color:var(--gross-deep);vertical-align:1px;}
+
+  .psum{background:var(--glass-soft,rgba(255,255,255,.62));border:1px solid var(--glass-border,#fff);border-radius:18px;padding:14px 16px 16px;margin-bottom:20px;box-shadow:0 6px 20px -14px rgba(70,50,100,.30), inset 0 1px 0 rgba(255,255,255,.85);}
+  .psum-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .pchip{font-size:.8rem;font-weight:700;background:rgba(255,255,255,.8);border:1px solid var(--glass-border,#fff);border-radius:999px;padding:5px 11px;}
+  .plabel{display:block;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:var(--accent-deep);margin:0 0 7px;}
+  .pstoprow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .pdate,.pin{font-family:inherit;font-size:.95rem;padding:9px 11px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.85);color:var(--ink);min-width:0;box-sizing:border-box;}
+  .pdate{min-height:42px;}
+  .pmuted{font-size:.8rem;color:var(--ink-soft);font-weight:700;}
+  .plink{border:none;background:none;color:var(--accent-deep);font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer;padding:4px 0;text-decoration:underline;}
+  .phint{font-size:.82rem;color:var(--ink-soft);margin:10px 0 0;line-height:1.45;}
+  .pempty{font-size:.84rem;color:var(--ink-soft);margin:0 0 8px;}
+  .pwarn{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,246,230,.95);border:1px solid #f3dcae;color:#7a4f0c;font-size:.84rem;line-height:1.45;}
+  .pwarn-in{margin:0 14px 8px;}
+  .pok{margin-top:10px;padding:9px 12px;border-radius:12px;background:rgba(232,248,241,.95);border:1px solid #bfe9d6;color:#15805d;font-size:.84rem;font-weight:700;}
+
+  .ptl{position:relative;margin:2px 0 24px;padding-left:24px;}
+  .ptl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;border-radius:2px;background:rgba(110,90,140,.18);}
+  .pst{position:relative;margin-bottom:12px;}
+  .pdot{position:absolute;left:-24px;top:17px;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid #c9bfd6;box-sizing:border-box;}
+  .pst.st-prog .pdot{border-color:var(--prob);background:#fff6e6;}
+  .pst.st-done .pdot{border-color:var(--fine);background:var(--fine);}
+  .pst.cur .pdot{border-color:var(--gross);box-shadow:0 0 0 5px rgba(74,163,232,.22);}
+  .pcardst{background:var(--glass-soft,rgba(255,255,255,.62));border:1px solid var(--glass-border,#fff);border-radius:16px;overflow:hidden;box-shadow:0 6px 20px -14px rgba(70,50,100,.30), inset 0 1px 0 rgba(255,255,255,.85);}
+  .pst.cur .pcardst{border:1.5px solid rgba(74,163,232,.55);}
+  .psthead{all:unset;box-sizing:border-box;display:grid;grid-template-columns:1fr auto auto;grid-template-areas:"t s c" "d d d";gap:4px 8px;width:100%;padding:12px 14px;cursor:pointer;font-family:inherit;color:var(--ink);}
+  .psthead:focus-visible{outline:2px solid var(--gross);outline-offset:-2px;border-radius:16px;}
+  .pst-t{grid-area:t;display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.98rem;}
+  .pst-d{grid-area:d;font-size:.78rem;color:var(--ink-soft);font-weight:700;}
+  .pst-s{grid-area:s;align-self:center;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:999px;background:rgba(110,90,140,.1);color:var(--ink-soft);white-space:nowrap;}
+  .pst-s.prog{background:#fff6e6;color:#8a5a0f;}
+  .pst-s.done{background:#e8f8f1;color:#15805d;}
+  .psthead .tchev{grid-area:c;align-self:center;color:var(--ink-soft);transition:transform .2s ease;}
+  .pst.open .psthead .tchev{transform:rotate(180deg);}
+  .pbadge{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:999px;}
+  .pbadge.now{background:var(--gross);color:#fff;}
+  .pbadge.best{background:#e8f8f1;color:#15805d;border:1px solid #bfe9d6;}
+  .pnow{padding:0 14px 12px;}
+  .pnow-track{position:relative;height:6px;border-radius:99px;background:rgba(110,90,140,.12);margin-top:2px;}
+  .pnow-fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:rgba(74,163,232,.5);}
+  .pnow-dot{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--ink);border:2px solid #fff;transform:translate(-50%,-50%);box-shadow:0 1px 4px rgba(0,0,0,.25);}
+  .pnow-lbl{margin-top:7px;font-size:.76rem;font-weight:800;color:var(--ink);}
+  .ppin{margin:0 14px 8px;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.75);border:1px solid var(--glass-border,#fff);font-size:.82rem;line-height:1.4;}
+  .ppin.warn{background:rgba(255,246,230,.95);border-color:#f3dcae;}
+  .pstbody{display:none;padding:2px 14px 14px;}
+  .pst.open .pstbody{display:block;}
+  .pseg{display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(110,90,140,.09);margin:4px 0 14px;}
+  .pseg button{flex:1;border:none;background:transparent;font-family:inherit;font-weight:800;font-size:.8rem;color:var(--ink-soft);padding:9px 4px;border-radius:9px;cursor:pointer;}
+  .pseg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px -4px rgba(70,50,100,.4);}
+  .pseg button.on[data-status="prog"]{color:#8a5a0f;}
+  .pseg button.on[data-status="done"]{color:#15805d;}
+  .pfocus{margin:0 0 12px;padding-left:18px;font-size:.9rem;line-height:1.45;}
+  .pfocus li{margin:4px 0;}
+  .pact{margin-top:10px;}
+
+  .pev{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:14px;background:var(--glass-soft,rgba(255,255,255,.62));border:1px solid var(--glass-border,#fff);margin-bottom:8px;}
+  .pev.warn{background:rgba(255,246,230,.95);border-color:#f3dcae;}
+  .pev-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:.9rem;}
+  .pev-main span{font-size:.78rem;color:var(--ink-soft);font-weight:700;}
+  .pev-main .pwarntxt{color:#7a4f0c;font-weight:600;margin-top:3px;line-height:1.4;}
+  .piconbtn{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:1px solid var(--glass-border,#fff);background:rgba(255,255,255,.85);cursor:pointer;font-size:.85rem;color:var(--ink-soft);}
+  .pevform{padding:12px;border-radius:14px;background:rgba(255,255,255,.75);border:1px solid var(--glass-border,#fff);margin-bottom:8px;}
+  .pevform .pin{width:100%;}
+  .pevdates{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+  .pevdates label{font-size:.72rem;font-weight:800;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px;min-width:0;}
+  .pevdates .pdate{width:100%;font-size:.88rem;padding:8px;}
+  .pformmsg{color:#c63e5f;font-size:.8rem;font-weight:700;margin:6px 0 0;min-height:1em;}
+  .pbtn{border:1px solid var(--glass-border,#fff);background:rgba(255,255,255,.8);border-radius:12px;padding:10px 14px;font-family:inherit;font-weight:800;font-size:.86rem;cursor:pointer;color:var(--ink);margin:8px 8px 0 0;}
+  .pbtn.primary{background:var(--gross-deep);color:#fff;border-color:transparent;}
+  .pbtn.wide{width:100%;margin:6px 0 0;padding:13px;}
+  .pplan{margin-bottom:16px;}
+  .pplanta{min-height:80px;resize:none;overflow:hidden;line-height:1.45;}
+
+  #planPrint{position:fixed;inset:0;z-index:300;background:#fff;overflow-y:auto;padding:16px 22px 48px;color:#26222f;font-family:"Nunito",system-ui,sans-serif;-webkit-overflow-scrolling:touch;}
+  #planPrint .pp-tools{position:sticky;top:-16px;background:#fff;padding:12px 0 10px;margin:-4px 0 12px;display:flex;flex-wrap:wrap;border-bottom:1px solid #eee;}
+  #planPrint .pp-tools .pbtn{margin:0 8px 0 0;border-color:#e4e0ea;}
+  #planPrint article{max-width:640px;margin:0 auto;}
+  #planPrint .pp-eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#1f6db5;margin:6px 0 0;}
+  #planPrint h1{font-family:"Fraunces",serif;font-weight:600;font-size:1.9rem;margin:4px 0 4px;}
+  #planPrint .pp-meta{color:#6c6580;font-size:.88rem;margin:0 0 18px;}
+  #planPrint section{padding:12px 0;border-top:1px solid #eee;}
+  #planPrint h2{font-size:1rem;margin:0 0 4px;}
+  #planPrint section p{margin:0;font-size:.95rem;line-height:1.55;}
+  #planPrint .pp-foot{margin-top:18px;font-size:.78rem;color:#8f87a0;}
+  @media print{
+    body.printing > *:not(#planPrint){display:none !important;}
+    body.printing::before{display:none !important;}
+    body.printing{background:#fff !important;}
+    #planPrint{position:static;overflow:visible;padding:0;}
+    #planPrint .pp-tools{display:none !important;}
+  }
+
   @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -373,6 +477,7 @@
 
   <div class="panel">
     <button class="todaybtn" id="todayBtn" style="width:100%">📋 What to do today →</button>
+    <button class="pottybtn" id="pottyBtn" type="button"><span class="pb-ic" aria-hidden="true">🚽</span><span class="pb-tx"><b>Potty plan</b><small id="pottyBtnSub"></small></span><span class="pb-arrow" aria-hidden="true">→</span></button>
   </div>
 
   <div class="panel">
@@ -407,7 +512,7 @@
     <b>A gentle reminder:</b> this isn't a test, and every baby grows at their own pace. It's a play guide drawn from the ASQ-3 framework used at UK health visitor reviews and the CDC/AAP milestone checklists. I'm not a medical professional. If Arlo loses a skill he had, or anything worries you, have a chat with your health visitor or GP.
   </div>
 
-  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 11:29 UTC</span></footer>
+  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 16:30 UTC</span></footer>
 </div>
 
 <!-- Detail overlay -->
@@ -450,6 +555,19 @@
       <p>Top priorities first: what Arlo hasn't mastered yet. Tap the <b>calendar button</b> on an activity once Arlo has tried it today.</p>
     </div>
     <div class="sheetbody" id="todayBody"></div>
+  </div>
+</div>
+
+<div class="overlay today potty" id="pottyOverlay" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pottyTitle">
+    <div class="sheethead" id="pottyHead" style="background:#e9f3fc">
+      <div class="grip"></div>
+      <button class="close" id="closePotty" aria-label="Close">✕</button>
+      <h2 id="pottyTitle" style="color:var(--gross-deep)">Potty plan</h2>
+      <p>From first potty books to dry nights, with dates worked out from Arlo's birthday. Everything here syncs between your phones.</p>
+      <div class="ptabs" id="pottyTabs" role="tablist"><button type="button" role="tab" data-tab="timeline" class="on" aria-selected="true">Timeline</button><button type="button" role="tab" data-tab="plan" aria-selected="false">Family plan</button></div>
+    </div>
+    <div class="sheetbody" id="pottyBody"></div>
   </div>
 </div>
 
@@ -502,7 +620,9 @@ const TAGS={
   master:{t:'Master',c:'#15805d',bg:'#e8f8f1'},
   elite:{t:'Elite',c:'#5b3fb0',bg:'#ece6fb'}
 };
-function actVal(id){ const v=state.acts[id]; if(typeof v==='number') return Math.max(0,Math.min(3,v)); if(v===true) return 1; return 0; }
+function actSrc(id){ return (String(id).indexOf('pt-')===0)?((state.potty&&state.potty.acts)||{}):state.acts; }
+function setActVal(id,v){ if(String(id).indexOf('pt-')===0){ if(!state.potty) state.potty=cleanPotty(); state.potty.acts[id]=v; } else state.acts[id]=v; }
+function actVal(id){ const v=actSrc(id)[id]; if(typeof v==='number') return Math.max(0,Math.min(3,v)); if(v===true) return 1; return 0; }
 function scorableActs(k){ return DATA[k].acts.filter(a=>!a.notes); }
 function domLevel(k){ const a=scorableActs(k); if(!a.length) return 'beginner'; let s=0; a.forEach(x=>s+=actVal(x.id)); const avg=s/a.length; if(avg>=2.5) return 'master'; if(avg>=1) return 'apprentice'; return 'beginner'; }
 function domMasteryPct(k){ const a=scorableActs(k); if(!a.length) return 0; let s=0; a.forEach(x=>s+=actVal(x.id)); return Math.round(s/(3*a.length)*100); }
@@ -585,7 +705,19 @@ const SRC = {
   "Health for Under 5s":"https://healthforunder5s.co.uk/sections/toddler/learning-to-walk/",
   "NHS: Food safety":"https://www.nhs.uk/best-start-in-life/baby/weaning/safe-weaning/preparing-food-safely/",
   "NHS OT: Move & play":"https://www.leicspart.nhs.uk/wp-content/uploads/2020/06/434-Move-and-play-9-18mnths-2.pdf",
-  "CAPT":"https://capt.org.uk/choking-prevention/"
+  "CAPT":"https://capt.org.uk/choking-prevention/",
+  "NHS: Potty training":"https://www.nhs.uk/best-start-in-life/toddler/potty-training-your-child/",
+  "NHS: Constipation":"https://www.nhs.uk/baby/health/constipation-in-children/",
+  "NHS: Bedwetting":"https://www.healthiertogether.nhs.uk/child-under-12-years/bedwetting",
+  "ERIC: Potty training":"https://eric.org.uk/advice-about-childrens-bladders-and-bowels-from-birth-to-potty-training-to-school-2/",
+  "Bladder & Bowel UK":"https://www.bbuk.org.uk/potty-and-toilet-training-association/",
+  "AAP: Toilet training":"https://www.healthychildren.org/English/ages-stages/toddler/toilet-training/Pages/the-right-age-to-toilet-train.aspx",
+  "AAFP review 2019":"https://www.aafp.org/pubs/afp/issues/2019/1015/p468.html",
+  "Blum et al. 2003":"https://www.semanticscholar.org/paper/Relationship-between-age-at-initiation-of-toilet-of-Blum-Taubman/c8d85129de8260c0a09401ef0761129a822e2780",
+  "Joinson et al. 2009":"https://www.researchgate.net/publication/38009710_A_Prospective_Study_of_Age_at_Initiation_of_Toilet_Training_and_Subsequent_Daytime_Bladder_Control_in_School-Age_Children",
+  "Schum et al. 2002":"https://pubmed.ncbi.nlm.nih.gov/?term=Schum+2002+sequential+acquisition+of+toilet-training+skills",
+  "NICE CG99":"https://www.nice.org.uk/guidance/cg99",
+  "NICE CG111":"https://www.nice.org.uk/guidance/cg111/chapter/Recommendations"
 };
 function srcHTML(arr){return 'Source:'+arr.map(s=>`<a href="${SRC[s]||'#'}" target="_blank" rel="noopener">${s}</a>`).join('');}
 function infoHTML(o){ return (o&&o.info)?`<button class="infobtn" type="button">ⓘ Research</button><div class="infobox">${o.info}</div>`:''; }
@@ -831,15 +963,15 @@ const BASE_ORDER = ["comm","fine","gross","prob","soc","over"];
 const FIREBASE_CONFIG={apiKey:"AIzaSyBVYcjxo5aKAKlwsDjui7FdQtNmhry0Mro",authDomain:"arlo-5d8a6.firebaseapp.com",databaseURL:"https://arlo-5d8a6-default-rtdb.firebaseio.com",projectId:"arlo-5d8a6",storageBucket:"arlo-5d8a6.firebasestorage.app",messagingSenderId:"588304685385",appId:"1:588304685385:web:cd18b18ba8c737a48ba298"};
 const SHARE_ID="arlo",AUTH_EMAIL="family@arlo-5d8a6.web.app";
 /* ---------- State ---------- */
-let state={skills:{},acts:{},focus:["comm","fine"],notes:{},stretchOn:{},tried:{date:"",ids:{}}};
+let state={skills:{},acts:{},focus:["comm","fine"],notes:{},stretchOn:{},tried:{date:"",ids:{}},potty:cleanPotty()};
 const KEY="arlo-data-v2";
-let saveTimer=null,storeMode="local",fbWrite=null,curKey=null,lastWrite=null,fsMod=null,authMod=null,authObj=null,dbRef=null;
-function clean(s){return{skills:(s&&s.skills)||{},acts:(s&&s.acts)||{},focus:(s&&s.focus)||["comm","fine"],notes:(s&&s.notes)||{},stretchOn:(s&&s.stretchOn)||{},tried:(s&&s.tried)||{date:"",ids:{}}};}
+let saveTimer=null,storeMode="local",fbWrite=null,curKey=null,lastWrite=null,fsMod=null,authMod=null,authObj=null,dbRef=null,syncReady=false;
+function clean(s){return{skills:(s&&s.skills)||{},acts:(s&&s.acts)||{},focus:(s&&s.focus)||["comm","fine"],notes:(s&&s.notes)||{},stretchOn:(s&&s.stretchOn)||{},tried:(s&&s.tried)||{date:"",ids:{}},potty:cleanPotty(s&&s.potty)};}
 function wireLogin(){const pwEl=document.getElementById('loginPw'),msg=document.getElementById('loginMsg');if(!pwEl)return;const signIn=async()=>{const pw=(pwEl.value||'').trim();if(pw.length<4){msg.textContent='Enter your password.';return;}msg.textContent='Checking…';try{await authMod.signInWithEmailAndPassword(authObj,AUTH_EMAIL,pw);}catch(e){msg.textContent=(e&&e.code==='auth/too-many-requests')?'Too many tries, wait a moment.':'Incorrect password.';}};document.getElementById('loginBtn').addEventListener('click',signIn);pwEl.addEventListener('keydown',e=>{if(e.key==='Enter')signIn();});document.getElementById('loginCreate').addEventListener('click',async()=>{const pw=(pwEl.value||'').trim();if(pw.length<6){msg.textContent='Pick a password of 6+ characters.';return;}msg.textContent='Setting up…';try{await authMod.createUserWithEmailAndPassword(authObj,AUTH_EMAIL,pw);}catch(e){msg.textContent=(e&&e.code==='auth/email-already-in-use')?'Already set, just tap Unlock.':'Could not set up. Enable Email/Password in Firebase first.';}});const lk=document.getElementById('lockBtn');if(lk)lk.addEventListener('click',()=>{try{authMod.signOut(authObj);}catch(e){}});}
-function startSync(){storeMode='firebase';updateModeBadge();fsMod.getDoc(dbRef).then(snap=>{if(snap.exists()&&snap.data().payload){try{state=clean(JSON.parse(snap.data().payload));}catch(e){}}renderAll();if(curKey&&overlay.classList.contains('open'))renderSheet(curKey,0);}).catch(()=>{});fsMod.onSnapshot(dbRef,snap=>{if(typeof dragging!=='undefined'&&dragging)return;const ae=document.activeElement;if(ae&&ae.tagName==='TEXTAREA')return;if(!(snap.exists()&&snap.data().payload))return;const p=snap.data().payload;if(p===lastWrite)return;if(p===JSON.stringify(state))return;try{state=clean(JSON.parse(p));renderAll();if(curKey&&overlay.classList.contains('open'))renderSheet(curKey,0);}catch(e){}});}
+function startSync(){storeMode='firebase';syncReady=false;updateModeBadge();fsMod.getDoc(dbRef).then(snap=>{if(snap.exists()&&snap.data().payload){try{state=clean(JSON.parse(snap.data().payload));}catch(e){}}syncReady=true;renderAll();if(curKey&&overlay.classList.contains('open'))renderSheet(curKey,0);}).catch(()=>{});fsMod.onSnapshot(dbRef,snap=>{if(!syncReady&&!snap.metadata.fromCache){syncReady=true;}if(typeof dragging!=='undefined'&&dragging)return;const ae=document.activeElement;if(ae&&(ae.tagName==='TEXTAREA'||(ae.tagName==='INPUT'&&ae.type!=='range')))return;if(!(snap.exists()&&snap.data().payload))return;const p=snap.data().payload;if(p===lastWrite)return;if(p===JSON.stringify(state))return;try{state=clean(JSON.parse(p));renderAll();if(curKey&&overlay.classList.contains('open'))renderSheet(curKey,0);}catch(e){}});}
 async function initStore(){if(FIREBASE_CONFIG&&FIREBASE_CONFIG.apiKey){try{const appMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");fsMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");authMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js");const fbapp=appMod.initializeApp(FIREBASE_CONFIG);const db=fsMod.getFirestore(fbapp);authObj=authMod.getAuth(fbapp);try{await authMod.setPersistence(authObj,authMod.browserLocalPersistence);}catch(e){}dbRef=fsMod.doc(db,"trackers",SHARE_ID);fbWrite=(data)=>{lastWrite=JSON.stringify(data);return fsMod.setDoc(dbRef,{payload:lastWrite,updated:Date.now()});};wireLogin();authMod.onAuthStateChanged(authObj,user=>{const lk=document.getElementById('lockBtn');if(user){hideLogin();if(lk)lk.style.display='block';startSync();}else{storeMode='local';updateModeBadge();if(lk)lk.style.display='none';showLogin();}});return null;}catch(e){console.warn("Firebase unavailable",e);}}if(window.storage){storeMode="claude";try{const r=await window.storage.get(KEY,true);if(r&&r.value)return clean(JSON.parse(r.value));}catch(e){}return null;}storeMode="local";try{const v=localStorage.getItem(KEY);if(v)return clean(JSON.parse(v));}catch(e){}return null;}
 async function load(){const loaded=await initStore();if(loaded)state=loaded;updateModeBadge();renderAll();}
-async function save(){const payload=JSON.stringify(state);if(storeMode==="firebase"&&fbWrite){try{await fbWrite(state);}catch(e){console.warn("save failed",e);}return;}if(storeMode==="claude"&&window.storage){try{await window.storage.set(KEY,payload,true);}catch(e){}return;}try{localStorage.setItem(KEY,payload);}catch(e){}}
+async function save(){const payload=JSON.stringify(state);if(storeMode==="firebase"&&fbWrite){if(!syncReady){clearTimeout(saveTimer);saveTimer=setTimeout(save,600);return;}try{await fbWrite(state);}catch(e){console.warn("save failed",e);}return;}if(storeMode==="claude"&&window.storage){try{await window.storage.set(KEY,payload,true);}catch(e){}return;}try{localStorage.setItem(KEY,payload);}catch(e){}}
 function updateModeBadge(){const el=document.getElementById('modeBadge');if(!el)return;if(storeMode==="firebase"){el.innerHTML='🟢 <b>Live sync is ON</b>: you and your partner share this tracker.';el.style.color='var(--fine-deep)';}else{el.innerHTML='⚪ Not synced yet. Sign in and enable Firestore + Email/Password (see README).';el.style.color='var(--ink-soft)';}}
 /* ---------- Helpers ---------- */
 function orderedKeys(){
@@ -925,7 +1057,7 @@ function renderCards(){
 
 function arloAge(){ return ((Date.now()-new Date('2025-09-24'))/(1000*60*60*24*30.4375)).toFixed(1); }
 function renderAge(){ const el=document.getElementById('ageChip'); if(el) el.innerHTML=`<span class="dot"></span> Arlo is <b>${arloAge()} months</b>`; }
-function renderAll(){ renderAge(); renderSummary(); renderCards(); }
+function renderAll(){ renderAge(); renderSummary(); renderCards(); renderPottyBtn(); const po=document.getElementById('pottyOverlay'); if(po&&po.classList.contains('open')&&!dragging) renderPotty(); }
 function queueSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(save,250); }
 
 /* ---------- Sheet ---------- */
@@ -1031,12 +1163,12 @@ function renderSheet(k,dir){
     inp.addEventListener('touchstart',grab,{passive:true});
     inp.addEventListener('pointerdown',grab);
     inp.addEventListener('input',()=>{
-      const id=inp.dataset.act; const v=+inp.value; state.acts[id]=v;
+      const id=inp.dataset.act; const v=+inp.value; setActVal(id,v);
       inp.style.setProperty('--thumb',blend(v/3));
       const si=stageIdx(v); const lab=body.querySelector('[data-lab="'+id+'"]');
       if(lab){ lab.textContent=STAGES[si].t; lab.style.color=STAGES[si].text; }
     });
-    inp.addEventListener('change',()=>{ dragging=false; state.acts[inp.dataset.act]=+inp.value; queueSave(); renderCards(); renderSummary(); });
+    inp.addEventListener('change',()=>{ dragging=false; setActVal(inp.dataset.act,+inp.value); queueSave(); renderCards(); renderSummary(); });
   });
   body.querySelectorAll('.notesarea').forEach(ta=>{
     ta.addEventListener('input',()=>{ if(!state.notes)state.notes={}; state.notes[ta.dataset.note]=ta.value; queueSave(); });
@@ -1067,6 +1199,338 @@ let dragging=false;
 ['pointerup','touchend','touchcancel'].forEach(ev=>document.addEventListener(ev,()=>{ if(dragging){ dragging=false; queueSave(); } }));
 document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('.infobtn'); if(!b)return; e.stopPropagation(); b.classList.toggle('open'); const box=b.nextElementSibling; if(box&&box.classList.contains('infobox')) box.classList.toggle('open'); });
 
+/* ---------- Potty plan ---------- */
+// Everything for this page lives under state.potty:
+// { status:{stageId:'not'|'prog'|'done'}, events:[{id,name,start,end}], stopDate:'YYYY-MM-DD', plan:{key:text}, acts:{id:0..3} }
+function cleanPotty(p){
+  const obj=o=>(o&&typeof o==='object'&&!Array.isArray(o))?o:{};
+  p=obj(p);
+  return {
+    status:obj(p.status),
+    events:Array.isArray(p.events)?p.events.filter(e=>e&&e.id&&e.start).map(e=>({id:String(e.id),name:String(e.name||''),start:String(e.start),end:e.end?String(e.end):''})):[],
+    stopDate:typeof p.stopDate==='string'?p.stopDate:'',
+    plan:obj(p.plan),
+    acts:obj(p.acts)
+  };
+}
+const P_BIRTH=new Date(2025,8,24,12);
+function pAddMonths(m){ const d=new Date(P_BIRTH); d.setMonth(d.getMonth()+m); return d; }
+function pAgeAt(d){ return (d-P_BIRTH)/(1000*60*60*24*30.4375); }
+function pToday(){ const d=new Date(); d.setHours(12,0,0,0); return d; }
+function pParse(s){ if(!s) return null; const a=String(s).split('-').map(Number); if(a.length!==3||!a[0]||!a[1]||!a[2]) return null; return new Date(a[0],a[1]-1,a[2],12); }
+function pISO(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function pFmt(d,long){ return d.toLocaleDateString('en-GB',long?{day:'numeric',month:'short',year:'numeric'}:{month:'short',year:'numeric'}); }
+const pEsc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+const P_STAGES=[
+  {id:"ps1",from:12,to:18,label:"12–18 months",t:"Get ready",
+   focus:["Read potty books and name wee and poo as they happen.","Change nappies in the bathroom and let him flush.","Let him watch the family toilet routine.","Short nappy-free play after a wee or poo.","Keep an eye on drinks and how soft his poos are.","Buy one potty and leave it out for him to explore."],
+   why:"Preparing now builds the words, familiarity and body awareness he'll need later, with no pressure.",
+   src:["NHS: Potty training","Bladder & Bowel UK"],
+   info:"UK guidance now favours a gradual, skills-based start rather than waiting for every readiness sign. Bladder & Bowel UK says it's never too early to start building skills, and ERIC suggests preparing from when a child can sit up.<cite>NHS Best Start in Life, 2026; ERIC; Bladder & Bowel UK</cite>"},
+  {id:"ps2",from:18,to:21,label:"18–21 months",t:"Potty practice",
+   focus:["A daily clothed potty sit, building to bare-bottom sits after breakfast and the evening meal.","Tip nappy poos into the potty or toilet.","Practise pulling trousers down and up.","Agree your family plan and share it with any nursery or childminder."],
+   why:"Short, regular sits make the potty familiar before it has a job to do.",
+   src:["ERIC: Potty training","AAFP review 2019"],
+   info:"This mirrors the first steps of the child-oriented (Brazelton) method. In a cohort of 482 children using it, 61% were trained by 36 months and 98% by 48 months. ERIC's 3-step approach puts practice sits here.<cite>Taubman, 1997; ERIC, Let's Go Potty</cite>"},
+  {id:"ps3",from:21,to:24,label:"21–24 months",t:"Pants by day",best:true,
+   focus:["The best window to stop daytime nappies, which also catches summer 2027.","Check for soft poos at least every other day first.","Pick a calm 3 to 4 day stretch at home and switch to pants by day, not pull-ups.","Timed sits on waking, after meals and before going out. Praise every try.","Keep nappies for naps and nights."],
+   why:"Starting here sits inside the NHS and ERIC 18 to 30 month window, before the risks linked with later starts.",
+   src:["Joinson et al. 2009","Blum et al. 2003","NHS: Potty training"],
+   info:"In the UK ALSPAC cohort, starting after 24 months was linked with about 1.5 times the odds of daytime wetting problems at school age. Starting much earlier mostly makes training take longer rather than finish sooner. Both findings are observational.<cite>Joinson et al., 2009; Blum, Taubman & Nemeth, Pediatrics, 2003</cite>"},
+  {id:"ps4",from:24,to:30,label:"2 to 2½ years",t:"Start by 30 months",
+   focus:["If you haven't started yet, start now, ideally before 27 months.","Mention progress at the 2 to 2½ year review.","Switch naps to pants once naps are dry.","Phase out sticker rewards once the habit is set."],
+   why:"NHS and ERIC advise moving out of daytime nappies by 30 months.",
+   src:["Blum et al. 2003","NHS: Potty training"],
+   info:"Before 27 months, the age training started made no significant difference to when it finished. So there's no rush within the window, only a reason not to drift past it.<cite>Blum, Taubman & Nemeth, 2003</cite>"},
+  {id:"ps5",from:30,to:42,label:"2½ to 3½ years",t:"Dry days settle",
+   focus:["Daytime dryness settles; for boys the middle age is about 35 months.","Move on to a seat reducer and step on the toilet.","Teach standing to wee only once he's fully trained, poos included.","Expect to help with wiping for a long while yet."],
+   why:"Boys reach these milestones a few months later than girls on average, but the spread between children is far bigger than that gap.",
+   src:["Schum et al. 2002","ERIC: Potty training"],
+   info:"In one US cohort the median age for daytime dryness was 35 months for boys and 32.5 months for girls. ERIC and the AAP advise boys to sit to wee first and stand later.<cite>Schum et al., Pediatrics, 2002; ERIC; AAP</cite>"},
+  {id:"ps6",from:42,to:60,label:"3½ to 5 years",t:"Nights come later",
+   focus:["Night dryness comes with maturity; it isn't something you teach.","Try night pants after several dry mornings in a row.","Mattress protector on; no fizzy or caffeinated drinks; a wee before bed.","Don't cut drinks or wake him to wee."],
+   why:"Bedwetting is normal before 5.",
+   src:["NICE CG111","NHS: Bedwetting"],
+   info:"NICE expects children to be dry at night by a developmental age of 5. The NHS says night dryness happens naturally over time and routine waking won't help in the long term.<cite>NICE CG111; NHS</cite>"},
+  {id:"ps7",from:60,to:72,label:"5 years +",t:"If nights are still wet",
+   focus:["From 5, see the GP or school nurse if wetting is frequent or bothers him.","At any age, see the GP if wetting comes back after 6 months dry, or comes with pain, thirst or constipation."],
+   why:"NICE recommends assessment and treatment from 5 rather than waiting.",
+   src:["NICE CG111"],
+   info:"Treatment options from 5 include a bedwetting alarm or desmopressin.<cite>NICE CG111</cite>"}
+];
+
+const P_ACTS=[
+  {id:"pt-1",stages:["ps1","ps2"],t:"Potty book time",do:"Read a short potty book together most days, pointing at the pictures and naming wee, poo and potty. Let Arlo turn the pages.",why:"It builds the words and understanding he'll need before he can tell you he needs to go.",src:["NHS: Potty training","ERIC: Potty training"],info:"Reading potty books together is part of NHS Best Start's preparation advice and ERIC's guide. There are no trials of books on their own, so this rests on professional guidance.<cite>NHS Best Start in Life, 2026; ERIC</cite>"},
+  {id:"pt-2",stages:["ps1","ps2"],t:"Name it as it happens",do:"When he goes quiet, strains or has a full nappy, calmly say “You're doing a poo” or “That's a wee”. Use the same words every time.",why:"It links the feeling in his body to a word, which is the start of being able to tell you.",src:["NHS: Potty training","Schum et al. 2002"],info:"The NHS advises talking about wees and poos as they happen. In one cohort, understanding potty words was an early skill, with a median of about 24.5 months in boys.<cite>NHS; Schum et al., Pediatrics, 2002</cite>"},
+  {id:"pt-3",stages:["ps1","ps2"],t:"Bathroom nappy changes",do:"Where you can, change nappies in the bathroom, tip any poo into the toilet, and let him wave “bye-bye poo” and flush.",why:"It connects wees and poos with the toilet and makes flushing familiar rather than scary.",src:["NHS: Potty training","AAFP review 2019"],info:"This is in NHS Best Start's preparation list, and it's a step in the child-oriented (Brazelton) method.<cite>NHS; Baird, Bybel & Kowalski, American Family Physician, 2019</cite>"},
+  {id:"pt-4",stages:["ps1","ps2"],t:"Watch and copy",do:"Let him come in when one of you uses the toilet, and narrate simply: “Daddy's doing a wee, now flush, now wash hands.”",why:"Toddlers learn routines by copying, and copying the family is one of the readiness signs.",src:["AAP: Toilet training","AAFP review 2019"],info:"The AAP recommends letting children see you use the toilet and wash your hands afterwards.<cite>AAP / HealthyChildren; Baird et al., 2019</cite>"},
+  {id:"pt-5",stages:["ps1","ps2"],from:15,t:"Clothed potty sits",do:"Invite him to sit on the potty fully clothed once a day for a minute with a book, and let him get up whenever he wants. Feet flat, knees up.",why:"It makes the potty a familiar, safe seat before it has any job to do.",src:["Bladder & Bowel UK","AAFP review 2019"],info:"This is the first step of the child-oriented method and of Bladder & Bowel UK's guide: start fully clothed and gradually take layers off. In a cohort of 482 children using this approach, 98% were trained by 4.<cite>Taubman, 1997; Bladder & Bowel UK</cite>"},
+  {id:"pt-6",stages:["ps1","ps2"],t:"Nappy-free play",do:"Give him about 30 minutes without a nappy after he's done a wee or poo, on a washable floor or outdoors when it's warm.",why:"He feels what weeing without a nappy is like and starts to notice it.",src:["NHS: Potty training"],info:"NHS Best Start recommends regular nappy-free time of around 30 minutes after a wee or poo. A small 2025 pilot study linked nappy use with fewer visible signals before weeing in 18 to 36 month olds.<cite>NHS; Bladt et al., European Journal of Pediatrics, 2025</cite>"},
+  {id:"pt-7",stages:["ps1","ps2","ps3"],t:"Pull-down practice",do:"At changes and dressing, ask him to help push his trousers down and pull them up, and to “help” with the nappy tabs.",why:"Managing clothes is one of the last readiness skills to arrive, so early practice pays off.",src:["AAFP review 2019","ERIC: Potty training"],info:"Most children can put on and take off clothes by about 30 months, and ERIC advises involving children in dressing and undressing.<cite>Baird et al., 2019; ERIC</cite>"},
+  {id:"pt-8",stages:["ps1","ps2","ps3"],t:"Drink and poo check",do:"Offer water with every meal and snack. Once a week, think back: have his poos been soft and easy, or hard and pellet-like?",why:"It catches constipation early, which is the most common thing that derails potty training.",src:["NHS: Constipation","NICE CG99"],info:"NHS Best Start says to check for soft poos at least every other day before stopping nappies, and NICE identifies toilet training as a risk period for constipation. See your health visitor or GP early if poos are hard, painful or fewer than 3 a week.<cite>NHS; NICE CG99</cite>"},
+  {id:"pt-9",stages:["ps1","ps2"],t:"Teddy uses the potty",do:"Act out teddy sitting on the potty, doing a pretend wee, being praised, flushing and washing hands.",why:"Pretend play rehearses the whole routine without any pressure on Arlo.",src:["NHS: Potty training"],info:"NHS Best Start suggests using dolls or toys to show how the potty works, and a doll demonstration is a core part of the Azrin and Foxx method.<cite>NHS; Azrin & Foxx, 1974</cite>"}
+];
+
+const P_PLAN=[
+  {key:"words",h:"Our words",def:"Wee, poo, potty, toilet, wet, dry, penis. The same words from everyone, said in a matter-of-fact way. No “dirty”, “naughty” or “stinky”."},
+  {key:"times",h:"Potty sit times",def:"On waking, 20 to 30 minutes after meals, before going out, and before naps and bed. Short sits, about 5 minutes at most, with a book or song. Say “time for a potty sit” rather than asking if he needs to go. Feet supported, knees above hips."},
+  {key:"praise",h:"Praise and stickers",def:"Praise every try, warmly and specifically, whether or not anything happens. Stickers for effort, never sweets. Phase them out once it's a habit."},
+  {key:"accidents",h:"When accidents happen",def:"Stay calm and neutral: “Oops, wee goes in the potty. Let's get clean pants.” Clean up together and move on. No telling off and no forced sits. If it clearly isn't working after 2 to 3 weeks, pause for a few weeks and then restart properly."},
+  {key:"nights",h:"Naps and nights",def:"Pants by day once we've started, not pull-ups. Nappies for naps and nights; pants for naps once naps are dry. Night pants only after several dry mornings in a row."},
+  {key:"carers",h:"For nursery or a childminder",def:"Please use the same words and sit times as us. Once he's in pants at home, please keep him in pants with you too. A quick daily note about wees, poos and accidents helps, and please tell us if his poos look hard or he seems to be holding on."}
+];
+
+function pPlanVal(k){ const s=P_PLAN.find(x=>x.key===k); const v=state.potty.plan[k]; return (typeof v==='string')?v:(s?s.def:''); }
+function currentPStage(){ const a=pAgeAt(pToday()); return P_STAGES.find(s=>a>=s.from&&a<s.to)||(a<P_STAGES[0].from?P_STAGES[0]:P_STAGES[P_STAGES.length-1]); }
+function pStageFor(d){ const a=pAgeAt(d); return P_STAGES.find(s=>a>=s.from&&a<s.to)||(a<P_STAGES[0].from?P_STAGES[0]:P_STAGES[P_STAGES.length-1]); }
+function pottyActive(){
+  const cur=currentPStage(), age=pAgeAt(pToday());
+  return P_ACTS.filter(a=>(a.from||0)<=age && a.stages.some(sid=>{ const st=state.potty.status[sid]; if(st==='done') return false; return sid===cur.id||st==='prog'; }));
+}
+function pNearEvents(d){
+  const M=31*864e5;
+  return state.potty.events.filter(e=>{ const s=pParse(e.start); if(!s) return false; const en=pParse(e.end)||s; return +d>=+s-M && +d<=+en+M; });
+}
+function pStopWarnings(){
+  const d=pParse(state.potty.stopDate); if(!d) return [];
+  const w=[], a=pAgeAt(d);
+  if(a<18) w.push(`That's ${a.toFixed(1)} months. Starting before 18 months usually means more months of accidents for only a small gain at the end.`);
+  if(a>30) w.push(`That's ${a.toFixed(1)} months. NHS and ERIC advise moving out of daytime nappies by 30 months, and later starts are linked with more daytime wetting at school age.`);
+  pNearEvents(d).forEach(e=>w.push(`It's within about a month of “${pEsc(e.name)}”. The research suggests starting when life is fairly calm.`));
+  return w;
+}
+
+let pottyTab='timeline', pottyOpenStages=null, pottyEditing=null;
+const pottyOverlay=document.getElementById('pottyOverlay');
+
+function renderPottyBtn(){
+  const el=document.getElementById('pottyBtnSub'); if(!el) return;
+  const cur=currentPStage(), d=pParse(state.potty.stopDate);
+  el.textContent=`${cur.t} · ${cur.label}`+(d?` · start ${pFmt(d,true)}`:'');
+}
+
+function pActHTML(a){
+  const v=actVal(a.id), si=stageIdx(v);
+  return `<div class="act pact">
+      <h4>${a.t}</h4>
+      <p class="doit">${a.do}</p>
+      <div class="slider">
+        <input type="range" class="rng" min="0" max="3" step="0.01" value="${v}" data-act="${a.id}" style="--thumb:${blend(v/3)}" aria-label="Progress for ${a.t}">
+        <div class="sticks"><span>not quite</span><span>had a go</span><span>nearly</span><span>master</span></div>
+        <div class="slabel" data-lab="${a.id}" style="color:${STAGES[si].text}">${STAGES[si].t}</div>
+      </div>
+      <div class="why"><b>Why it helps:</b> ${a.why}</div>
+      <div class="src">${srcHTML(a.src)}</div>${infoHTML(a)}
+    </div>`;
+}
+
+function pTimelineHTML(){
+  const today=pToday(), age=pAgeAt(today), cur=currentPStage();
+  const stop=pParse(state.potty.stopDate), warns=pStopWarnings();
+  const nearIds=new Set(stop?pNearEvents(stop).map(e=>e.id):[]);
+  const evs=state.potty.events.slice().sort((a,b)=>a.start<b.start?-1:1);
+  const range=e=>{ const s=pParse(e.start), en=pParse(e.end); return pFmt(s,true)+(en&&+en!==+s?` to ${pFmt(en,true)}`:''); };
+
+  let h=`<div class="psum">
+    <div class="psum-row"><span class="pchip">Arlo is <b>${arloAge()} months</b></span><span class="pchip">Now: <b>${cur.t}</b></span></div>
+    <label class="plabel" for="pStop">Planned start: stop daytime nappies</label>
+    <div class="pstoprow"><input type="date" class="pdate" id="pStop" value="${pEsc(state.potty.stopDate)}" min="${pISO(pAddMonths(12))}" max="${pISO(pAddMonths(48))}">${stop?`<span class="pmuted">at ${pAgeAt(stop).toFixed(1)} months</span><button class="plink" id="pStopClear" type="button">Clear</button>`:''}</div>
+    ${stop?'':`<p class="phint">The research's best window is 21 to 24 months: ${pFmt(pAddMonths(21),true)} to ${pFmt(pAddMonths(24),true)}.</p>`}
+    ${warns.map(w=>`<div class="pwarn">⚠️ ${w}</div>`).join('')}
+    ${stop&&!warns.length?`<div class="pok">✓ Inside the 18 to 30 month window and clear of your life events.</div>`:''}
+  </div>
+  <p class="section-label">Timeline</p>
+  <div class="ptl">`;
+
+  P_STAGES.forEach((st,i)=>{
+    const sFrom=pAddMonths(st.from), sTo=pAddMonths(st.to);
+    const first=i===0, last=i===P_STAGES.length-1;
+    const inStage=d=>d&&(first||+d>=+sFrom)&&(last||+d<+sTo);
+    const status=state.potty.status[st.id]||'not';
+    const isCur=st.id===cur.id, open=pottyOpenStages.has(st.id);
+    const SL={not:'Not yet',prog:'In progress',done:'Done'};
+    let pins='';
+    if(stop&&inStage(stop)){
+      pins+=`<div class="ppin stop ${warns.length?'warn':''}">🎯 <b>Stop daytime nappies</b> · ${pFmt(stop,true)} <span class="pmuted">(${pAgeAt(stop).toFixed(1)} mo)</span></div>`;
+      warns.forEach(w=>{ pins+=`<div class="pwarn pwarn-in">⚠️ ${w}</div>`; });
+    }
+    evs.forEach(e=>{ const s=pParse(e.start); if(inStage(s)) pins+=`<div class="ppin ${nearIds.has(e.id)?'warn':''}">📌 <b>${pEsc(e.name)}</b> · ${range(e)}${nearIds.has(e.id)?' ⚠️':''}</div>`; });
+    const pct=isCur?Math.max(0,Math.min(100,(today-sFrom)/(sTo-sFrom)*100)):0;
+    const acts=P_ACTS.filter(a=>a.stages.includes(st.id));
+    h+=`<div class="pst ${isCur?'cur':''} st-${status} ${open?'open':''}" data-sid="${st.id}">
+      <span class="pdot" aria-hidden="true"></span>
+      <div class="pcardst">
+        <button class="psthead" type="button" data-toggle="${st.id}" aria-expanded="${open}">
+          <span class="pst-t"><b>${st.t}</b>${st.best?'<span class="pbadge best">Best window</span>':''}${isCur?'<span class="pbadge now">Now</span>':''}</span>
+          <span class="pst-s ${status}">${SL[status]}</span>
+          <span class="tchev">▾</span>
+          <span class="pst-d">${st.label} · ${last?'from '+pFmt(sFrom):pFmt(sFrom)+' to '+pFmt(sTo)}</span>
+        </button>
+        ${isCur?`<div class="pnow"><div class="pnow-track"><span class="pnow-fill" style="width:${pct}%"></span><span class="pnow-dot" style="left:${pct}%"></span></div><div class="pnow-lbl">You are here · ${pFmt(today,true)} · ${arloAge()} months</div></div>`:''}
+        ${pins}
+        <div class="pstbody">
+          <div class="pseg" role="group" aria-label="Stage status">${['not','prog','done'].map(s=>`<button type="button" data-status="${s}" data-sid="${st.id}" class="${status===s?'on':''}" aria-pressed="${status===s}">${SL[s]}</button>`).join('')}</div>
+          <ul class="pfocus">${st.focus.map(f=>`<li>${f}</li>`).join('')}</ul>
+          <div class="why"><b>Why:</b> ${st.why}</div>
+          <div class="src">${srcHTML(st.src)}</div>${infoHTML(st)}
+          ${acts.length?`<p class="section-label" style="margin-top:18px">Activities for this stage</p>${acts.map(pActHTML).join('')}`:''}
+        </div>
+      </div>
+    </div>`;
+  });
+  h+=`</div>`;
+
+  const form=e=>`<div class="pevform" data-form="${e?e.id:'new'}">
+      <input type="text" class="pin" id="pEvName" placeholder="e.g. Nursery starts" maxlength="60" value="${e?pEsc(e.name):''}" aria-label="Event name">
+      <div class="pevdates"><label>Starts<input type="date" class="pdate" id="pEvStart" value="${e?pEsc(e.start):''}"></label><label>Ends (optional)<input type="date" class="pdate" id="pEvEnd" value="${e?pEsc(e.end):''}"></label></div>
+      <p class="pformmsg" id="pEvMsg"></p>
+      <button class="pbtn primary" id="pEvSave" type="button">Save</button><button class="pbtn" id="pEvCancel" type="button">Cancel</button>
+    </div>`;
+  h+=`<p class="section-label">Life events</p>
+    <p class="phint" style="margin:-4px 0 12px">Add things like nursery starting, holidays or moving house. You'll get a heads-up if your planned start is within about a month of one.</p>`;
+  if(!evs.length && pottyEditing!=='new') h+=`<p class="pempty">No events yet.</p>`;
+  evs.forEach(e=>{
+    if(pottyEditing===e.id){ h+=form(e); return; }
+    const near=nearIds.has(e.id);
+    h+=`<div class="pev ${near?'warn':''}">
+      <div class="pev-main"><b>${pEsc(e.name)}</b><span>${range(e)}</span>${near?'<span class="pwarntxt">Within about a month of your planned start. The research suggests starting when life is fairly calm.</span>':''}</div>
+      <button class="piconbtn" type="button" data-edit="${e.id}" aria-label="Edit ${pEsc(e.name)}">✎</button>
+      <button class="piconbtn" type="button" data-del="${e.id}" aria-label="Delete ${pEsc(e.name)}">✕</button>
+    </div>`;
+  });
+  h+= pottyEditing==='new' ? form(null) : `<button class="pbtn" id="pEvAdd" type="button">+ Add an event</button>`;
+  return h;
+}
+
+function pPlanHTML(){
+  return `<p class="phint" style="margin:0 0 16px">Agree this together and share it with anyone who looks after Arlo. Each section starts with the research's suggestion; edit it to suit you. Changes save as you type and sync to both phones.</p>
+    ${P_PLAN.map(s=>{ const v=state.potty.plan[s.key]; const edited=(typeof v==='string')&&v!==s.def;
+      return `<div class="pplan"><label class="plabel" for="pp-${s.key}">${s.h}</label>
+        <textarea class="notesarea pplanta" id="pp-${s.key}" data-plan="${s.key}" rows="3">${pEsc(pPlanVal(s.key))}</textarea>
+        ${edited?`<button class="plink" type="button" data-reset="${s.key}">Reset to the research suggestion</button>`:''}</div>`; }).join('')}
+    <button class="pbtn primary wide" id="pPrint" type="button">Print or share with a carer</button>`;
+}
+
+function renderPotty(){
+  if(!pottyOpenStages) pottyOpenStages=new Set([currentPStage().id]);
+  const body=document.getElementById('pottyBody'), sh=pottyOverlay.querySelector('.sheet'), sc=sh.scrollTop;
+  document.querySelectorAll('#pottyTabs button').forEach(b=>{ const on=b.dataset.tab===pottyTab; b.classList.toggle('on',on); b.setAttribute('aria-selected',on); });
+  body.innerHTML = pottyTab==='plan' ? pPlanHTML() : pTimelineHTML();
+  wirePotty(body);
+  sh.scrollTop=sc;
+}
+
+function pSizeTA(ta){ const sh=ta.closest('.sheet'), st=sh?sh.scrollTop:0; ta.style.height='auto'; ta.style.height=(ta.scrollHeight+2)+'px'; if(sh) sh.scrollTop=st; }
+
+function wirePotty(el){
+  const rerender=()=>{ queueSave(); renderPotty(); renderPottyBtn(); };
+  el.querySelectorAll('[data-toggle]').forEach(b=>b.addEventListener('click',()=>{
+    const sid=b.dataset.toggle, card=b.closest('.pst'), open=!pottyOpenStages.has(sid);
+    if(open) pottyOpenStages.add(sid); else pottyOpenStages.delete(sid);
+    card.classList.toggle('open',open); b.setAttribute('aria-expanded',open);
+  }));
+  el.querySelectorAll('[data-status]').forEach(b=>b.addEventListener('click',()=>{
+    state.potty.status[b.dataset.sid]=b.dataset.status; rerender();
+  }));
+  const stop=el.querySelector('#pStop');
+  if(stop) stop.addEventListener('change',()=>{ state.potty.stopDate=stop.value||''; stop.blur(); rerender(); });
+  const clr=el.querySelector('#pStopClear');
+  if(clr) clr.addEventListener('click',()=>{ state.potty.stopDate=''; rerender(); });
+  const add=el.querySelector('#pEvAdd');
+  if(add) add.addEventListener('click',()=>{ pottyEditing='new'; renderPotty(); const n=document.getElementById('pEvName'); if(n) n.focus(); });
+  el.querySelectorAll('[data-edit]').forEach(b=>b.addEventListener('click',()=>{ pottyEditing=b.dataset.edit; renderPotty(); }));
+  el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    const e=state.potty.events.find(x=>x.id===b.dataset.del);
+    state.potty.events=state.potty.events.filter(x=>x.id!==b.dataset.del); rerender();
+    if(e) toast(`Removed “${e.name}”`);
+  }));
+  const save=el.querySelector('#pEvSave');
+  if(save) save.addEventListener('click',()=>{
+    const name=document.getElementById('pEvName').value.trim(), start=document.getElementById('pEvStart').value, end=document.getElementById('pEvEnd').value;
+    const msg=document.getElementById('pEvMsg');
+    if(!name){ msg.textContent='Give the event a name.'; return; }
+    if(!start){ msg.textContent='Add a start date.'; return; }
+    if(end&&end<start){ msg.textContent='The end date is before the start.'; return; }
+    if(pottyEditing==='new') state.potty.events.push({id:'ev'+Date.now().toString(36),name,start,end:end||''});
+    else { const e=state.potty.events.find(x=>x.id===pottyEditing); if(e){ e.name=name; e.start=start; e.end=end||''; } }
+    if(document.activeElement) document.activeElement.blur();
+    pottyEditing=null; rerender();
+  });
+  const cancel=el.querySelector('#pEvCancel');
+  if(cancel) cancel.addEventListener('click',()=>{ pottyEditing=null; renderPotty(); });
+
+  el.querySelectorAll('.rng').forEach(inp=>{
+    const grab=e=>{ e.stopPropagation(); dragging=true; };
+    inp.addEventListener('touchstart',grab,{passive:true});
+    inp.addEventListener('pointerdown',grab);
+    inp.addEventListener('input',()=>{
+      const id=inp.dataset.act, v=+inp.value; setActVal(id,v);
+      const col=blend(v/3), si=stageIdx(v);
+      el.querySelectorAll('.rng[data-act="'+id+'"]').forEach(o=>{ if(o!==inp) o.value=v; o.style.setProperty('--thumb',col); });
+      el.querySelectorAll('[data-lab="'+id+'"]').forEach(lab=>{ lab.textContent=STAGES[si].t; lab.style.color=STAGES[si].text; });
+    });
+    inp.addEventListener('change',()=>{ dragging=false; setActVal(inp.dataset.act,+inp.value); queueSave(); });
+  });
+
+  el.querySelectorAll('[data-plan]').forEach(ta=>{
+    pSizeTA(ta);
+    ta.addEventListener('input',()=>{ state.potty.plan[ta.dataset.plan]=ta.value; pSizeTA(ta); queueSave(); });
+  });
+  el.querySelectorAll('[data-reset]').forEach(b=>b.addEventListener('click',()=>{ delete state.potty.plan[b.dataset.reset]; rerender(); }));
+  const pr=el.querySelector('#pPrint');
+  if(pr) pr.addEventListener('click',openPlanPrint);
+}
+
+function pPlanText(){
+  const d=pParse(state.potty.stopDate);
+  let t=`Arlo's potty plan\n`+(d?`Planned start: ${pFmt(d,true)}\n`:'')+'\n';
+  P_PLAN.forEach(s=>{ const v=pPlanVal(s.key).trim(); if(v) t+=`${s.h}\n${v}\n\n`; });
+  return t.trim();
+}
+function openPlanPrint(){
+  closePlanPrint();
+  const d=pParse(state.potty.stopDate);
+  const secs=P_PLAN.map(s=>{ const v=pPlanVal(s.key).trim(); return v?`<section><h2>${s.h}</h2><p>${pEsc(v).replace(/\n/g,'<br>')}</p></section>`:''; }).join('');
+  const div=document.createElement('div'); div.id='planPrint'; div.setAttribute('role','dialog'); div.setAttribute('aria-label',"Arlo's potty plan");
+  div.innerHTML=`<div class="pp-tools"><button class="pbtn primary" id="ppPrint" type="button">Print</button><button class="pbtn" id="ppShare" type="button">Share</button><button class="pbtn" id="ppClose" type="button">Close</button></div>
+    <article>
+      <p class="pp-eyebrow">Potty plan</p>
+      <h1>Arlo's potty plan</h1>
+      <p class="pp-meta">Born 24 September 2025${d?` · Planned start: ${pFmt(d,true)}`:''} · Updated ${pFmt(pToday(),true)}</p>
+      ${secs}
+      <p class="pp-foot">Based on NHS Best Start in Life, ERIC and Bladder &amp; Bowel UK guidance.</p>
+    </article>`;
+  document.body.appendChild(div); document.body.classList.add('printing');
+  div.querySelector('#ppPrint').addEventListener('click',()=>window.print());
+  div.querySelector('#ppClose').addEventListener('click',closePlanPrint);
+  div.querySelector('#ppShare').addEventListener('click',async()=>{
+    const text=pPlanText();
+    try{ if(navigator.share){ await navigator.share({title:"Arlo's potty plan",text}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
+    try{ await navigator.clipboard.writeText(text); toast('Plan copied, ready to paste'); }catch(e){ toast("Couldn't share from this browser"); }
+  });
+}
+function closePlanPrint(){ const p=document.getElementById('planPrint'); if(p) p.remove(); document.body.classList.remove('printing'); }
+
+function openPotty(){
+  pottyEditing=null; if(!pottyOpenStages) pottyOpenStages=new Set([currentPStage().id]);
+  renderPotty();
+  pottyOverlay.classList.add('open'); pottyOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+  pottyOverlay.querySelector('.sheet').scrollTop=0;
+}
+function closePotty(){ closePlanPrint(); pottyOverlay.classList.remove('open'); pottyOverlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+document.getElementById('pottyBtn').addEventListener('click',openPotty);
+document.getElementById('closePotty').addEventListener('click',closePotty);
+pottyOverlay.addEventListener('click',e=>{ if(e.target===pottyOverlay) closePotty(); });
+document.getElementById('pottyTabs').addEventListener('click',e=>{ const b=e.target.closest('button[data-tab]'); if(!b||b.dataset.tab===pottyTab) return; pottyTab=b.dataset.tab; pottyEditing=null; renderPotty(); pottyOverlay.querySelector('.sheet').scrollTop=0; });
+document.addEventListener('keydown',e=>{ if(e.key!=='Escape'||!pottyOverlay.classList.contains('open')) return; if(document.getElementById('planPrint')) closePlanPrint(); else closePotty(); });
+{ // swipe down from the top to close
+  const sh=pottyOverlay.querySelector('.sheet'); let ty=0,tx=0,sc=0,ok=false;
+  sh.addEventListener('touchstart',e=>{ ok=!e.target.closest('input,textarea,.rng'); ty=e.touches[0].clientY; tx=e.touches[0].clientX; sc=sh.scrollTop; },{passive:true});
+  sh.addEventListener('touchend',e=>{ if(!ok) return; const dy=e.changedTouches[0].clientY-ty, dx=Math.abs(e.changedTouches[0].clientX-tx); if(dy>80&&dx<70&&sc===0) closePotty(); });
+}
+
+
 /* ---------- What to do today ---------- */
 const todayOverlay=document.getElementById('todayOverlay');
 let todayShowAll=false;
@@ -1093,7 +1557,7 @@ function actItemHTML(o, tried){
       <div class="thead-row">
         <button class="thead" type="button">
           <span class="tbar" style="background:${col}"></span>
-          <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${DATA[o.k].name} · ${STAGES[si].t}</span></span>
+          <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${o.k==='potty'?'<span class="pottytag">🚽 Potty</span>':DATA[o.k].name} · ${STAGES[si].t}</span></span>
           <span class="tchev">▾</span>
         </button>
         <button class="caltog ${tried?'on':''}" data-tid="${o.a.id}" aria-pressed="${tried}" title="${tried?'Tried with Arlo today':'Mark as tried today'}">${CAL_SVG(tried)}</button>
@@ -1119,9 +1583,12 @@ function buildToday(){
 
   const tm=triedMap();
   const allActs={}; BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ allActs[a.id]={k,a}; }));
+  P_ACTS.forEach(a=>{ allActs[a.id]={k:'potty',a}; });
   const ord=orderedKeys();
   let mainItems=[]; BASE_ORDER.forEach(k=>scorableActs(k).forEach((a,pos)=>{ const v=actVal(a.id); if(v<2.5 && !tm[a.id]) mainItems.push({k,a,v,pos}); }));
-  mainItems.sort((x,y)=>(x.v-y.v)||(x.pos-y.pos)||(ord.indexOf(x.k)-ord.indexOf(y.k)));
+  pottyActive().forEach((a,pos)=>{ const v=actVal(a.id); if(v<2.5 && !tm[a.id]) mainItems.push({k:'potty',a,v,pos}); });
+  const oi=k=>k==='potty'?99:ord.indexOf(k);
+  mainItems.sort((x,y)=>(x.v-y.v)||(x.pos-y.pos)||(oi(x.k)-oi(y.k)));
   const triedItems=Object.keys(tm).filter(id=>tm[id]&&allActs[id]).map(id=>({k:allActs[id].k,a:allActs[id].a}));
 
   let stretch=[]; BASE_ORDER.forEach(k=>{ if(k!=='over' && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>{ const id=stId(k,idx); if(state.stretchOn && state.stretchOn[id]) stretch.push({k,it,id}); }); } });
@@ -1182,7 +1649,7 @@ function buildToday(){
     inp.addEventListener('pointerdown',grab);
     inp.addEventListener('click',e=>e.stopPropagation());
     inp.addEventListener('input',()=>{
-      const id=inp.dataset.act; const v=+inp.value; state.acts[id]=v;
+      const id=inp.dataset.act; const v=+inp.value; setActVal(id,v);
       const col=blend(v/3); inp.style.setProperty('--thumb',col);
       const si=stageIdx(v); const lab=el.querySelector('[data-lab="'+id+'"]');
       if(lab){ lab.textContent=STAGES[si].t; lab.style.color=STAGES[si].text; }
@@ -1222,7 +1689,7 @@ document.getElementById('copyCode').addEventListener('click',async()=>{
 });
 document.getElementById('loadCode').addEventListener('click',()=>{
   const v=document.getElementById('syncIn').value.trim(); if(!v){toast('Paste a code first');return;}
-  try{ const s=JSON.parse(decodeURIComponent(escape(atob(v)))); state={skills:s.skills||{},acts:s.acts||{},focus:s.focus||['comm','fine']}; save(); renderAll(); modal.classList.remove('open'); toast('Progress loaded ✓'); }
+  try{ const s=JSON.parse(decodeURIComponent(escape(atob(v)))); state={skills:s.skills||{},acts:s.acts||{},focus:s.focus||['comm','fine'],notes:s.notes||{},stretchOn:s.stretchOn||{},tried:s.tried||{date:'',ids:{}},potty:cleanPotty(s.potty)}; save(); renderAll(); modal.classList.remove('open'); toast('Progress loaded ✓'); }
   catch(e){ toast('That code didn’t work'); }
 });
 
