@@ -1,9 +1,10 @@
 # Arlo · Play & Progress
 
-A bright, installable web app tracking Arlo's development against the **10-month
-Ages & Stages Questionnaire (ASQ-3)**, with research-based activities, a
-priority "What to do today" list, stretch targets, and **live sync between two
-phones** — now protected by a **family password**.
+An installable web app tracking Arlo's development from **12 to 18 months**,
+guided by the **Ages & Stages Questionnaire (ASQ-3)** and the CDC/AAP and NHS
+milestone checklists. It has research-based activities with cited evidence, a
+priority "What to do today" list, 18–24 month stretch targets, a research page,
+and **live sync between two phones** behind a **family password**.
 
 Your Firebase project (`arlo-5d8a6`) is already configured inside `index.html`.
 It uses **Cloud Firestore** for the data and **Firebase Authentication
@@ -16,7 +17,8 @@ remembered, so you don't re-enter it every time.
 ## Files (upload them all together, in one folder)
 - `index.html` – the app (config inside)
 - `manifest.json` – installable web-app name + icons
-- `sw.js` – offline support (cache `arlo-v4`)
+- `research.html` – the evidence behind the activities, with an interactive chart
+- `sw.js` – offline support (cache `arlo-v6`)
 - `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` – home-screen icons
 
 ---
@@ -79,10 +81,23 @@ switches/sliders — all write to the one shared document. A guard stops a live
 update from interrupting a slider you're dragging or text you're typing.
 
 ## Updating later
-After pushing changes, bump the version in `sw.js` (`arlo-v4` → `arlo-v5`) so
+After pushing changes, bump the version in `sw.js` (`arlo-v6` → `arlo-v7`) so
 already-installed phones pull the new code/icon. On Android, if an old icon
 sticks, remove and re-add the home-screen shortcut.
 
 ## Privacy
 With the rule above, only someone signed in with the password can read or edit
 the tracker. Use a password you're happy sharing just between the two of you.
+
+## 12–18 month update (November 2026)
+- Milestones are grouped **by 15 months** and **by 18 months**. Ticks for
+  milestones that carried over (first words, following a request without a
+  gesture, standing alone, helping with dressing) are kept.
+- The 9–12 month milestones and activities sit in collapsed **Earlier** sections
+  in each category, with your ticks and slider values intact. They no longer
+  count towards levels or the Today list.
+- New activities start fresh at "not quite there". Stretch targets are now
+  18–24 months with their own ids, so earlier stretch switches don't carry over.
+- "What to do today" shows the top 8, with a button to show the rest.
+- Nothing in the Firestore document changes shape: same `trackers/arlo` doc,
+  same `payload` field.
