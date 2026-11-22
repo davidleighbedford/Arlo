@@ -459,7 +459,9 @@
   }
 
   /* ---------- Larger Today and Potty panels ---------- */
-  .overlay.today .sheet{height:calc(100vh - 14px);height:calc(100dvh - 14px);max-height:none;}
+  .overlay .sheet{height:calc(100vh - 14px);height:calc(100dvh - 14px);max-height:none;}
+  .sheethead.slim .nav{margin-top:8px;}
+  .sheethead.slim .navbtn{padding:5px 11px;font-size:.78rem;}
   .sheethead.slim{padding:8px 18px 10px;}
   .sheethead.slim .grip{margin:0 auto 6px;}
   .sheethead.slim h2{font-size:1.32rem;line-height:1.2;padding-right:44px;}
@@ -523,23 +525,23 @@
     <b>A gentle reminder:</b> this isn't a test, and every baby grows at their own pace. It's a play guide drawn from the ASQ-3 framework used at UK health visitor reviews and the CDC/AAP milestone checklists. I'm not a medical professional. If Arlo loses a skill he had, or anything worries you, have a chat with your health visitor or GP.
   </div>
 
-  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 16:44 UTC</span></footer>
+  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 16:49 UTC</span></footer>
 </div>
 
 <!-- Detail overlay -->
 <div class="overlay" id="overlay" aria-hidden="true">
   <div class="sheet" role="dialog" aria-modal="true">
-    <div class="sheethead" id="sheethead">
+    <div class="sheethead slim" id="sheethead">
       <div class="grip"></div>
       <button class="close" id="closeBtn" aria-label="Close">✕</button>
       <h2 id="sheetTitle"></h2>
-      <p id="sheetSub"></p>
       <div class="nav">
         <button class="navbtn" id="prevBtn">‹ Prev</button>
         <div class="dots" id="dots"></div>
         <button class="navbtn" id="nextBtn">Next ›</button>
       </div>
     </div>
+    <p class="sheetintro" id="sheetSub"></p>
     <div class="sheetbody" id="sheetBody"></div>
   </div>
 </div>
