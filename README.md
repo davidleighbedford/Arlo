@@ -19,7 +19,7 @@ remembered, so you don't re-enter it every time.
 - `index.html` – the app (config inside)
 - `manifest.json` – installable web-app name + icons
 - `research.html` – the evidence behind the activities, with an interactive chart
-- `sw.js` – offline support (cache `arlo-v10`)
+- `sw.js` – offline support (cache `arlo-v11`)
 - `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` – home-screen icons
 
 ---
@@ -82,7 +82,7 @@ switches/sliders — all write to the one shared document. A guard stops a live
 update from interrupting a slider you're dragging or text you're typing.
 
 ## Updating later
-After pushing changes, bump the version in `sw.js` (`arlo-v10` → `arlo-v11`) so
+After pushing changes, bump the version in `sw.js` (`arlo-v11` → `arlo-v12`) so
 already-installed phones pull the new code/icon. On Android, if an old icon
 sticks, remove and re-add the home-screen shortcut.
 
@@ -119,3 +119,8 @@ the tracker. Use a password you're happy sharing just between the two of you.
 - Everything is stored under `potty` in the same `trackers/arlo` document.
   Saves now wait until the first load from Firebase has finished, so an early
   tap can't overwrite your saved data.
+
+## Sliders on phones
+On touch screens a slider only moves after a clear sideways drag. Taps on the
+bar and scrolls that start on a slider no longer change it. Mouse and keyboard
+work as before.

@@ -471,6 +471,12 @@
   .sheetintro{margin:0;padding:12px 20px 0;font-size:.86rem;color:var(--ink-soft);line-height:1.45;}
   .sheetintro + .sheetbody{padding-top:14px;}
 
+  /* ---------- Touch sliders: deliberate sideways drag only ---------- */
+  .touchsliders .rng{pointer-events:none;}
+  .touchsliders .slider{touch-action:pan-y;}
+  .slider.sliding .rng::-webkit-slider-thumb{transform:scale(1.12);box-shadow:0 4px 14px rgba(0,0,0,.32);}
+  .slider.sliding .rng::-moz-range-thumb{transform:scale(1.12);}
+
   @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -525,7 +531,7 @@
     <b>A gentle reminder:</b> this isn't a test, and every baby grows at their own pace. It's a play guide drawn from the ASQ-3 framework used at UK health visitor reviews and the CDC/AAP milestone checklists. I'm not a medical professional. If Arlo loses a skill he had, or anything worries you, have a chat with your health visitor or GP.
   </div>
 
-  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 16:49 UTC</span></footer>
+  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 17:04 UTC</span></footer>
 </div>
 
 <!-- Detail overlay -->
@@ -1212,6 +1218,54 @@ let dragging=false;
 ['pointerup','touchend','touchcancel'].forEach(ev=>document.addEventListener(ev,()=>{ if(dragging){ dragging=false; queueSave(); } }));
 document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('.infobtn'); if(!b)return; e.stopPropagation(); b.classList.toggle('open'); const box=b.nextElementSibling; if(box&&box.classList.contains('infobox')) box.classList.toggle('open'); });
 
+/* ---------- Touch sliders: only move on a deliberate sideways drag ---------- */
+(function(){
+  if(!(window.matchMedia&&matchMedia('(pointer: coarse)').matches)) return;  // mouse and keyboard stay native
+  document.documentElement.classList.add('touchsliders');
+  const START=10, THUMB=30;   // px of sideways travel before it counts; thumb width from the CSS
+  let t=null;                 // {inp, x0, y0, mode:'pending'|'drag'}
+  function valFromX(inp,x){
+    const r=inp.getBoundingClientRect(), min=+inp.min||0, max=+inp.max||100, step=+inp.step||1;
+    const f=Math.max(0,Math.min(1,(x-r.left-THUMB/2)/Math.max(1,r.width-THUMB)));
+    const v=Math.round((min+f*(max-min))/step)*step;
+    return Math.max(min,Math.min(max,+v.toFixed(4)));
+  }
+  function onMove(e){
+    if(!t) return;
+    const p=e.touches[0], dx=p.clientX-t.x0, dy=p.clientY-t.y0;
+    if(t.mode==='pending'){
+      if(Math.abs(dy)>8 && Math.abs(dy)>=Math.abs(dx)){ finish(); return; }          // a scroll: leave it alone
+      if(Math.abs(dx)>START && Math.abs(dx)>Math.abs(dy)*1.3){                       // a clear sideways drag
+        t.mode='drag'; dragging=true; t.inp.closest('.slider').classList.add('sliding');
+      } else return;
+    }
+    if(e.cancelable) e.preventDefault();
+    const v=valFromX(t.inp,p.clientX);
+    if(String(v)!==t.inp.value){ t.inp.value=v; t.inp.dispatchEvent(new Event('input',{bubbles:true})); }
+  }
+  function finish(){
+    document.removeEventListener('touchmove',onMove,{passive:false});
+    const cur=t; t=null;
+    if(cur&&cur.mode==='drag'){
+      cur.inp.closest('.slider').classList.remove('sliding');
+      cur.inp.dispatchEvent(new Event('change',{bubbles:true}));
+      dragging=false;
+    }
+  }
+  document.addEventListener('touchstart',e=>{
+    if(t) finish();
+    if(e.touches.length!==1) return;
+    const s=e.target.closest&&e.target.closest('.slider'); if(!s) return;
+    const inp=s.querySelector('input.rng'); if(!inp) return;
+    const r=inp.getBoundingClientRect(), p=e.touches[0];
+    if(p.clientY<r.top-14||p.clientY>r.bottom+14) return;                            // only the bar itself, not its labels
+    t={inp,x0:p.clientX,y0:p.clientY,mode:'pending'};
+    document.addEventListener('touchmove',onMove,{passive:false});
+  },{passive:true});
+  document.addEventListener('touchend',()=>{ if(t) finish(); },{passive:true});
+  document.addEventListener('touchcancel',()=>{ if(t) finish(); },{passive:true});
+})();
+
 /* ---------- Potty plan ---------- */
 // Everything for this page lives under state.potty:
 // { status:{stageId:'not'|'prog'|'done'}, events:[{id,name,start,end}], stopDate:'YYYY-MM-DD', plan:{key:text}, acts:{id:0..3} }
@@ -1539,7 +1593,7 @@ document.getElementById('pottyTabs').addEventListener('click',e=>{ const b=e.tar
 document.addEventListener('keydown',e=>{ if(e.key!=='Escape'||!pottyOverlay.classList.contains('open')) return; if(document.getElementById('planPrint')) closePlanPrint(); else closePotty(); });
 { // swipe down from the top to close
   const sh=pottyOverlay.querySelector('.sheet'); let ty=0,tx=0,sc=0,ok=false;
-  sh.addEventListener('touchstart',e=>{ ok=!e.target.closest('input,textarea,.rng'); ty=e.touches[0].clientY; tx=e.touches[0].clientX; sc=sh.scrollTop; },{passive:true});
+  sh.addEventListener('touchstart',e=>{ ok=!e.target.closest('input,textarea,.rng,.slider'); ty=e.touches[0].clientY; tx=e.touches[0].clientX; sc=sh.scrollTop; },{passive:true});
   sh.addEventListener('touchend',e=>{ if(!ok) return; const dy=e.changedTouches[0].clientY-ty, dx=Math.abs(e.changedTouches[0].clientX-tx); if(dy>80&&dx<70&&sc===0) closePotty(); });
 }
 
@@ -1679,7 +1733,7 @@ function buildToday(){
 
 // swipe (horizontal = navigate, downward from top = close)
 let sx=0,sy=0,swiping=false,shScTop=0;
-sheet.addEventListener('touchstart',e=>{ if(e.target.closest('.rng')){ swiping=false; return; } const t=e.touches[0]; sx=t.clientX; sy=t.clientY; shScTop=sheet.scrollTop; swiping=true; },{passive:true});
+sheet.addEventListener('touchstart',e=>{ if(e.target.closest('.rng,.slider')){ swiping=false; return; } const t=e.touches[0]; sx=t.clientX; sy=t.clientY; shScTop=sheet.scrollTop; swiping=true; },{passive:true});
 sheet.addEventListener('touchend',e=>{
   if(!swiping)return; swiping=false;
   const t=e.changedTouches[0]; const dx=t.clientX-sx, dy=t.clientY-sy;
