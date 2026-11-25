@@ -19,7 +19,7 @@ remembered, so you don't re-enter it every time.
 - `index.html` – the app (config inside)
 - `manifest.json` – installable web-app name + icons
 - `research.html` – the evidence behind the activities, with an interactive chart
-- `sw.js` – offline support (cache `arlo-v11`)
+- `sw.js` – offline support (cache `arlo-v12`)
 - `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` – home-screen icons
 
 ---
@@ -82,7 +82,7 @@ switches/sliders — all write to the one shared document. A guard stops a live
 update from interrupting a slider you're dragging or text you're typing.
 
 ## Updating later
-After pushing changes, bump the version in `sw.js` (`arlo-v11` → `arlo-v12`) so
+After pushing changes, bump the version in `sw.js` (`arlo-v12` → `arlo-v13`) so
 already-installed phones pull the new code/icon. On Android, if an old icon
 sticks, remove and re-add the home-screen shortcut.
 
@@ -99,7 +99,6 @@ the tracker. Use a password you're happy sharing just between the two of you.
   count towards levels or the Today list.
 - New activities start fresh at "not quite there". Stretch targets are now
   18–24 months with their own ids, so earlier stretch switches don't carry over.
-- "What to do today" shows the top 8, with a button to show the rest.
 - Nothing in the Firestore document changes shape: same `trackers/arlo` doc,
   same `payload` field.
 
@@ -124,3 +123,13 @@ the tracker. Use a password you're happy sharing just between the two of you.
 On touch screens a slider only moves after a clear sideways drag. Taps on the
 bar and scrolls that start on a slider no longer change it. Mouse and keyboard
 work as before.
+
+## What to do today
+- Shows 2 activities from each area, with "Show N more" to see the rest of
+  that area.
+- Within an area, activities Arlo has tried least in the last 4 weeks come
+  first. Ties go to the lowest slider rating, then whichever was tried longest
+  ago.
+- Tapping the calendar button records today's date for that activity in a
+  synced history (`hist` in the same document, kept for about a year).
+  Untapping removes today's date.

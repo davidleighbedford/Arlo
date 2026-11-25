@@ -477,6 +477,16 @@
   .slider.sliding .rng::-webkit-slider-thumb{transform:scale(1.12);box-shadow:0 4px 14px rgba(0,0,0,.32);}
   .slider.sliding .rng::-moz-range-thumb{transform:scale(1.12);}
 
+  /* ---------- Today: grouped by area ---------- */
+  .tgroup{margin:0 0 6px;}
+  .tghead{display:flex;align-items:center;gap:8px;margin:16px 2px 9px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--ink-soft);}
+  .tgroup:first-child .tghead{margin-top:2px;}
+  .tghead b{color:var(--gcd);}
+  .tgglyph{font-size:1rem;letter-spacing:0;}
+  .tgcount{margin-left:auto;font-size:.7rem;letter-spacing:.04em;color:#b6ad9f;}
+  .tghead::before{content:"";width:4px;height:16px;border-radius:4px;background:var(--gc);order:-1;}
+  .tgmore{display:block;width:100%;margin:-2px 0 4px;border:1px dashed rgba(110,90,140,.28);border-radius:12px;padding:9px;font-family:inherit;font-weight:800;font-size:.82rem;color:var(--gcd);cursor:pointer;background:rgba(255,255,255,.4);}
+
   @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -531,7 +541,7 @@
     <b>A gentle reminder:</b> this isn't a test, and every baby grows at their own pace. It's a play guide drawn from the ASQ-3 framework used at UK health visitor reviews and the CDC/AAP milestone checklists. I'm not a medical professional. If Arlo loses a skill he had, or anything worries you, have a chat with your health visitor or GP.
   </div>
 
-  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 22 Nov 2026 · 17:04 UTC</span></footer>
+  <footer><a href="research.html" class="reslink">📚 The research behind these activities →</a><br>Made for Arlo · synced between you &amp; your partner<br><span class='built'>Last updated 25 Nov 2026 · 14:59 UTC</span></footer>
 </div>
 
 <!-- Detail overlay -->
@@ -572,7 +582,7 @@
       <button class="close" id="closeToday" aria-label="Close">✕</button>
       <h2 style="color:var(--comm-deep)">What to do today</h2>
     </div>
-    <p class="sheetintro">Top priorities first: what Arlo hasn't mastered yet. Tap the <b>calendar button</b> on an activity once Arlo has tried it today.</p>
+    <p class="sheetintro">Two activities from each area, least tried first. Tap the <b>calendar button</b> when Arlo has tried one; it's remembered, so the others come up next time.</p>
     <div class="sheetbody" id="todayBody"></div>
   </div>
 </div>
@@ -647,6 +657,29 @@ function domLevel(k){ const a=scorableActs(k); if(!a.length) return 'beginner'; 
 function domMasteryPct(k){ const a=scorableActs(k); if(!a.length) return 0; let s=0; a.forEach(x=>s+=actVal(x.id)); return Math.round(s/(3*a.length)*100); }
 let showStretchDonut=false;
 function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+const HIST_DAYS=28, HIST_KEEP=400;
+function cleanHist(h){
+  const out={}; if(!h||typeof h!=='object'||Array.isArray(h)) return out;
+  const cut=histCutoff(HIST_KEEP);
+  Object.keys(h).forEach(id=>{ if(!Array.isArray(h[id])) return; const d=[...new Set(h[id].filter(x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&x>=cut))].sort(); if(d.length) out[id]=d; });
+  return out;
+}
+function histCutoff(days){ const d=new Date(); d.setDate(d.getDate()-days+1); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function histList(id){ return (state.hist&&state.hist[id])||[]; }
+function histCount(id){ const cut=histCutoff(HIST_DAYS); return histList(id).filter(d=>d>=cut).length; }
+function histLast(id){ const l=histList(id); return l.length?l[l.length-1]:''; }
+function histMark(id,on){
+  if(!state.hist) state.hist={};
+  const t=todayStr(), l=state.hist[id]||[];
+  if(on){ if(!l.includes(t)){ l.push(t); l.sort(); state.hist[id]=l; return true; } }
+  else if(l.includes(t)){ const r=l.filter(d=>d!==t); if(r.length) state.hist[id]=r; else delete state.hist[id]; return true; }
+  return false;
+}
+function histText(id){
+  const n=histCount(id);
+  if(n===0) return histList(id).length?'Not tried in 4 weeks':'Not tried yet';
+  return n===1?'Tried once in 4 weeks':`Tried ${n} times in 4 weeks`;
+}
 function triedMap(){ if(!state.tried || state.tried.date!==todayStr()){ state.tried={date:todayStr(),ids:{}}; queueSave(); } return state.tried.ids; }
 function stId(k,i){ const it=DATA[k].look&&DATA[k].look.items[i]; return (it&&it.id)||('st-'+k+'-'+i); }
 function stretchAchieved(id){ return !!(state.stretchOn&&state.stretchOn[id]) && actVal(id)>=2.5; }
@@ -982,10 +1015,10 @@ const BASE_ORDER = ["comm","fine","gross","prob","soc","over"];
 const FIREBASE_CONFIG={apiKey:"AIzaSyBVYcjxo5aKAKlwsDjui7FdQtNmhry0Mro",authDomain:"arlo-5d8a6.firebaseapp.com",databaseURL:"https://arlo-5d8a6-default-rtdb.firebaseio.com",projectId:"arlo-5d8a6",storageBucket:"arlo-5d8a6.firebasestorage.app",messagingSenderId:"588304685385",appId:"1:588304685385:web:cd18b18ba8c737a48ba298"};
 const SHARE_ID="arlo",AUTH_EMAIL="family@arlo-5d8a6.web.app";
 /* ---------- State ---------- */
-let state={skills:{},acts:{},focus:["comm","fine"],notes:{},stretchOn:{},tried:{date:"",ids:{}},potty:cleanPotty()};
+let state={skills:{},acts:{},focus:["comm","fine"],notes:{},stretchOn:{},tried:{date:"",ids:{}},potty:cleanPotty(),hist:{}};
 const KEY="arlo-data-v2";
 let saveTimer=null,storeMode="local",fbWrite=null,curKey=null,lastWrite=null,fsMod=null,authMod=null,authObj=null,dbRef=null,syncReady=false;
-function clean(s){return{skills:(s&&s.skills)||{},acts:(s&&s.acts)||{},focus:(s&&s.focus)||["comm","fine"],notes:(s&&s.notes)||{},stretchOn:(s&&s.stretchOn)||{},tried:(s&&s.tried)||{date:"",ids:{}},potty:cleanPotty(s&&s.potty)};}
+function clean(s){return{skills:(s&&s.skills)||{},acts:(s&&s.acts)||{},focus:(s&&s.focus)||["comm","fine"],notes:(s&&s.notes)||{},stretchOn:(s&&s.stretchOn)||{},tried:(s&&s.tried)||{date:"",ids:{}},potty:cleanPotty(s&&s.potty),hist:cleanHist(s&&s.hist)};}
 function wireLogin(){const pwEl=document.getElementById('loginPw'),msg=document.getElementById('loginMsg');if(!pwEl)return;const signIn=async()=>{const pw=(pwEl.value||'').trim();if(pw.length<4){msg.textContent='Enter your password.';return;}msg.textContent='Checking…';try{await authMod.signInWithEmailAndPassword(authObj,AUTH_EMAIL,pw);}catch(e){msg.textContent=(e&&e.code==='auth/too-many-requests')?'Too many tries, wait a moment.':'Incorrect password.';}};document.getElementById('loginBtn').addEventListener('click',signIn);pwEl.addEventListener('keydown',e=>{if(e.key==='Enter')signIn();});document.getElementById('loginCreate').addEventListener('click',async()=>{const pw=(pwEl.value||'').trim();if(pw.length<6){msg.textContent='Pick a password of 6+ characters.';return;}msg.textContent='Setting up…';try{await authMod.createUserWithEmailAndPassword(authObj,AUTH_EMAIL,pw);}catch(e){msg.textContent=(e&&e.code==='auth/email-already-in-use')?'Already set, just tap Unlock.':'Could not set up. Enable Email/Password in Firebase first.';}});const lk=document.getElementById('lockBtn');if(lk)lk.addEventListener('click',()=>{try{authMod.signOut(authObj);}catch(e){}});}
 function startSync(){storeMode='firebase';syncReady=false;updateModeBadge();fsMod.getDoc(dbRef).then(snap=>{if(snap.exists()&&snap.data().payload){try{state=clean(JSON.parse(snap.data().payload));}catch(e){}}syncReady=true;renderAll();if(curKey&&overlay.classList.contains('open'))renderSheet(curKey,0);}).catch(()=>{});fsMod.onSnapshot(dbRef,snap=>{if(!syncReady&&!snap.metadata.fromCache){syncReady=true;}if(typeof dragging!=='undefined'&&dragging)return;const ae=document.activeElement;if(ae&&(ae.tagName==='TEXTAREA'||(ae.tagName==='INPUT'&&ae.type!=='range')))return;if(!(snap.exists()&&snap.data().payload))return;const p=snap.data().payload;if(p===lastWrite)return;if(p===JSON.stringify(state))return;try{state=clean(JSON.parse(p));renderAll();if(curKey&&overlay.classList.contains('open'))renderSheet(curKey,0);}catch(e){}});}
 async function initStore(){if(FIREBASE_CONFIG&&FIREBASE_CONFIG.apiKey){try{const appMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");fsMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");authMod=await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js");const fbapp=appMod.initializeApp(FIREBASE_CONFIG);const db=fsMod.getFirestore(fbapp);authObj=authMod.getAuth(fbapp);try{await authMod.setPersistence(authObj,authMod.browserLocalPersistence);}catch(e){}dbRef=fsMod.doc(db,"trackers",SHARE_ID);fbWrite=(data)=>{lastWrite=JSON.stringify(data);return fsMod.setDoc(dbRef,{payload:lastWrite,updated:Date.now()});};wireLogin();authMod.onAuthStateChanged(authObj,user=>{const lk=document.getElementById('lockBtn');if(user){hideLogin();if(lk)lk.style.display='block';startSync();}else{storeMode='local';updateModeBadge();if(lk)lk.style.display='none';showLogin();}});return null;}catch(e){console.warn("Firebase unavailable",e);}}if(window.storage){storeMode="claude";try{const r=await window.storage.get(KEY,true);if(r&&r.value)return clean(JSON.parse(r.value));}catch(e){}return null;}storeMode="local";try{const v=localStorage.getItem(KEY);if(v)return clean(JSON.parse(v));}catch(e){}return null;}
@@ -1600,8 +1633,8 @@ document.addEventListener('keydown',e=>{ if(e.key!=='Escape'||!pottyOverlay.clas
 
 /* ---------- What to do today ---------- */
 const todayOverlay=document.getElementById('todayOverlay');
-let todayShowAll=false;
-function openToday(){ todayShowAll=false; buildToday(); todayOverlay.classList.add('open'); todayOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; todayOverlay.querySelector('.sheet').scrollTop=0; }
+let todayOpenCats=new Set();
+function openToday(){ todayOpenCats=new Set(); buildToday(); todayOverlay.classList.add('open'); todayOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; todayOverlay.querySelector('.sheet').scrollTop=0; }
 function closeToday(){ todayOverlay.classList.remove('open'); todayOverlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
 document.getElementById('closeToday').addEventListener('click',closeToday);
 { // swipe-down to close today panel
@@ -1624,7 +1657,7 @@ function actItemHTML(o, tried){
       <div class="thead-row">
         <button class="thead" type="button">
           <span class="tbar" style="background:${col}"></span>
-          <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${o.k==='potty'?'<span class="pottytag">🚽 Potty</span>':DATA[o.k].name} · ${STAGES[si].t}</span></span>
+          <span class="tnamewrap"><span class="tname">${o.a.t}</span><span class="tdom">${o.grouped?histText(o.a.id):(o.k==='potty'?'<span class="pottytag">🚽 Potty</span>':DATA[o.k].name)} · ${STAGES[si].t}</span></span>
           <span class="tchev">▾</span>
         </button>
         <button class="caltog ${tried?'on':''}" data-tid="${o.a.id}" aria-pressed="${tried}" title="${tried?'Tried with Arlo today':'Mark as tried today'}">${CAL_SVG(tried)}</button>
@@ -1651,20 +1684,31 @@ function buildToday(){
   const tm=triedMap();
   const allActs={}; BASE_ORDER.forEach(k=>scorableActs(k).forEach(a=>{ allActs[a.id]={k,a}; }));
   P_ACTS.forEach(a=>{ allActs[a.id]={k:'potty',a}; });
-  const ord=orderedKeys();
-  let mainItems=[]; BASE_ORDER.forEach(k=>scorableActs(k).forEach((a,pos)=>{ const v=actVal(a.id); if(v<2.5 && !tm[a.id]) mainItems.push({k,a,v,pos}); }));
-  pottyActive().forEach((a,pos)=>{ const v=actVal(a.id); if(v<2.5 && !tm[a.id]) mainItems.push({k:'potty',a,v,pos}); });
-  const oi=k=>k==='potty'?99:ord.indexOf(k);
-  mainItems.sort((x,y)=>(x.v-y.v)||(x.pos-y.pos)||(oi(x.k)-oi(y.k)));
+  // any tries marked today count in the history (covers marks made before history existed)
+  let histChanged=false; Object.keys(tm).forEach(id=>{ if(tm[id]&&allActs[id]&&histMark(id,true)) histChanged=true; }); if(histChanged) queueSave();
+  const groups=[];
+  const addGroup=(k,name,glyph,col,deep,acts)=>{
+    const items=[]; acts.forEach((a,pos)=>{ const v=actVal(a.id); if(v<2.5&&!tm[a.id]) items.push({k,a,v,pos,n:histCount(a.id),last:histLast(a.id),grouped:true}); });
+    items.sort((x,y)=>(x.n-y.n)||(x.v-y.v)||(x.last<y.last?-1:x.last>y.last?1:0)||(x.pos-y.pos));
+    if(items.length) groups.push({k,name,glyph,col,deep,items,total:acts.length});
+  };
+  orderedKeys().forEach(k=>addGroup(k,DATA[k].name,DATA[k].glyph,`var(--${k})`,`var(--${k}-deep)`,scorableActs(k)));
+  addGroup('potty','Potty plan','🚽','var(--gross)','var(--gross-deep)',pottyActive());
   const triedItems=Object.keys(tm).filter(id=>tm[id]&&allActs[id]).map(id=>({k:allActs[id].k,a:allActs[id].a}));
 
   let stretch=[]; BASE_ORDER.forEach(k=>{ if(k!=='over' && DATA[k].look){ DATA[k].look.items.forEach((it,idx)=>{ const id=stId(k,idx); if(state.stretchOn && state.stretchOn[id]) stretch.push({k,it,id}); }); } });
 
   let html='';
-  if(!mainItems.length){ html+=`<div class="alldone">🎉 Nothing left on today's list right now. Slide things back as Arlo grows, or open the boxes below.</div>`; }
-  const TODAY_LIMIT=8; const shown=todayShowAll?mainItems:mainItems.slice(0,TODAY_LIMIT);
-  shown.forEach(o=> html+=actItemHTML(o,false));
-  if(mainItems.length>TODAY_LIMIT){ html+=`<button class="todaymore" id="todayMore" type="button">${todayShowAll?'Show fewer':'Show '+(mainItems.length-TODAY_LIMIT)+' more activities'}</button>`; }
+  if(!groups.length){ html+=`<div class="alldone">🎉 Nothing left on today's list right now. Slide things back as Arlo grows, or open the boxes below.</div>`; }
+  const PER=2;
+  groups.forEach(g=>{
+    const open=todayOpenCats.has(g.k), shown=open?g.items:g.items.slice(0,PER), more=g.items.length-PER;
+    html+=`<section class="tgroup" data-cat="${g.k}" style="--gc:${g.col};--gcd:${g.deep}">
+      <div class="tghead"><span class="tgglyph" aria-hidden="true">${g.glyph}</span><b>${g.name}</b><span class="tgcount">${shown.length} of ${g.items.length}</span></div>`;
+    shown.forEach(o=> html+=actItemHTML(o,false));
+    if(more>0) html+=`<button class="tgmore" type="button" data-more="${g.k}" aria-expanded="${open}">${open?'Show fewer':'Show '+more+' more'}</button>`;
+    html+=`</section>`;
+  });
 
   if(stretch.length){
     html+=`<button class="stretchtoggle" id="stretchToggle" type="button">Stretch targets <span class="sopt">optional next steps</span><span class="tchev">▾</span></button><div class="stretchwrap" id="stretchWrap">`;
@@ -1696,8 +1740,7 @@ function buildToday(){
 
   const stog=document.getElementById('stretchToggle');
   if(stog) stog.addEventListener('click',()=>{ stog.classList.toggle('open'); document.getElementById('stretchWrap').classList.toggle('open'); });
-  const tmore=document.getElementById('todayMore');
-  if(tmore) tmore.addEventListener('click',()=>{ todayShowAll=!todayShowAll; buildToday(); });
+  el.querySelectorAll('[data-more]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.more; if(todayOpenCats.has(k)) todayOpenCats.delete(k); else todayOpenCats.add(k); buildToday(); }));
   const ttog=document.getElementById('triedToggle');
   if(ttog) ttog.addEventListener('click',()=>{ ttog.classList.toggle('open'); document.getElementById('triedWrap').classList.toggle('open'); });
   wireStretch(el);
@@ -1706,6 +1749,7 @@ function buildToday(){
     e.stopPropagation();
     const id=b.dataset.tid; const m=triedMap();
     if(m[id]) delete m[id]; else m[id]=true;
+    histMark(id,!!m[id]);
     queueSave();
     if(m[id]){ b.classList.add('on'); setTimeout(()=>buildToday(),450); }
     else buildToday();
@@ -1756,7 +1800,7 @@ document.getElementById('copyCode').addEventListener('click',async()=>{
 });
 document.getElementById('loadCode').addEventListener('click',()=>{
   const v=document.getElementById('syncIn').value.trim(); if(!v){toast('Paste a code first');return;}
-  try{ const s=JSON.parse(decodeURIComponent(escape(atob(v)))); state={skills:s.skills||{},acts:s.acts||{},focus:s.focus||['comm','fine'],notes:s.notes||{},stretchOn:s.stretchOn||{},tried:s.tried||{date:'',ids:{}},potty:cleanPotty(s.potty)}; save(); renderAll(); modal.classList.remove('open'); toast('Progress loaded ✓'); }
+  try{ const s=JSON.parse(decodeURIComponent(escape(atob(v)))); state={skills:s.skills||{},acts:s.acts||{},focus:s.focus||['comm','fine'],notes:s.notes||{},stretchOn:s.stretchOn||{},tried:s.tried||{date:'',ids:{}},potty:cleanPotty(s.potty),hist:cleanHist(s.hist)}; save(); renderAll(); modal.classList.remove('open'); toast('Progress loaded ✓'); }
   catch(e){ toast('That code didn’t work'); }
 });
 
